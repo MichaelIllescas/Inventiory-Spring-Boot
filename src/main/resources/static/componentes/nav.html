@@ -1,0 +1,75 @@
+ <nav th:fragment="nav" class="navbar navbar-expand-lg bg-gradient-dark-blue animated--grow-in">
+        <div class="container">
+            <!-- Logo -->
+         <a class="navbar-brand" th:href="@{/index}">
+    <img th:src="@{/img/logoInventiory.png}" class="rounded-circle" alt="Logo" style="width: 55px; height: 55px;">
+    </a>
+            <!-- Botón colapsable en pantallas pequeñas -->
+            <button class="animated--grow-in btn btn-secondary bg-gradient-dark rounded-circle p-2 d-lg-none" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon">
+                    <i class="fa fa-bars"></i>
+                </span>
+            </button>
+    
+            <!-- Contenido del Navbar -->
+            <div class="collapse navbar-collapse animated--grow-in" id="navbarNav">
+                <ul class="navbar-nav m-auto w-100 justify-content-between">
+                    <!-- Items principales -->
+                    <li class="nav-item flex-fill text-center animated--grow-in">
+                        <a class="nav-link text-light animated--grow-in" th:href="@{/index}">Inicio</a>
+                    </li>
+                    <li class="nav-item dropdown flex-fill text-center animated--grow-in">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="productosDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Productos
+                        </a>
+                        <div class="dropdown-menu custom-dropdown w-25 m-auto animated--grow-in" aria-labelledby="productosDropdown">
+                            <a class="dropdown-item " th:href="@{/crearProductos}">Crear Producto</a>
+                            <a class="dropdown-item" th:href="@{/verProductos}">Ver Productos</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown flex-fill text-center animated--grow-in">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="clientesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Clientes
+                        </a>
+                        <div class="dropdown-menu custom-dropdown w-25 m-auto animated--grow-in" aria-labelledby="clientesDropdown">
+                            <a class="dropdown-item" href="#">Registrar Cliente</a>
+                            <a class="dropdown-item" href="#">Ver Clientes</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown flex-fill text-center animated--grow-in">
+                        <a class="nav-link dropdown-toggle text-light w-25 m-auto" href="#" id="ventasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Ventas
+                        </a>
+                        <div class="animated--grow-in dropdown-menu custom-dropdown w-25 m-auto" aria-labelledby="ventasDropdown">
+                            <a class="dropdown-item" href="#">Registrar Venta</a>
+                            <a class="dropdown-item" href="#">Ver Ventas</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown flex-fill text-center animated--grow-in">
+                        <a class="nav-link dropdown-toggle text-light" href="#" id="facturasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Facturas
+                        </a>
+                        <div class="dropdown-menu custom-dropdown w-25 align-content-center m-auto animated--grow-in" aria-labelledby="facturasDropdown">
+                            <a class="dropdown-item" href="#">Ver Facturas</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown no-arrow flex-fill text-center animated--grow-in">
+                      
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">pingorito McGee</span>
+                        <img class="img-profile rounded-circle"
+                            src="img/undraw_profile.svg" style="width: 30px; height: 30px;">
+                    </a>
+                        <!-- Dropdown - User Information -->
+                        <div class="dropdown-menu dropdown-menu-right shadow custom-dropdown w-25 m-auto animated--grow-in" aria-labelledby="userDropdown">
+                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Cerrar Sesión
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>

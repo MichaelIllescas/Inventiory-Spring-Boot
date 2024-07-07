@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang ="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <!-- Bootstrap CSS -->
+    <link href="css/sb-admin-2.css" rel="stylesheet">
+</head>
+<body class="bg-login-image">
+    <div class="container d-flex align-items-center justify-content-center min-vh-100 shadow">
+        <div class="card shadow p-4" style="max-width: 300px; width: 100%;">
+            <h2 class="card-title text-center">Inicio de Sesión</h2>
+            <form th:action="@{/inicioSesion}" method="get">
+                <div class="form-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+                <div class="text-center mt-3">
+                    <a href="#">¿Olvidaste tu contraseña?</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/sb-admin-2.js"></script>
+</body>
+</html>

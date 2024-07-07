@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="componentes/head::head"></head>
+<body class="bg-login-image">
+
+   <nav th:insert="componentes/nav::nav"></nav>
+
+        <!--Formulario productos-->
+    <div class="d-flex align-items-center justify-content-center mt-4 mb-5 pb-5 pt-5" style="height: 90vh;">
+        <div class="container mb-4 mt-5" style="max-width: 500px;">
+            <h1 class="my-4 mt-5 text-center text-white">Registrar Productos</h1>
+            <form class="mb-5" th:action="@{/producto/crear}" method="post">
+                <div class="form-group">
+                    <label for="nombre" class="text-white">Nombre del Producto:</label>
+                    <input type="text" class="form-control form-control-lg" id="nombre" name="nombre" required>
+                </div>
+                <div class="form-group">
+                    <label for="marca" class="text-white">Marca:</label>
+                    <input type="text" class="form-control form-control-lg" id="marca" name="marca" required>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion" class="text-white">Descripción:</label>
+                    <input type="text" class="form-control form-control-lg" id="descripcion" name="descripcion" required>
+                </div>
+                <div class="form-group">
+                    <label for="descripcion" class="text-white">Categoría:</label>
+                    <input type="text" class="form-control form-control-lg" id="categoria" name="categoria" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="precio" class="text-white">Precio:</label>
+                    <input type="number" class="form-control form-control-lg" id="precio" name="precio" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="stock" class="text-white">Stock:</label>
+                    <input type="number" class="form-control form-control-lg" id="stock" name="stock" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block blue w-25 m-auto rounded">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <div th:insert="componentes/footer::footer"></div>
+   
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <div th:insert="componentes/modalCerrarSesion::modalCerrarSesion"></div>
+ 
+    <div th:insert="componentes/scriptsBTyJS::scriptsBTyJS"></div>
+
+</body>
+</html>
+
