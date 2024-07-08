@@ -1,17 +1,20 @@
+
 <!DOCTYPE html>
 <html lang ="es" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="componentes/head:: head"></head>
+<head th:insert="componentes/head :: head"></head>
 <body class="bg-login-image" id="page-top">
 
-   <nav th:insert="componentes/nav :: nav"></<nav></nav>
-    
+ <nav th:insert="componentes/nav :: nav"></<nav></nav>
+
+
+
     <!-- DataTables Example -->
-<section class="m-5 mb-5 pb-5">
+<section class="mt-5">
     <div class="row m-auto w-100">
         <div class="col-10 m-auto">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Listado de Productos:</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Listado de Clientes:</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive table-hover">
@@ -20,26 +23,30 @@
                                 <tr>
                                     <th>Código</th>
                                     <th>Nombre</th>
-                                    <th>Marca</th>
-                                    <th>Descripción</th>
-                                    <th>Precio</th>
-                                    <th>Stock</th>
+                                    <th>Apellido</th>
+                                    <th>Dirección</th>
+                                    <th>Teléfono</th>
+                                    <th>D.N.I.</th>
+                                    <th>CUIL/CUIT</th>
+                                    <th>Compras</th>
+                                    <th>Estado</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- Iterar sobre la lista de productos -->
-                                <tr th:each="producto : ${listadoProductos}">
-                                    <td th:text="${producto.id}"></td>
-                                    <td th:text="${producto.nombre}"></td>
-                                    <td th:text="${producto.marca}"></td>
-                                    <td th:text="${producto.descripcion}"></td>
-                                    <td th:text="${producto.precio}"></td>
-                                    <td th:text="${producto.stock}"></td>
+                                <tr th:each="cliente : ${listadoClientes}">
+                                    <td th:text="${cliente.id}"></td>
+                                    <td th:text="${cliente.nombre}"></td>
+                                    <td th:text="${cliente.apellido}"></td>
+                                    <td th:text="${cliente.direccion}"></td>
+                                    <td th:text="${cliente.telefono}"></td>
+                                    <td th:text="${cliente.dni}"></td>
+                                    <td th:text="${cliente.cuil_cuit}"></td>
+                                    <td><a href="#">Ver sus compras</a></td>
+                                    <td th:text="${cliente.estado == 1 ? 'Activo' : 'Inactivo'}"></td>
                                     <td class="text-center w-auto">
-                                        <form th:action="@{/actualizarProductos}" method="post">
-                                            <input type="hidden" name="id" th:value="${producto.id}">
-                                            <input type="hidden" name="idProducto" th:value="${producto.id}">
+                                        <form name="editar" th:action="@{/actualizarCliente}" method="get" class="w-auto">
+                                            <input type="hidden" th:name="id" th:value="${cliente.id}">
                                             <button type="submit" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </button>
@@ -55,7 +62,8 @@
     </div>
 </section>
 
-          <div th:insert="componentes/footer::footer"></div>
+        
+ <div th:insert="componentes/footer::footer"></div>
    
  <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
@@ -63,7 +71,8 @@
     </a>
 
    <div th:insert="componentes/modalCerrarSesion :: modalCerrarSesion"></div>
+ 
+   <div th:insert="componentes/scriptsBTyJS :: scriptsBTyJS"></div>
 
-  <div th:insert="componentes/scriptsBTyJS:: scriptsBTyJS"></div>
 </body>
 </html>

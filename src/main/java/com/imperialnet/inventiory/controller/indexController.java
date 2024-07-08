@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.imperialnet.inventiory.controller;
 
 import org.springframework.stereotype.Controller;
@@ -13,13 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author jonii
  */
 @Controller 
-public class indexController {
+public class IndexController {
     
     @GetMapping("/index")
     public String index(){
         return "index";
     }
-  
+    
+    @GetMapping("/")
+    public String inicio(){
+        return "login";
+    }
     @GetMapping("/menuProductos")
     public String menuProductos(){
         return "menuProductos";

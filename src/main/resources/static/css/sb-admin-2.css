@@ -11504,3 +11504,27 @@ body.sidebar-toggled footer.sticky-footer {
 .btn-primary:hover{
 background: linear-gradient(90deg, rgba(11,6,6,1) 0%, rgba(39,18,235,0.9612219887955182) 65%, rgba(158,162,163,1) 100%);
 }
+
+
+/* Define the spin animation with 3D rotation and pauses */
+@keyframes spin {
+    0% { transform: rotateY(0deg); }
+    45% { transform: rotateY(180deg);  }
+    50% { transform: rotateY(180deg);  }
+    95% { transform: rotateY(360deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+/* Apply the spin animation to the logo */
+.logo-animation {
+    width: 55px;
+    height: 55px;
+    animation: spin 4s linear infinite; /* Adjust the duration (4s) as needed */
+    transform-style: preserve-3d; /* Enable 3D transformations */
+    transition: transform 0.3s ease-in-out; /* Smooth scaling transition */
+}
+
+/* Improve the appearance with shadow and scaling on hover */
+.logo-animation:hover {
+    transform: scale(1.1); /* Scale the logo slightly on hover */
+}

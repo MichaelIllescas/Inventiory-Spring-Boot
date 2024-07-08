@@ -65,4 +65,9 @@ public class ProductoController {
             return "redirect:/verProductos"; // Redirige al listado si no se encuentra el producto
         }
     }
+    
+    
+    
+    
+    
 }
