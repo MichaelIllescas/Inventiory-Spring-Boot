@@ -1,6 +1,7 @@
 
 package com.imperialnet.inventiory.service;
 
+import com.imperialnet.inventiory.entities.Producto;
 import com.imperialnet.inventiory.entities.Venta;
 import com.imperialnet.inventiory.repository.VentaRepository;
 import java.util.List;
@@ -48,6 +49,15 @@ public class VentaService implements IVentaService{
     @Override
     public void eliminarVenta(Long id) {
         ventaRepo.deleteById(id);
+    }
+
+    @Override
+    public float calcularTotalVenta(List<Producto> productosSeleccionados) {
+         float total = 0;
+        for (Producto producto : productosSeleccionados) {
+            total += producto.getPrecio();
+        }
+        return total;
     }
     
 }

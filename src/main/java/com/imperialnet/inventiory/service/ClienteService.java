@@ -75,4 +75,14 @@ public class ClienteService implements IClienteService{
          cliRepo.save(clienteExistente);
     }
 }
+
+    @Override
+    public Cliente findByNombre(String nombre) {
+       return cliRepo.findByNombre(nombre);
+    }
+
+    @Override
+    public Cliente findByDni(String dni) {
+       return cliRepo.findByDni(dni);
+    }
 }

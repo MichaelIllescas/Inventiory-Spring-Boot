@@ -19,4 +19,8 @@ public interface IClienteService {
     public Cliente editarCliente(Long id, Cliente cliente);
     public void editarCliente(Cliente cliente);
     public void eliminarCliente(Long id);
+
+    public Cliente findByNombre(String nombre);
+     public Cliente findByDni(String dni);
+    
 }

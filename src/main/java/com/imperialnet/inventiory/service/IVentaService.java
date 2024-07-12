@@ -4,6 +4,7 @@
  */
 package com.imperialnet.inventiory.service;
 
+import com.imperialnet.inventiory.entities.Producto;
 import com.imperialnet.inventiory.entities.Usuario;
 import com.imperialnet.inventiory.entities.Venta;
 import java.util.List;
@@ -18,4 +19,9 @@ public interface IVentaService {
     public Venta obtenerVentaPorId(Long id);
     public Venta editarVenta(Long id, Venta venta);
     public void eliminarVenta(Long id);
+    
+    
+     // Método para calcular el total de la venta
+    public float calcularTotalVenta(List<Producto> productosSeleccionados) ;
+        
 }

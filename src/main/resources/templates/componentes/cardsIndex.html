@@ -2,8 +2,8 @@
     <section th:fragment="cardsIndex" class="content-section p-3 m-auto" id="portfolio">
         <div class="container m-auto">
             
-                <div class="row gx-1 gy-1 m-auto mb-5 ">
-                    <div class="col-lg-4 col-md-10 col-sm-10 mb-3">
+                <div  class="row gx-1 gy-1 m-auto mb-5 ">
+                    <div th:if="${rol != 2}" class="col-lg-4 col-md-10 col-sm-10 mb-3">
                         <a class="portfolio-item d-block text-center position-relative" th:href="@{/menuUsuarios}">
                             <div class="caption d-flex justify-content-center align-items-center h-100 w-100">
                                 <div class="caption-content">

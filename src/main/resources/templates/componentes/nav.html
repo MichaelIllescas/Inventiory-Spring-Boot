@@ -41,7 +41,7 @@
                         Ventas
                     </a>
                     <div class="dropdown-menu custom-dropdown animated--grow-in" aria-labelledby="ventasDropdown">
-                        <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Registrar Venta</a>
+                        <a class="dropdown-item" th:href="@{/registrarVenta}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Registrar Venta</a>
                         <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ver Ventas</a>
                     </div>
                 </li>
@@ -58,7 +58,7 @@
                 <li class="nav-item dropdown no-arrow animated--grow-in">
                     <a class="nav-link dropdown-toggle text-white" href="#" id="userDropdown" role="button"
                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">pingorito McGee</span>
+                        <span th:text=${session.userNombre} class="mr-2 d-none d-lg-inline text-gray-600 ">pingorito McGee</span>
                         <img class="img-profile rounded-circle" src="img/undraw_profile.svg" style="width: 30px; height: 30px;">
                     </a>
                     <!-- Dropdown - User Information -->

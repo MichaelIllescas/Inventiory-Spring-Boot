@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang ="es" xmlns:th="http://www.thymeleaf.org">
+<html  lang ="es" xmlns:th="http://www.thymeleaf.org">
 <head th:insert="componentes/head :: head"></head>
 <body class="bg-login-image" id="page-top">
 
@@ -9,7 +9,7 @@
 
 
     <!-- DataTables Example -->
-<section class="mt-5">
+<section th:if="${session.rol != 2}" class="mt-5">
     <div class="row m-auto w-100">
         <div class="col-10 m-auto">
             <div class="card shadow mb-4">
@@ -35,8 +35,8 @@
                                     <td th:text="${usuario.rol.descripicion}"></td> <!-- Usando el operador de navegación segura -->
                                     <td th:text="${usuario.activo == 1 ? 'Activo' : 'Inactivo'}"></td>
                                     <td class="text-center w-auto">
-                                        <form name="editar" th:action="@{/actualizarUsuario}" method="get" class="w-auto">
-                                            <input type="hidden" th:name="id" th:value="${usuario.id}">
+                                        <form name="editar" th:action="@{/actualizarUsuario}" th:method="get" class="w-auto">
+                                            <input type="hidden" name="id" th:value="${usuario.id}">
                                             <button type="submit" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </button>
