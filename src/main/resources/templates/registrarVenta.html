@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
     <head th:insert="componentes/head::head"></head>
+
+
     <body class="bg-login-image" id="page-top">
 
         <nav th:insert="componentes/nav::nav"></nav>
@@ -11,18 +13,21 @@
             <div class="row">
                 <div class="col-lg-6">
                     <!-- Formulario para seleccionar cliente -->
-                    <form th:action="@{/seleccionarCliente}" method="get">
-                        <div class="form-group">
-                            <label for="inputCliente" class="text-white">Selecciona un Cliente:</label>
-                            <input type="text" class="form-control form-control-lg" id="inputCliente" name="dniCliente" list="listaClientes" placeholder="Buscar cliente...">
-                            <datalist id="listaClientes">
-                                <th:block th:each="cliente : ${clientes}">
-                                    <option th:value="${cliente.dni}" th:text="${cliente.nombre + ' - ' + cliente.apellido + ' - ' + cliente.dni}"></option>
-                                </th:block>
-                            </datalist>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Seleccionar</button>
-                    </form>
+                   <form th:action="@{/seleccionarCliente}" method="get">
+    <div class="form-group">
+        <label for="inputCliente" class="text-white">Selecciona un Cliente:</label>
+        <select id="inputCliente" name="dniCliente" class="form-control form-control-lg">
+            <option></option> <!-- Opción vacía inicial -->
+            <!-- Iteración sobre los clientes desde el controlador -->
+            <th:block th:each="cliente : ${clientes}">
+                <option th:value="${cliente.dni}" th:text="${cliente.nombre + ' ' + cliente.apellido + ' - ' + cliente.dni}"></option>
+            </th:block>
+        </select>
+        <small th:if="${session.errorCli}" class="form-text text-white" th:text="${session.errorCli}"></small>
+    </div>
+    <button type="submit" class="btn btn-primary">Seleccionar</button>
+</form>
+
 
 
                     <!-- Datos del Cliente seleccionado -->
@@ -44,17 +49,17 @@
                     <form th:action="@{/agregarProducto}" method="post" class="mb-4">
                         <div class="form-group">
                             <label for="inputProducto" class="text-white">Selecciona un Producto:</label>
-                            <input type="text" class="form-control form-control-lg" id="inputProducto" name="idProducto" list="listaProductos" placeholder="Buscar producto...">
-                            <datalist id="listaProductos">
+                            <select id="inputProducto"  name="idProducto" class="form-control form-control-lg">
+                                <option></option> <!-- Opción vacía inicial -->
                                 <!-- Iteración sobre los productos desde el controlador -->
                                 <th:block th:each="producto : ${productos}">
                                     <option th:value="${producto.id}" th:text="${producto.nombre + ' - ' + producto.marca + ' - ' + producto.descripcion + ' - ' + producto.precio}"></option>
                                 </th:block>
-                            </datalist>
+                            </select>
                         </div>
+                        <small th:if="${session.errorProd}" class="form-text text-white" th:text="${session.errorProd}"></small>
                         <button type="submit" class="btn btn-success">Agregar</button>
                     </form>
-
 
 
                     <!-- Tabla para mostrar productos seleccionados -->
@@ -64,17 +69,19 @@
                                 <tr>
                                     <th>Producto</th>
                                     <th>Precio</th>
+                                    <th>Cant.</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- Ejemplo de producto agregado dinámicamente -->
                                 <tr th:each="prod : ${session.productosSeleccionados}">
-                                    <td th:text="${prod.nombre}">milanesa</td>
-                                    <td th:text="${prod.precio}">$10.00</td>
+                                    <td th:text="${prod.producto.nombre}">milanesa</td>
+                                    <td th:text="${prod.producto.precio}">$10.00</td>
+                                    <td th:text="${prod.cantidad}">$10.00</td>
                                     <td class="w-25">
                                         <form th:action="@{/eliminarProducto}" method="post">
-                                            <input type="hidden" th:value="${prod.id}" name="idProd">
+                                            <input type="hidden" th:value="${prod.producto.id}" name="idProd">
                                             <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                                         </form>
                                     </td>
@@ -92,9 +99,16 @@
 
 
                     <!-- Botón para confirmar la venta -->
-                    <form th:action="@{/confirmarVenta}" method="post">
-                        <button type="submit" class="btn btn-success mt-4">Confirmar Venta</button>
+                    <form th:action="@{/confirmarVenta}" method="post" class="d-flex">
+                        <button type="submit" class="btn btn-success ">Confirmar Venta</button>
+
+                        <p th:if="${session.confirmacion} "class=" m-auto   text-white text-shadow "  th:text="${session.confirmacion}"></p>
+
                     </form>
+
+
+
+
                 </div>
             </div>
         </div>
@@ -109,6 +123,31 @@
         <div th:insert="componentes/modalCerrarSesion::modalCerrarSesion"></div>
 
         <div th:insert="componentes/scriptsBTyJS::scriptsBTyJS"></div>
+        <!-- CDN de Select2 CSS y JS -->
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
 
+        <script>
+            $(document).ready(function () {
+                $('#inputProducto').select2({
+                    placeholder: 'Buscar producto...',
+                    allowClear: true,
+                    // Permite borrar la selección
+                    // Puedes añadir más opciones de configuración según necesites
+                });
+            });
+            $(document).ready(function () {
+                $('#inputCliente').select2({
+                    placeholder: 'Buscar cliente...',
+                    allowClear: true,
+                    
+                    // Permite borrar la selección
+                    // Puedes añadir más opciones de configuración según necesites
+                });
+            });
+            
+            
+        </script>
+        
     </body>
 </html>

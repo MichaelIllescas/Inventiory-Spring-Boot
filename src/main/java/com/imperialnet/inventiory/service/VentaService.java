@@ -1,9 +1,11 @@
 
 package com.imperialnet.inventiory.service;
 
+import com.imperialnet.inventiory.entities.ItemVenta;
 import com.imperialnet.inventiory.entities.Producto;
 import com.imperialnet.inventiory.entities.Venta;
 import com.imperialnet.inventiory.repository.VentaRepository;
+import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +18,22 @@ import org.springframework.stereotype.Service;
 public class VentaService implements IVentaService{
     @Autowired
     VentaRepository ventaRepo;
+    
     @Override
-    public void crearVenta(Venta venta) {
+    public void registrarVenta(Venta venta, List<ItemVenta> itemsVenta) {
+        // Asignar la lista de itemsVenta a la venta
+        venta.setItemsVenta(itemsVenta);
+        
+        // Asignar la venta a cada ItemVenta para establecer la relación bidireccional
+        for (ItemVenta itemVenta : itemsVenta) {
+            itemVenta.setVenta(venta);
+        }
+        
+        // Calcular el total de la venta si es necesario
+        float total = calcularTotalVenta(itemsVenta);
+        venta.setTotal(total);
+        
+        // Guardar la venta en la base de datos
         ventaRepo.save(venta);
     }
 
@@ -37,7 +53,7 @@ public class VentaService implements IVentaService{
         if(ventaEditar!=null){
             ventaEditar.setCliente(venta.getCliente());
             ventaEditar.setFechaVenta(venta.getFechaVenta());
-            ventaEditar.setItem_Venta(venta.getItem_Venta());
+            ventaEditar.setItemsVenta(venta.getItemsVenta());
             ventaEditar.setTotal(venta.getTotal());
             ventaEditar.setUsuario(venta.getUsuario());
             ventaRepo.save(ventaEditar);
@@ -52,12 +68,13 @@ public class VentaService implements IVentaService{
     }
 
     @Override
-    public float calcularTotalVenta(List<Producto> productosSeleccionados) {
+    public float calcularTotalVenta(List<ItemVenta> productosSeleccionados) {
          float total = 0;
-        for (Producto producto : productosSeleccionados) {
-            total += producto.getPrecio();
+        for (ItemVenta producto : productosSeleccionados) {
+            total += producto.getProducto().getPrecio()*producto.getCantidad();
         }
         return total;
     }
+   
     
 }

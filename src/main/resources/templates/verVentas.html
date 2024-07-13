@@ -14,7 +14,7 @@
         <div class="col-12 m-auto">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Listado de Clientes:</h6>
+                    <h6 class="m-0 font-weight-bold text-primary">Listado de Ventas</h6>
                 </div>
                 <div class="card-body">
                     <div class="table-responsive table-hover">
@@ -22,24 +22,24 @@
                             <thead class="thead-light">
                                 <tr>
                                     
-                                    <th>Nombre</th>
-                                    <th>Dirección</th>
-                                    <th>Teléfono</th>
-                                    <th>D.N.I.</th>
-                                    <th>Compras</th>
+                                    <th>Orden</th>
+                                    <th>Cliente</th>
+                                    <th>DNI</th>
+                                    <th>Fecha</th>
+                                    <th>Monto</th>
                                     <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="cliente : ${listadoClientes}">
-                                    <td th:text="${cliente.nombre + ' ' +cliente.apellido}"></td>
-                                    <td th:text="${cliente.direccion}"></td>
-                                    <td th:text="${cliente.telefono}"></td>
-                                    <td th:text="${cliente.dni}"></td>
-                                    <td><a href="#">Ver sus compras</a></td>
+                                <tr >
+                                    <td ></td>
+                                    <td ></td>
+                                    <td ></td>
+                                    <td ></td>
+                                    <td></td>
                                     <td class="text-center w-auto">
                                         <form name="editar" th:action="@{/actualizarCliente}" method="get" class="w-auto">
-                                            <input type="hidden" th:name="id" th:value="${cliente.id}">
+                                            <input type="hidden" th:name="id">
                                             <button type="submit" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </button>

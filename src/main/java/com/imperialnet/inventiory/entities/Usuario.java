@@ -1,6 +1,7 @@
 
 package com.imperialnet.inventiory.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -41,7 +42,10 @@ public class Usuario {
     
     private int activo=1;
     
-    @OneToMany
+   
+    
+    // Relación con ventas
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     private List<Venta> ventas;
 
     public Usuario() {

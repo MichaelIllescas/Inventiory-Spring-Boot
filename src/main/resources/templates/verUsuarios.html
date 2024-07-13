@@ -10,8 +10,8 @@
 
     <!-- DataTables Example -->
 <section th:if="${session.rol != 2}" class="mt-5">
-    <div class="row m-auto w-100">
-        <div class="col-10 m-auto">
+    <div class="row m-auto w-100 pb-5">
+        <div class="col-12 m-auto">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Listado de Usuarios:</h6>
@@ -21,7 +21,6 @@
                         <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>Id</th>
                                     <th>Usuario</th>
                                     <th>Rol</th>
                                     <th>Estado</th>
@@ -30,7 +29,6 @@
                             </thead>
                             <tbody>
                                 <tr th:each="usuario : ${listadoUsuarios}">
-                                    <td th:text="${usuario.id}"></td>
                                     <td th:text="${usuario.nombreUsuario}"></td>
                                     <td th:text="${usuario.rol.descripicion}"></td> <!-- Usando el operador de navegación segura -->
                                     <td th:text="${usuario.activo == 1 ? 'Activo' : 'Inactivo'}"></td>

@@ -4,6 +4,7 @@
  */
 package com.imperialnet.inventiory.entities;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,7 +34,8 @@ public class Cliente {
     private String dni;
     private String cuil_cuit;
     
-    @OneToMany
+   
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Venta> ventas;
     
     private int estado=1;

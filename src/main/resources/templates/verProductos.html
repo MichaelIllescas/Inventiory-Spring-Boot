@@ -6,9 +6,9 @@
    <nav th:insert="componentes/nav :: nav"></<nav></nav>
     
     <!-- DataTables Example -->
-<section class="m-5 mb-5 pb-5">
+<section class="m-0 mt-4 mb-5 pb-5">
     <div class="row m-auto w-100">
-        <div class="col-10 m-auto">
+        <div class="col-12 m-auto">
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Listado de Productos:</h6>
@@ -18,7 +18,7 @@
                         <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                             <thead class="thead-light">
                                 <tr>
-                                    <th>Código</th>
+                                    <th>Cód.</th>
                                     <th>Nombre</th>
                                     <th>Marca</th>
                                     <th>Descripción</th>
@@ -30,14 +30,14 @@
                             <tbody>
                                 <!-- Iterar sobre la lista de productos -->
                                 <tr th:each="producto : ${listadoProductos}">
-                                    <td th:text="${producto.id}"></td>
-                                    <td th:text="${producto.nombre}"></td>
-                                    <td th:text="${producto.marca}"></td>
-                                    <td th:text="${producto.descripcion}"></td>
-                                    <td th:text="${producto.precio}"></td>
-                                    <td th:text="${producto.stock}"></td>
-                                    <td class="text-center w-auto">
-                                        <form th:action="@{/actualizarProductos}" method="post">
+                                    <td class="w-auto" th:text="${producto.id}"></td>
+                                    <td class="w-auto" th:text="${producto.nombre}"></td>
+                                    <td class="w-auto" th:text="${producto.marca}"></td>
+                                    <td class="w-auto" th:text="${producto.descripcion}"></td>
+                                    <td class="w-auto" th:text="${producto.precio}"></td>
+                                    <td class="w-auto" th:text="${producto.stock}"></td>
+                                    <td  class="text-center w-auto">
+                                        <form th:action="@{/actualizarProductos}" method="post" class="w-auto">
                                             <input type="hidden" name="id" th:value="${producto.id}">
                                             <input type="hidden" name="idProducto" th:value="${producto.id}">
                                             <button type="submit" class="btn btn-primary btn-sm">

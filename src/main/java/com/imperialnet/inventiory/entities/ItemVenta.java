@@ -8,6 +8,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.Getter;
@@ -31,6 +33,9 @@ public class ItemVenta {
     private Producto producto;
     
     private int cantidad;
+    @ManyToOne
+    @JoinColumn(name = "venta_id")
+    private Venta venta;
 
     public ItemVenta() {
     }

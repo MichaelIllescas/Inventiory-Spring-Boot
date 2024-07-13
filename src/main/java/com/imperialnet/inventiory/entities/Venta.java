@@ -1,51 +1,55 @@
-
 package com.imperialnet.inventiory.entities;
 
+import com.imperialnet.inventiory.entities.Cliente;
+import com.imperialnet.inventiory.entities.Usuario;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
-import java.util.Date;
+import jakarta.persistence.Table;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-/**
- *
- * @author jonii
- */
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
+@Table(name = "venta")
 public class Venta {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-    private Date fechaVenta;
-    private float total;
-    @OneToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
-    @OneToOne
+
+    @Column(name = "fecha_venta")
+    private LocalDate fechaVenta;
+
+    @Column(name = "total")
+    private float total;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
-    @OneToMany
-    private List<ItemVenta> item_Venta;
-
-    public Venta() {
-    }
-
-    public Venta(Long id, Date fechaVenta, float total, Cliente cliente, Usuario usuario, List<ItemVenta> item_Venta) {
-        this.id = id;
-        this.fechaVenta = fechaVenta;
-        this.total = total;
-        this.cliente = cliente;
-        this.usuario = usuario;
-        this.item_Venta = item_Venta;
-    }
- 
     
-    
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemVenta> itemsVenta;
+
+
 }

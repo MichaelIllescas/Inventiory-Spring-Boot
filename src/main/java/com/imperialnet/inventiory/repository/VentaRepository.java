@@ -13,4 +13,5 @@ import com.imperialnet.inventiory.entities.Venta;
 @Repository
 public interface VentaRepository extends JpaRepository<Venta, Long>{
     
+    
 }
