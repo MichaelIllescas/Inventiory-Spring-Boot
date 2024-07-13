@@ -46,8 +46,14 @@ public class VentaController {
     @Autowired
     ProcutosSesionData listado;
 
+    @GetMapping("/menuVentas")
+    public String menu() {
+        return "menuVentas";
+    }
+
     @GetMapping("/registrarVenta")
-    public String panelVenta(Model model, HttpSession sesion) {
+    public String panelVenta(Model model, HttpSession sesion)
+    {
         List<Producto> productos = prodServ.getProductos();
         model.addAttribute("productos", productos);
         List<Cliente> clientes = cliServ.getClientes();
@@ -58,7 +64,8 @@ public class VentaController {
     @GetMapping("/seleccionarCliente")
     public String seleccionarCliente(Model model,
             HttpSession sesion,
-            @RequestParam(value = "dniCliente", required = false) String dni) {
+            @RequestParam(value = "dniCliente", required = false) String dni)
+    {
         if (dni == null || dni.isEmpty()) {
             sesion.setAttribute("errorCli", "Debe seleccionar un cliente");
             return "redirect:/registrarVenta"; // Asegúrate de que esta sea la vista correcta
@@ -78,9 +85,10 @@ public class VentaController {
 
     @PostMapping("/agregarProducto")
     public String agregarProducto(@RequestParam(value = "idProducto", required = false) String idProductostr,
-            Model model,
-            HttpSession sesion,
-            ItemVenta item) {
+                                    Model model,
+                                    HttpSession sesion,
+                                    ItemVenta item) 
+    {
 
         Long idProducto = null;
         try {
@@ -115,17 +123,13 @@ public class VentaController {
 
     @PostMapping("/eliminarProducto")
     public String eliminarProducto(@RequestParam("idProd") Long idProd,
-            HttpSession sesion) {
+                                   HttpSession sesion)
+    {
         listado.getProductosSeleccionados().removeIf(producto -> producto.getProducto().getId().equals(idProd));
 
         sesion.setAttribute("productosSeleccionados", listado.getProductosSeleccionados());
         sesion.setAttribute("total", ventaServ.calcularTotalVenta(listado.getProductosSeleccionados()));
         return "redirect:/registrarVenta";
-    }
-
-    @GetMapping("/verVentas")
-    public String verVentas() {
-        return "verVentas";
     }
 
     @PostMapping("/confirmarVenta")
@@ -168,15 +172,59 @@ public class VentaController {
         venta.setUsuario(usuario);
         venta.setFechaVenta(fechaDeHoyLocalDate);
 
-        ventaServ.registrarVenta(venta, productosSeleccionados);
+        ventaServ.registrarVenta(venta, productosSeleccionados, sesion);
+
+        String errorMessage = (String) sesion.getAttribute("errorProd");
+        if (errorMessage != null) {
+
+            return "redirect:/registrarVenta"; // Redirigir a una página de venta
+        }
 
         // Limpiar atributos de sesión después de registrar la venta
         sesion.removeAttribute("cliente");
         sesion.removeAttribute("total");
-        sesion.removeAttribute("productosSeleccionados");
-
+        sesion.removeAttribute("errorProd");
+        sesion.removeAttribute("errorCli");
+        //se vacia el listado para evitar conflictos en proximas ventas
+        listado.vaciar();
         sesion.setAttribute("confirmacion", "Se ha registrado la venta correctamente.");
         return "redirect:/registrarVenta";
     }
+
+    @GetMapping("/verVentas")
+    public String verVentas(HttpSession sesion, Model model) {
+        model.addAttribute("ventas", ventaServ.getVentas());
+        System.out.println("ventas:");
+        for (Venta venta : ventaServ.getVentas()) {
+            System.out.println("id:" + venta.getId());
+        }
+        return "verVentas";
+    }
+
+    @PostMapping("/eliminarVenta")
+    public String eliminarVenta(@RequestParam("idVta") Long idVta,
+                                HttpSession sesion,
+                                Model model)
+    {
+        ventaServ.eliminarVenta(idVta);
+        sesion.setAttribute("mensajeConfirm", "Se ha eliminado Correctamente");
+        
+        return "redirect:/verVentas";
+    }
+    
+     @PostMapping("/ventasCliente")
+    public String cargarComprasCliente(@RequestParam("idCli") Long idCli,
+                                HttpSession sesion,
+                                Model model)
+    {
+        Cliente cliente=cliServ.obtenerClientePorId(idCli);
+        String nomApe=cliente.getNombre() + " " + cliente.getApellido();
+        List<Venta> ventas=cliente.getVentas();
+        model.addAttribute("ventas", ventas);
+        model.addAttribute("cli", nomApe);
+        
+        return "verComprasCliente";
+    }
+
 
 }

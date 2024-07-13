@@ -1,8 +1,8 @@
 <nav th:fragment="nav" class="navbar navbar-expand-lg bg-gradient-dark-blue animated--grow-in">
     <div class="container">
         <!-- Logo -->
-       <a class="navbar-brand" th:href="@{/index}">
-            <img th:src="@{/img/logoInventiory.png}" class="rounded-pill logo-animation shadow" alt="Logo">
+       <a class="navbar-brand  " th:href="@{/index}">
+           <img th:src="@{/img/logoInventiory-removebg-preview.png}" class=" rounded-pill logo-animation shadow img-fluid" alt="Logo">
         </a>
 
         <button class="animated--grow-in btn btn-secondary bg-gradient-dark rounded-circle p-2 d-lg-none" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -50,7 +50,8 @@
                         Facturas
                     </a>
                     <div class="dropdown-menu custom-dropdown animated--grow-in" aria-labelledby="facturasDropdown">
-                        <a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ver Facturas</a>
+                        <a class="dropdown-item" th:href="@{/menuFacturas}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ver Facturas</a>
+                        <a class="dropdown-item"  th:href="@{/menuFacturas}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Generar Factura</a>
                     </div>
                 </li>
             </ul>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="componentes/head::head"></head>
+<body class="bg-login-image" id="page-top">
+
+   <nav th:insert="componentes/nav::nav"></nav>
+    
+    <section class="content-section p-5 d-flex m-auto" id="portfolio">
+        <div class="container m-auto">
+            <h1 class="m-auto text-white">SITIO EN CONSTRUCCION!</h1>
+        </div>
+    </section>
+
+    <div th:insert="componentes/footer::footer"></div>
+   
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <div th:insert="componentes/modalCerrarSesion::modalCerrarSesion"></div>
+ 
+    <div th:insert="componentes/scriptsBTyJS::scriptsBTyJS"></div>
+       
+</body>
+</html>

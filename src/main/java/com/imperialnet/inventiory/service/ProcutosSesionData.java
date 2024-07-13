@@ -37,4 +37,8 @@ public void agregarProducto(ItemVenta nuevoProducto) {
     // Si el producto no está en la lista, agregarlo normalmente
     productosSeleccionados.add(nuevoProducto);
 }
+
+    public void vaciar() {
+        productosSeleccionados.clear();
+    }
 }
