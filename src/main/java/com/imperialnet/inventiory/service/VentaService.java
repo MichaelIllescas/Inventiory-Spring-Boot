@@ -5,6 +5,8 @@ import com.imperialnet.inventiory.entities.ItemVenta;
 import com.imperialnet.inventiory.entities.Producto;
 import com.imperialnet.inventiory.entities.Venta;
 import com.imperialnet.inventiory.repository.VentaRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +21,11 @@ public class VentaService implements IVentaService{
     @Autowired
     VentaRepository ventaRepo;
     
-    @Override
+     @Autowired
+    private EntityManager entityManager;
+
+  
+
     public void registrarVenta(Venta venta, List<ItemVenta> itemsVenta) {
         // Asignar la lista de itemsVenta a la venta
         venta.setItemsVenta(itemsVenta);
@@ -33,8 +39,8 @@ public class VentaService implements IVentaService{
         float total = calcularTotalVenta(itemsVenta);
         venta.setTotal(total);
         
-        // Guardar la venta en la base de datos
-        ventaRepo.save(venta);
+        // Guardar la venta en la base de datos usando merge() si es necesario
+        entityManager.merge(venta); // Reasocia la entidad detached con el contexto de persistencia
     }
 
     @Override
@@ -68,6 +74,7 @@ public class VentaService implements IVentaService{
     }
 
     @Override
+    @Transactional
     public float calcularTotalVenta(List<ItemVenta> productosSeleccionados) {
          float total = 0;
         for (ItemVenta producto : productosSeleccionados) {

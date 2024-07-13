@@ -3,6 +3,7 @@ package com.imperialnet.inventiory.service;
 
 import com.imperialnet.inventiory.entities.ItemVenta;
 import com.imperialnet.inventiory.repository.ItemVentaRepository;
+import jakarta.transaction.Transactional;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class ItemVentaService implements IItemVentaService{
     ItemVentaRepository itemRepo;
 
     @Override
+        @Transactional
     public void crearItemVenta(ItemVenta item) {
         itemRepo.save(item);
 

@@ -12,6 +12,7 @@ import com.imperialnet.inventiory.service.IUsuarioService;
 import com.imperialnet.inventiory.service.IVentaService;
 import com.imperialnet.inventiory.service.ProcutosSesionData;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,6 +129,7 @@ public class VentaController {
     }
 
     @PostMapping("/confirmarVenta")
+    @Transactional
     public String confirmarVenta(HttpSession sesion) {
         // Obtener la fecha actual
         LocalDate fechaDeHoyLocalDate = LocalDate.now();

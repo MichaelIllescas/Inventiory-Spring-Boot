@@ -8,6 +8,7 @@ import com.imperialnet.inventiory.entities.ItemVenta;
 import com.imperialnet.inventiory.entities.Producto;
 import com.imperialnet.inventiory.entities.Usuario;
 import com.imperialnet.inventiory.entities.Venta;
+import jakarta.transaction.Transactional;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ import java.util.List;
  * @author jonii
  */
 public interface IVentaService {
+        @Transactional
     public void registrarVenta(Venta venta, List<ItemVenta> itemsVenta);
     public List<Venta> getVentas();
     public Venta obtenerVentaPorId(Long id);

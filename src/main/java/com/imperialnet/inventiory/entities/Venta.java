@@ -48,7 +48,7 @@ public class Venta {
     @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Usuario usuario;
     
-    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
     private List<ItemVenta> itemsVenta;
 
 
