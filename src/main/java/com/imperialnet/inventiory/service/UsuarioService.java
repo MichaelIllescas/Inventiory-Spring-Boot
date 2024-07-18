@@ -105,6 +105,18 @@ public class UsuarioService implements IUsuarioService{
          }
          return false;
      }
+
+    @Override
+    public void anularUsuario(Usuario usuario) {
+        if(usuario.getActivo()==1){
+        usuario.setActivo(0);
+        }else{
+        usuario.setActivo(1);
+        }
+        usuarioRepo.save(usuario);
+    }
+     
+     
 }
 
     

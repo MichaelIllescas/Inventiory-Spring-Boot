@@ -32,12 +32,24 @@
                                     <td th:text="${usuario.nombreUsuario}"></td>
                                     <td th:text="${usuario.rol.descripicion}"></td> <!-- Usando el operador de navegación segura -->
                                     <td th:text="${usuario.activo == 1 ? 'Activo' : 'Inactivo'}"></td>
-                                    <td class="text-center w-auto">
+                                    <td class="text-center w-auto d-flex justify-content-center">
                                         <form name="editar" th:action="@{/actualizarUsuario}" th:method="get" class="w-auto">
                                             <input type="hidden" name="id" th:value="${usuario.id}">
                                             <button type="submit" class="btn btn-primary btn-sm">
                                                 <i class="fas fa-pencil-alt"></i>
                                             </button>
+                                        </form>
+                                         <form name="editar" th:action="@{/anularUsuario}" th:method="post" class="w-auto">
+                                            <input type="hidden" name="id" th:value="${usuario.id}">
+                                            <button th:if="${usuario.activo == 1 }" type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-solid fa-ban"></i>
+                                               
+                                            </button>
+                                            <button th:if="${usuario.activo == 0 }" type="submit" class="btn btn-info btn-sm">
+                                              
+                                               <i class="fas fa-solid fa-check"></i>
+                                            </button>
+                                            
                                         </form>
                                     </td>
                                 </tr>

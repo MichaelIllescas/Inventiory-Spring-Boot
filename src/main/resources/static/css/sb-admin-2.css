@@ -11572,3 +11572,12 @@ body.sidebar-toggled footer.sticky-footer {
 .btn-like-link:hover {
     color: #0056b3; /* Cambia el color al pasar el cursor */
 }
+.btn-underline {
+    background-color: transparent; /* Fondo transparente para que no se vea el subrayado bajo el fondo del botón */
+    border: none; /* Sin borde */
+    text-decoration: underline; /* Subrayado */
+    cursor: pointer; /* Cambiar cursor a pointer */
+    color: inherit; /* Color de texto heredado */
+    padding: 0; /* Ajustar el padding según sea necesario */
+    font-size: inherit; /* Tamaño de fuente heredado */
+}

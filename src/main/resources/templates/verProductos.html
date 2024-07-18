@@ -29,8 +29,8 @@
                             </thead>
                             <tbody>
                                 <!-- Iterar sobre la lista de productos -->
-                                <tr th:each="producto : ${listadoProductos}">
-                                    <td class="w-auto" th:text="${producto.id}"></td>
+                                <tr  th:each="producto : ${listadoProductos}" th:class="${producto.stock < 5} ? (producto.stock == 0 ? 'bg-danger text-white' : 'bg-warning') : ''">
+                                    <td class="w-auto " th:text="${producto.id}"></td>
                                     <td class="w-auto" th:text="${producto.nombre}"></td>
                                     <td class="w-auto" th:text="${producto.marca}"></td>
                                     <td class="w-auto" th:text="${producto.descripcion}"></td>
@@ -53,8 +53,11 @@
             </div>
         </div>
     </div>
+    
 </section>
 
+    
+    
           <div th:insert="componentes/footer::footer"></div>
    
  <!-- Scroll to Top Button-->

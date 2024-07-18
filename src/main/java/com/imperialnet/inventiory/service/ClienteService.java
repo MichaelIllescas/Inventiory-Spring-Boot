@@ -5,7 +5,9 @@
 package com.imperialnet.inventiory.service;
 
 import com.imperialnet.inventiory.entities.Cliente;
+import com.imperialnet.inventiory.entities.Producto;
 import com.imperialnet.inventiory.repository.ClienteRepository;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,9 +21,15 @@ public class ClienteService implements IClienteService{
 
     @Autowired
     ClienteRepository cliRepo;
+    @Autowired
+    IUsuarioService userService;
+    
+    
+    
     
     @Override
-    public void crearCliente(Cliente cliente) {
+    public void crearCliente(Cliente cliente, HttpSession sesion) {
+        cliente.setUsuario(userService.obtenerUsuarioPorId((Long)sesion.getAttribute("idUsuario")));
         cliRepo.save(cliente);
     }
 
@@ -84,5 +92,10 @@ public class ClienteService implements IClienteService{
     @Override
     public Cliente findByDni(String dni) {
        return cliRepo.findByDni(dni);
+    }
+
+    @Override
+    public List<Cliente> obtenerClientesPorUsuario(Long usuarioId) {
+        return cliRepo.findByUsuarioId(usuarioId);
     }
 }

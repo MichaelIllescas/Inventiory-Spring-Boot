@@ -4,7 +4,9 @@
  */
 package com.imperialnet.inventiory.repository;
 
+import com.imperialnet.inventiory.entities.Producto;
 import com.imperialnet.inventiory.entities.Usuario;
+import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -19,5 +21,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
     Optional<Usuario> findByNombreUsuario(String nombreUsuario);
     
       String findClaveById(Long usuarioId);      
-    
+     
 }

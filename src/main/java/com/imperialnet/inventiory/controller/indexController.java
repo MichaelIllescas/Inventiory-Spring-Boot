@@ -1,8 +1,10 @@
 
 package com.imperialnet.inventiory.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 /**
@@ -18,9 +20,10 @@ public class IndexController {
         return "index";
     }
  
-    @GetMapping("/")
-    public String inicio(){
-        return "login";
+   @GetMapping("/")
+    public String login(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+       
+        return "login"; // Ensure you have a login.html Thymeleaf template
     }
     
     @GetMapping("/menuProductos")

@@ -2,6 +2,8 @@ package com.imperialnet.inventiory.service;
 
 import com.imperialnet.inventiory.entities.Producto;
 import com.imperialnet.inventiory.repository.ProductoRepository;
+import com.imperialnet.inventiory.repository.UsuarioRepository;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +15,13 @@ public class ProductoService implements IProductoService {
 
     @Autowired
     private ProductoRepository prodRepo;
+    @Autowired
+    private IUsuarioService usuServ;
 
+    
     @Override
-    public void crearProducto(Producto producto) {
+    public void crearProducto(Producto producto,HttpSession sesion) {
+        producto.setUsuario(usuServ.obtenerUsuarioPorId((Long) sesion.getAttribute("idUsuario")));
         prodRepo.save(producto);
     }
 
@@ -49,5 +55,18 @@ public class ProductoService implements IProductoService {
     @Override
     public void eliminarProducto(Long id) {
         prodRepo.deleteById(id);
+    }
+    
+    
+    public List<Producto> obtenerProductosPorUsuario(Long usuarioId) {
+        return prodRepo.findByUsuarioId(usuarioId);
+    }
+    
+       public void actualizarStock(Long id, int cantidad) {
+        Producto producto = obtenerProductoPorId(id);
+        if (producto != null) {
+            producto.setStock(cantidad);
+            prodRepo.save(producto);
+        }
     }
 }

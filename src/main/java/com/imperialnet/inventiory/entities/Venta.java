@@ -34,6 +34,9 @@ public class Venta {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "observaciones")
+    private String observaciones;
+    
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
@@ -51,5 +54,5 @@ public class Venta {
     @OneToMany(mappedBy = "venta", cascade = CascadeType.ALL)
     private List<ItemVenta> itemsVenta;
 
-
+   
 }

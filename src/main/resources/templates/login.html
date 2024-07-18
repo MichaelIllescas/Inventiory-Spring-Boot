@@ -35,6 +35,9 @@
             <div th:if="${param.mensaje}" class="alert alert-success text-center mt-3 py-1">
                 <p th:text="${param.mensaje}"></p>
             </div>
+            <div th:if="${sessionExpired}" class="alert alert-warning" role="alert">
+        <span th:text="${sessionExpired}"></span>
+    </div>
             
             <div class="text-center mt-3">
                 <a href="#">¿Olvidaste tu contraseña?</a>

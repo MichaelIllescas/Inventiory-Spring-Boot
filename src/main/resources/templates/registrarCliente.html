@@ -9,8 +9,11 @@
     <div class="container mb-3" style="max-width: 800px;"> <!-- Aumenté el max-width para mejor distribución -->
         <h1 class="my-4 text-center text-white">Registrar Cliente</h1>
         <form class="mb-5" th:action="@{/registrarCliente}" method="post">
-
+ <div th:if="${session.errorReg}" class="alert alert-danger text-center mt-3 py-1 pt-3">
+                            <p  th:text="${session.errorReg}"></p>
+                        </div>
             <div class="row">
+               
                 <div class="col-lg-6">
                     <div class="form-group">
                         <label for="nombre" class="text-white">Nombre del Cliente:</label>

@@ -9,8 +9,9 @@
 <div class="d-flex align-items-center justify-content-center mb-5 pb-5">
     <div class="container mb-4 mt-2" style="max-width: 800px;">
         <h1 class="my-4 mt-5 text-center text-white">Actualizar Productos</h1>
-        <form class="mb-5" th:action="@{/producto/actualizar/{id}(id=${producto.id})}" method="post" th:object="${producto}">
+        <form class="mb-5" th:action="@{/actualizar}" method="post" th:object="${producto}">
 
+            <input type='hidden' th:value='${producto.id}' name='id'> 
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">

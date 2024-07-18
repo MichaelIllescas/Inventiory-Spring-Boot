@@ -9,6 +9,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import java.util.List;
 import lombok.Getter;
@@ -37,6 +39,11 @@ public class Cliente {
    
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
     private List<Venta> ventas;
+    
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = true)
+
+    private Usuario usuario;
     
     private int estado=1;
 

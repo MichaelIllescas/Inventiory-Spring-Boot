@@ -25,6 +25,7 @@
                     <div class="dropdown-menu custom-dropdown animated--grow-in" aria-labelledby="productosDropdown">
                         <a class="dropdown-item" th:href="@{/crearProductos}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Registrar Producto</a>
                         <a class="dropdown-item" th:href="@{/verProductos}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ver Productos</a>
+                        <a class="dropdown-item" th:href="@{/actualizarStock}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Actualizar Stock</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown animated--grow-in">
@@ -43,6 +44,15 @@
                     <div class="dropdown-menu custom-dropdown animated--grow-in" aria-labelledby="ventasDropdown">
                         <a class="dropdown-item" th:href="@{/registrarVenta}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Registrar Venta</a>
                         <a class="dropdown-item" th:href="@{/verVentas}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ver Ventas</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown animated--grow-in">
+                    <a class="nav-link dropdown-toggle text-light" href="#" id="facturasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Informes
+                    </a>
+                    <div class="dropdown-menu custom-dropdown animated--grow-in" aria-labelledby="facturasDropdown">
+                        <a class="dropdown-item" th:href="@{/ventas}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Informe de Ventas</a>
+                        <a class="dropdown-item"  th:href="@{/informeProductos}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Informe de Productos</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown animated--grow-in">

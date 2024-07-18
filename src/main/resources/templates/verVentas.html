@@ -23,6 +23,7 @@
                                             <th>DNI</th>
                                             <th>Fecha</th>
                                             <th>Monto</th>
+                                            <th>Observaciones</th>
                                             <th style="width:75px;">Acciones</th>
                                         </tr>
                                     </thead>
@@ -33,6 +34,7 @@
                                             <td th:text="${venta.cliente.dni}"></td>
                                             <td th:text="${venta.fechaVenta}"></td>
                                             <td th:text="${venta.total}"></td>
+                                            <td th:text="${venta.observaciones}"></td>
                                             <td class="text-center">
                                                 <div class="d-flex">
                                                     <!-- Botón de eliminación -->
@@ -77,6 +79,9 @@
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <p><strong>Fecha de Venta:</strong> <span class="text-primary" th:text="${venta.fechaVenta}"></span></p>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <p><strong>Observaciones</strong> <span class="text-primary" th:text="${venta.observaciones}"></span></p>
                                                                     </div>
                                                                 </div>
 
