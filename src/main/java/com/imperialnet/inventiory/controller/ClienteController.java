@@ -37,7 +37,7 @@ public class ClienteController {
             HttpSession sesion,
             Model model) {
         // Verificar si el cliente ya está registrado por su DNI
-        Cliente clienteExistente = cliServ.findByDni(cliente.getDni());
+        Cliente clienteExistente = cliServ.findByDni(cliente.getDni(), (Long)sesion.getAttribute("idUsuario"));
 
         if (clienteExistente != null) {
             sesion.setAttribute("errorReg", "El cliente con DNI " + cliente.getDni() + " ya está registrado.");

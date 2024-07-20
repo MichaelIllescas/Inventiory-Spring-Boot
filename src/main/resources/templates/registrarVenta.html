@@ -31,14 +31,32 @@
                     </form>
 
                     <!-- Datos del Cliente seleccionado -->
-                    <div class="mt-4 text-white">
-                        <h2 class="text-white">Datos del Cliente:</h2>
-                        <p>Nombre: <span class="h3" th:text="${session.cliente != null} ? ${session.cliente.nombre} : ''"></span></p>
-                        <p>Apellido:  <span class="h3"  th:text="${session.cliente != null} ? ${session.cliente.apellido} : ''"></span></p>
-                        <p>DNI: <span class="h3" th:text="${session.cliente != null} ? ${session.cliente.dni} : ''"></span></p>
-                        <p>Dirección: <span class="h3" th:text="${session.cliente != null} ? ${session.cliente.direccion} : ''"></span></p>
-                        <p>Teléfono: <span class="h3" th:text="${session.cliente != null} ? ${session.cliente.telefono} : ''"></span></p>
+                    <div class="mt-4 bg-gradient-light rounded p-4 shadow-sm">
+                        <h2 class="text-dark text-center mb-4">Datos del Cliente:</h2>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <strong class="text-muted">Nombre:</strong>
+                                <p class="h4 mb-0" th:text="${session.cliente != null} ? ${session.cliente.nombre} : ''"></p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <strong class="text-muted">Apellido:</strong>
+                                <p class="h4 mb-0" th:text="${session.cliente != null} ? ${session.cliente.apellido} : ''"></p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <strong class="text-muted">DNI:</strong>
+                                <p class="h4 mb-0" th:text="${session.cliente != null} ? ${session.cliente.dni} : ''"></p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <strong class="text-muted">Dirección:</strong>
+                                <p class="h4 mb-0" th:text="${session.cliente != null} ? ${session.cliente.direccion} : ''"></p>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <strong class="text-muted">Teléfono:</strong>
+                                <p class="h4 mb-0" th:text="${session.cliente != null} ? ${session.cliente.telefono} : ''"></p>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
 
                 <div class="col-lg-6">
@@ -54,10 +72,15 @@
                                 </th:block>
                             </select>
                         </div>
+                        <div th:if="${session.errorProd}" class="alert alert-danger text-center mt-3 py-1 pt-3">
+                            <p th:text="${session.errorProd}"></p>
+
+                        </div>
                         <div class="form-group w-25">
                             <label for="cant" class="text-white">Cantidad:</label>
                             <input type="number" class="form-control form-control-sm w-50" id="cant" name="cant" value="1" min="1" step="1">
                         </div>
+
 
                         <button type="submit" class="btn btn-success">Agregar</button>
                     </form>
@@ -105,47 +128,44 @@
                         </div>
                         <button type="submit" class="btn btn-success">Confirmar Venta</button>
 
-                        <p th:if="${session.confirmacion}" class="mt-3 alert alert-success  text-gray " th:text="${session.confirmacion}"></p>
-                        <div th:if="${session.errorProd}" class="alert alert-danger text-center mt-3 py-1 pt-3">
-                            <p th:text="${session.errorProd}"></p>
-                        
-                        
+                        <p th:if="${confirmacion}" class="mt-3 alert alert-success  text-gray " th:text="${confirmacion}"></p>
+
                     </form>
+
                 </div>
             </div>
-        </div>
 
-        <div th:insert="componentes/footer::footer"></div>
+            <div th:insert="componentes/footer::footer"></div>
 
-        <!-- Scroll to Top Button -->
-        <a class="scroll-to-top rounded" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a>
+            <!-- Scroll to Top Button -->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
 
-        <div th:insert="componentes/modalCerrarSesion::modalCerrarSesion"></div>
+            <div th:insert="componentes/modalCerrarSesion::modalCerrarSesion"></div>
 
-        <div th:insert="componentes/scriptsBTyJS::scriptsBTyJS"></div>
-        <!-- CDN de Select2 CSS y JS -->
+            <div th:insert="componentes/scriptsBTyJS::scriptsBTyJS"></div>
+            <!-- CDN de Select2 CSS y JS -->
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
 
-        <script>
-            $(document).ready(function () {
-                $('#inputProducto').select2({
-                    placeholder: 'Buscar producto...',
-                    allowClear: true,
-                    // Permite borrar la selección
-                    // Puedes añadir más opciones de configuración según necesites
+            <script>
+                $(document).ready(function () {
+                    $('#inputProducto').select2({
+                        placeholder: 'Buscar producto...',
+                        allowClear: true,
+                        // Permite borrar la selección
+                        // Puedes añadir más opciones de configuración según necesites
+                    });
                 });
-            });
-            $(document).ready(function () {
-                $('#inputCliente').select2({
-                    placeholder: 'Buscar cliente...',
-                    allowClear: true,
-                    // Permite borrar la selección
-                    // Puedes añadir más opciones de configuración según necesites
+                $(document).ready(function () {
+                    $('#inputCliente').select2({
+                        placeholder: 'Buscar cliente...',
+                        allowClear: true,
+                        // Permite borrar la selección
+                        // Puedes añadir más opciones de configuración según necesites
+                    });
                 });
-            });
-        </script>
+            </script>
     </body>
 </html>

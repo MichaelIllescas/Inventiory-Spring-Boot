@@ -36,6 +36,8 @@ public class ItemVenta {
     @ManyToOne
     @JoinColumn(name = "venta_id")
     private Venta venta;
+    
+    private float precioUnitario;
 
     public ItemVenta() {
     }

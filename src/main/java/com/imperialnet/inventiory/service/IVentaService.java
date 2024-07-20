@@ -41,9 +41,12 @@ public interface IVentaService {
     public Cliente obtenerClienteQueMasComproEnMes(int mes, long id);
 
     public float obtenerMontoTotalComprasClienteEnMes(Long clienteId, int mes, long idUser);
-    
+
     public float obtenerMontoTotalComprasEnMes(List<Venta> ventas);
 
     public List<Object[]> obtenerTopProductosVendidos(int mes, Long usuarioId);
 
+    public List<Venta> obtenerVentasPorCliente(Long clienteId);
+
+    public List<Venta> obtenerVentasPorClienteYUsuario(Long clienteId, Long usuarioId);
 }

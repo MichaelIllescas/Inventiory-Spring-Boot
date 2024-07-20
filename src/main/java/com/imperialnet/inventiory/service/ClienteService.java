@@ -84,14 +84,25 @@ public class ClienteService implements IClienteService{
     }
 }
 
+
     @Override
-    public Cliente findByNombre(String nombre) {
-       return cliRepo.findByNombre(nombre);
+    public Cliente findByNombre(String nombre, Long usuarioId) {
+        // Encuentra todos los clientes del usuario y luego busca por nombre
+        List<Cliente> clientes = cliRepo.findByUsuarioId(usuarioId);
+        return clientes.stream()
+                       .filter(cliente -> cliente.getNombre().equals(nombre))
+                       .findFirst()
+                       .orElse(null);
     }
 
     @Override
-    public Cliente findByDni(String dni) {
-       return cliRepo.findByDni(dni);
+    public Cliente findByDni(String dni, Long usuarioId) {
+        // Encuentra todos los clientes del usuario y luego busca por DNI
+        List<Cliente> clientes = cliRepo.findByUsuarioId(usuarioId);
+        return clientes.stream()
+                       .filter(cliente -> cliente.getDni().equals(dni))
+                       .findFirst()
+                       .orElse(null);
     }
 
     @Override

@@ -14,16 +14,22 @@ import java.util.List;
  * @author jonii
  */
 public interface IClienteService {
-      
-    public void crearCliente(Cliente cliente, HttpSession sesion);
-    public List<Cliente> getClientes();
-    public Cliente obtenerClientePorId(Long id);
-    public Cliente editarCliente(Long id, Cliente cliente);
-    public void editarCliente(Cliente cliente);
-    public void eliminarCliente(Long id);
-     public List<Cliente> obtenerClientesPorUsuario(Long usuarioId);
 
-    public Cliente findByNombre(String nombre);
-     public Cliente findByDni(String dni);
-    
+    public void crearCliente(Cliente cliente, HttpSession sesion);
+
+    public List<Cliente> getClientes();
+
+    public Cliente obtenerClientePorId(Long id);
+
+    public Cliente editarCliente(Long id, Cliente cliente);
+
+    public void editarCliente(Cliente cliente);
+
+    public void eliminarCliente(Long id);
+
+    public List<Cliente> obtenerClientesPorUsuario(Long usuarioId);
+
+    public Cliente findByDni(String dni, Long usuarioId);
+
+    public Cliente findByNombre(String nombre, Long usuarioId);
 }

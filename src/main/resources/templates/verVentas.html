@@ -100,7 +100,7 @@
                                                                         <tr class="text-primary" th:each="item : ${venta.itemsVenta}">
                                                                             <td th:text="${item.producto.nombre + ' ' + item.producto.descripcion}"></td>
                                                                             <td th:text="${item.cantidad}"></td>
-                                                                            <td th:text="${item.producto.precio}"></td>
+                                                                            <td th:text="${item.precioUnitario}"></td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>

@@ -19,6 +19,8 @@ import org.springframework.data.repository.query.Param;
 public interface VentaRepository extends JpaRepository<Venta, Long>{
     
     List<Venta> findByUsuarioId(Long usuarioId);
+ List<Venta> findByClienteId(Long clienteId);
+     List<Venta> findByClienteIdAndUsuarioId(Long clienteId, Long usuarioId);
 
    
     

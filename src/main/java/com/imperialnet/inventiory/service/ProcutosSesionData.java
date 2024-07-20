@@ -2,6 +2,7 @@
 package com.imperialnet.inventiory.service;
 
 import com.imperialnet.inventiory.entities.ItemVenta;
+import com.imperialnet.inventiory.entities.Producto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,14 +18,13 @@ import org.springframework.web.context.annotation.SessionScope;
 public class ProcutosSesionData implements Serializable{
     
      private List<ItemVenta> productosSeleccionados = new ArrayList<>();
+     private List<Producto> productosAumento = new ArrayList<>();
 
     public List<ItemVenta> getProductosSeleccionados() {
         return productosSeleccionados;
     }
      
-
-
-public void agregarProducto(ItemVenta nuevoProducto) {
+    public void agregarProducto(ItemVenta nuevoProducto) {
     // Verificar si el producto ya está en la lista
     for (ItemVenta item : productosSeleccionados) {
         if (item.getProducto().getId() == nuevoProducto.getProducto().getId()) {
@@ -38,7 +38,32 @@ public void agregarProducto(ItemVenta nuevoProducto) {
     productosSeleccionados.add(nuevoProducto);
 }
 
+    public void agregarAproductosaAumentarPrecio( Producto producto){
+         boolean exists = false;
+    for (Producto prods : productosAumento) {
+        if (prods.getId().equals(producto.getId())) {
+            exists = true;
+            break;
+        }
+    }
+    if (!exists) {
+        productosAumento.add(producto);
+    }
+        
+        
+        
+    }
+    
+    public List <Producto> getListadoAumento(){
+        return productosAumento;
+    }
+    
     public void vaciar() {
         productosSeleccionados.clear();
     }
+    
+    
+    
+    
+    
 }

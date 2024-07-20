@@ -42,7 +42,6 @@ public class Cliente {
     
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = true)
-
     private Usuario usuario;
     
     private int estado=1;

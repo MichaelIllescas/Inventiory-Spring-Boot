@@ -34,45 +34,47 @@ public class VentaService implements IVentaService {
     @Autowired
     private EntityManager entityManager;
 
-    @Override
-    @Transactional
-    public void registrarVenta(Venta venta, List<ItemVenta> itemsVenta, HttpSession session) {
-        // Verificar el stock disponible para cada producto
-        for (ItemVenta itemVenta : itemsVenta) {
-            Producto producto = itemVenta.getProducto();
-            if (producto.getStock() < itemVenta.getCantidad() || producto.getStock() == 0) {
-                session.setAttribute("errorProd", "No queda Stock del producto que desea vender.");
-                return;
-            }
+   @Override
+@Transactional
+public void registrarVenta(Venta venta, List<ItemVenta> itemsVenta, HttpSession session) {
+    // Verificar el stock disponible para cada producto y asignar el precio unitario
+    for (ItemVenta itemVenta : itemsVenta) {
+        Producto producto = itemVenta.getProducto();
+        // Asignar el precio unitario del producto al itemVenta
+        itemVenta.setPrecioUnitario(producto.getPrecio()); // Asignar el precio del producto
+
+        // Verificar stock
+        if (producto.getStock() < itemVenta.getCantidad() || producto.getStock() == 0) {
+            session.setAttribute("errorProd", "No queda Stock del producto que desea vender.");
+            return;
         }
-
-        // Deducir el stock de cada producto
-        for (ItemVenta itemVenta : itemsVenta) {
-            Producto producto = itemVenta.getProducto();
-
-            if (producto.getStock() > 0) {
-                producto.setStock(producto.getStock() - itemVenta.getCantidad());
-                productoRepo.save(producto); // Guardar el cambio en la base de datos
-            }
-
-        }
-
-        // Asignar la lista de itemsVenta a la venta
-        venta.setItemsVenta(itemsVenta);
-
-        // Asignar la venta a cada ItemVenta para establecer la relación bidireccional
-        for (ItemVenta itemVenta : itemsVenta) {
-            itemVenta.setVenta(venta);
-        }
-
-        // Calcular el total de la venta si es necesario
-        float total = calcularTotalVenta(itemsVenta);
-        venta.setTotal(total);
-
-        // Guardar la venta en la base de datos usando merge() si es necesario
-        entityManager.merge(venta); // Reasocia la entidad detached con el contexto de persistencia
     }
 
+    // Deducir el stock de cada producto
+    for (ItemVenta itemVenta : itemsVenta) {
+        Producto producto = itemVenta.getProducto();
+
+        if (producto.getStock() > 0) {
+            producto.setStock(producto.getStock() - itemVenta.getCantidad());
+            productoRepo.save(producto); // Guardar el cambio en la base de datos
+        }
+    }
+
+    // Asignar la lista de itemsVenta a la venta
+    venta.setItemsVenta(itemsVenta);
+
+    // Asignar la venta a cada ItemVenta para establecer la relación bidireccional
+    for (ItemVenta itemVenta : itemsVenta) {
+        itemVenta.setVenta(venta);
+    }
+
+    // Calcular el total de la venta si es necesario
+    float total = calcularTotalVenta(itemsVenta);
+    venta.setTotal(total);
+
+    // Guardar la venta en la base de datos usando merge() si es necesario
+    entityManager.merge(venta); // Reasocia la entidad detached con el contexto de persistencia
+}
     @Override
     public List<Venta> getVentas() {
         return ventaRepo.findAll();
@@ -206,6 +208,16 @@ public class VentaService implements IVentaService {
             .setParameter("usuarioId", usuarioId)
             .setMaxResults(10)
             .getResultList();
+    }
+    
+       @Override
+    public List<Venta> obtenerVentasPorCliente(Long clienteId) {
+        return ventaRepo.findByClienteId(clienteId);
+    }
+    
+     @Override
+    public List<Venta> obtenerVentasPorClienteYUsuario(Long clienteId, Long usuarioId) {
+        return ventaRepo.findByClienteIdAndUsuarioId(clienteId, usuarioId);
     }
     
 }
