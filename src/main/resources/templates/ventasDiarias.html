@@ -9,37 +9,49 @@
 
         <div class="row justify-content-center mt-2">
             
-            <div class="col-md-10 bg-light p-4 rounded shadow inset-shadow-gray ">
-            <h1 class="text-dark mb-4">Informe de Ventas Mensuales</h1>
-                <form th:action="@{/informeVentas}" method="get">
-                    <div class="input-group mb-3">
-                        <label class="text-dark mr-3 pt-1 h5" for="mes">Seleccione el mes:</label>
-                        <select class="form-select rounded" id="mes" name="mes">
-                            <option value="1" th:text="'Enero'" th:selected="${mesSeleccionado == 1}">Enero</option>
-                            <option value="2" th:text="'Febrero'" th:selected="${mesSeleccionado == 2}">Febrero</option>
-                            <option value="3" th:text="'Marzo'" th:selected="${mesSeleccionado == 3}">Marzo</option>
-                            <option value="4" th:text="'Abril'" th:selected="${mesSeleccionado == 4}">Abril</option>
-                            <option value="5" th:text="'Mayo'" th:selected="${mesSeleccionado == 5}">Mayo</option>
-                            <option value="6" th:text="'Junio'" th:selected="${mesSeleccionado == 6}">Junio</option>
-                            <option value="7" th:text="'Julio'" th:selected="${mesSeleccionado == 7}">Julio</option>
-                            <option value="8" th:text="'Agosto'" th:selected="${mesSeleccionado == 8}">Agosto</option>
-                            <option value="9" th:text="'Septiembre'" th:selected="${mesSeleccionado == 9}">Septiembre</option>
-                            <option value="10" th:text="'Octubre'" th:selected="${mesSeleccionado == 10}">Octubre</option>
-                            <option value="11" th:text="'Noviembre'" th:selected="${mesSeleccionado == 11}">Noviembre</option>
-                            <option value="12" th:text="'Diciembre'" th:selected="${mesSeleccionado == 12}">Diciembre</option>
-                        </select>
-                        <button class="btn btn-success ml-2" type="submit">Seleccionar</button>
-                    </div>
-                </form>
-            </div>
+        <div class="col-md-10 bg-light p-4 rounded shadow inset-shadow-gray">
+    <h1 class="text-dark mb-4">Informe Diario de Ventas: </h1>
+<form class="w-75 m-auto" th:action="@{/informeDiarioVentas}" method="get">
+    <div class="row mb-3 align-items-center">
+        <div class="col-md-4">
+            <label class=" text-gray h6 mb-3" for="mes">Seleccione el mes:</label>
+            <select class=" text-gray h5 form-select form-select-sm border-info rounded text-center" id="mes" name="mes">
+                <option  value="1" th:text="'Enero'" th:selected="${mesSeleccionado == 1}">Enero</option>
+                <option value="2" th:text="'Febrero'" th:selected="${mesSeleccionado == 2}">Febrero</option>
+                <option value="3" th:text="'Marzo'" th:selected="${mesSeleccionado == 3}">Marzo</option>
+                <option value="4" th:text="'Abril'" th:selected="${mesSeleccionado == 4}">Abril</option>
+                <option value="5" th:text="'Mayo'" th:selected="${mesSeleccionado == 5}">Mayo</option>
+                <option value="6" th:text="'Junio'" th:selected="${mesSeleccionado == 6}">Junio</option>
+                <option value="7" th:text="'Julio'" th:selected="${mesSeleccionado == 7}">Julio</option>
+                <option value="8" th:text="'Agosto'" th:selected="${mesSeleccionado == 8}">Agosto</option>
+                <option value="9" th:text="'Septiembre'" th:selected="${mesSeleccionado == 9}">Septiembre</option>
+                <option value="10" th:text="'Octubre'" th:selected="${mesSeleccionado == 10}">Octubre</option>
+                <option value="11" th:text="'Noviembre'" th:selected="${mesSeleccionado == 11}">Noviembre</option>
+                <option value="12" th:text="'Diciembre'" th:selected="${mesSeleccionado == 12}">Diciembre</option>
+            </select>
         </div>
+        <div class="col-md-4">
+            <label class="text-dark h6" for="dia">Seleccione el día:</label>
+            <input type="number" th:value="${diaSeleccionado}" class="form-control form-control-sm border-info text-center rounded" id="dia" name="dia" min="1" max="31" />
+        </div>
+        <div class="col-md-4">
+            <label class="text-dark h6" for="anio">Seleccione el año:</label>
+            <input type="number" th:value="${anioSeleccionado}" class="form-control form-control-sm border-info text-center rounded " id="anio" name="anio" min="1900" max="2100" />
+        </div>
+    </div>
+    <button class="btn btn-success " type="submit">Seleccionar</button>
+</form>
 
+
+</div>
+
+  </div>
         <div class="row justify-content-center mt-4 pb-5">
             <div class="col-sm-10 col-lg-10 bg-light p-4 rounded shadow">
                 <h4 class="mb-4 text-dark" th:if="${montoTotal != null}">
                     Importe Mensual de Ventas Registradas: $<span th:text="${totalVentasMes}"></span>
                 </h4>
-                <h4 class="mb-4 text-dark" th:if="${clienteTop != null}">
+                <h4 class="mb-4 text-dark " th:if="${clienteTop != null}">
                     Cliente del Mes: <span th:text="${clienteTop.nombre + ' '+ clienteTop.apellido + ', DNI: ' + clienteTop.dni}"></span>
                 </h4>
                 <h4 class="mb-4 text-dark" th:if="${montoTotal != null}">
@@ -47,38 +59,48 @@
                 </h4>
 
                 <div class="table-responsive">
-                    <table class="table table-bordered table-sm table-hover">
-                        <thead class="table-dark">
-                            <tr>
-                                <th scope="col">Cliente</th>
-                                <th scope="col">Fecha</th>
-                                <th scope="col">Observaciones</th>
-                                <th scope="col">Detalles</th>
-                                <th scope="col">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr th:if="${error}">
-                                <td colspan="5" class="text-center text-danger">No hay ventas para el mes seleccionado.</td>
-                            </tr>
-                            <tr th:each="venta : ${ventas}">
-                                <td th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido}"></td>
-                                <td th:text="${venta.fechaVenta}"></td>
-                                <td th:text="${venta.observaciones}"></td>
-                                <td class="text-center">
-                                    <button type="button" class="btn btn-primary btn-sm rounded-circle" data-toggle="modal" th:attr="data-target='#ventaModal' + ${venta.id}" data-bs-toggle="tooltip" title="Ver detalles de la venta">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                </td>
-                                <td th:text="${venta.total}"></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                  <div th:if="${error}" class="alert alert-warning" role="alert">
+    <p th:text="${error}"></p>
+</div>
+
+<table th:if="${not #lists.isEmpty(ventas)}" class="table table-sm table-bordered table-hover">
+    <h3 th:text="'Listado de ventas realizadas en la fecha: ' +${diaSeleccionado}+ '/' + ${mesSeleccionado} + '/'+ ${anioSeleccionado} " > </h3>
+    <thead class="table-dark">
+    
+        <tr>
+            <th scope="col">Cliente</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Observaciones</th>
+             <th scope="col">Total</th>
+            <th scope="col">Detalles</th>
+         
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="venta : ${ventas}">
+            <td th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido}"></td>
+            <td th:text="${venta.fechaVenta}"></td>
+            <td th:text="${venta.observaciones}"></td>
+            <td th:text="${venta.total}"></td>
+            <td class="text-center">
+                <button type="button" class="btn btn-primary btn-sm rounded-circle" data-toggle="modal" th:attr="data-target='#ventaModal' + ${venta.id}" data-bs-toggle="tooltip" title="Ver detalles de la venta">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </td>
+            
+        </tr>
+    </tbody>
+</table>
+
+<div th:if="${#lists.isEmpty(ventas)}" class="alert alert-info text-center" role="alert">
+    No hay ventas registradas en la fecha indicada.
+</div>
+
                 </div>
             </div>
         </div>
     </div>
-
+  
     <div th:insert="componentes/footer :: footer"></div>
 
     <a class="scroll-to-top rounded" href="#page-top">
@@ -122,22 +144,23 @@
 
                         <hr class="hr text-primary">
                         <h5 class="text-dark text-left">Productos comprados:</h5>
-                        <table class="table table-bordered">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Producto</th>
-                                    <th style="width: 70px">Cantidad</th>
-                                    <th style="width: 70px">Precio</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="text-primary" th:each="item : ${venta.itemsVenta}">
-                                    <td th:text="${item.producto.nombre + ' ' + item.producto.descripcion}"></td>
-                                    <td th:text="${item.cantidad}"></td>
-                                    <td th:text="${item.precioUnitario}"></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <table class="table table-bordered table-sm">
+    <thead class="thead-light">
+        <tr>
+            <th>Producto</th>
+            <th style="width: 70px">Cantidad</th>
+            <th style="width: 70px">Precio</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-primary" th:each="item : ${venta.itemsVenta}">
+            <td th:text="${item.producto.nombre + ' ' + item.producto.descripcion}"></td>
+            <td class="text-center" th:text="${item.cantidad}"></td>
+            <td class="text-center" th:text="${item.precioUnitario}"></td>
+        </tr>
+    </tbody>
+</table>
+
 
                         <div class="row d-flex">
                             <div class="col-sm-12 pr-3 text-right justify-content-center">

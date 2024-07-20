@@ -49,4 +49,6 @@ public interface IVentaService {
     public List<Venta> obtenerVentasPorCliente(Long clienteId);
 
     public List<Venta> obtenerVentasPorClienteYUsuario(Long clienteId, Long usuarioId);
+
+    public List<Venta> filterVentasByFecha(Long idUsuario, int dia, int mes, int ano);
 }

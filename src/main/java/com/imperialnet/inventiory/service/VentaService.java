@@ -10,6 +10,7 @@ import jakarta.persistence.EntityManager;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -220,4 +221,9 @@ public void registrarVenta(Venta venta, List<ItemVenta> itemsVenta, HttpSession 
         return ventaRepo.findByClienteIdAndUsuarioId(clienteId, usuarioId);
     }
     
+    @Override
+    public List<Venta> filterVentasByFecha(Long idUsuario, int dia, int mes, int ano) {
+        LocalDate fecha = LocalDate.of(ano, mes, dia);
+        return ventaRepo.findVentasByUsuarioAndFecha(idUsuario, fecha);
+    }
 }

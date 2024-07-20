@@ -1,8 +1,8 @@
 <nav th:fragment="nav" class="navbar navbar-expand-lg bg-gradient-dark-blue animated--grow-in">
     <div class="container">
         <!-- Logo -->
-       <a class="navbar-brand  " th:href="@{/index}">
-           <img th:src="@{/img/logoInventiory-removebg-preview.png}" class=" rounded-pill logo-animation shadow img-fluid" alt="Logo">
+        <a class="navbar-brand  " th:href="@{/index}">
+            <img th:src="@{/img/logoInventiory-removebg-preview.png}" class=" rounded-pill logo-animation shadow img-fluid" alt="Logo">
         </a>
 
         <button class="animated--grow-in btn btn-secondary bg-gradient-dark rounded-circle p-2 d-lg-none" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,9 +23,9 @@
                         Productos
                     </a>
                     <div class="dropdown-menu custom-dropdown animated--grow-in" aria-labelledby="productosDropdown">
-                        <a class="dropdown-item" th:href="@{/crearProductos}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Registrar Producto</a>
-                        <a class="dropdown-item" th:href="@{/verProductos}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ver Productos</a>
-                        <a class="dropdown-item" th:href="@{/actualizarStock}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Actualizar Stock</a>
+                        <a class="dropdown-item" th:href="@{/crearProductos}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Registrar Nuevo Producto</a>
+                        <a class="dropdown-item" th:href="@{/verProductos}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ver Productos Registados</a>
+                        <a class="dropdown-item" th:href="@{/actualizarStock}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Actualizar Stock de Productos</a>
                         <a class="dropdown-item" th:href="@{/aplicarAumentos}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Aplicar Aumento de Precios</a>
                         <a class="dropdown-item" th:href="@{/aplicarDescuento}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Aplicar Descuento de Precios</a>
                     </div>
@@ -35,8 +35,8 @@
                         Clientes
                     </a>
                     <div class="dropdown-menu custom-dropdown animated--grow-in" aria-labelledby="clientesDropdown">
-                        <a class="dropdown-item" th:href="@{/registrarCliente}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Registrar Cliente</a>
-                        <a class="dropdown-item" th:href="@{/verClientes}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ver Clientes</a>
+                        <a class="dropdown-item" th:href="@{/registrarCliente}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Registrar Nuevo Cliente</a>
+                        <a class="dropdown-item" th:href="@{/verClientes}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ver Clientes Registrados</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown animated--grow-in">
@@ -44,8 +44,8 @@
                         Ventas
                     </a>
                     <div class="dropdown-menu custom-dropdown animated--grow-in" aria-labelledby="ventasDropdown">
-                        <a class="dropdown-item" th:href="@{/registrarVenta}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Registrar Venta</a>
-                        <a class="dropdown-item" th:href="@{/verVentas}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ver Ventas</a>
+                        <a class="dropdown-item" th:href="@{/registrarVenta}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Registrar Nueva Venta</a>
+                        <a class="dropdown-item" th:href="@{/verVentas}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ver Ventas Registardas</a>
                     </div>
                 </li>
                 <li class="nav-item dropdown animated--grow-in">
@@ -53,9 +53,12 @@
                         Informes
                     </a>
                     <div class="dropdown-menu custom-dropdown animated--grow-in" aria-labelledby="facturasDropdown">
-                        <a class="dropdown-item" th:href="@{/ventas}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Informe de Ventas</a>
-                        <a class="dropdown-item"  th:href="@{/informeProductos}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Informe de Productos</a>
+                        <a class="dropdown-item" th:href="@{/ventas}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Informe Mensual de Ventas</a>
+                        <a class="dropdown-item"  th:href="@{/ventasDiarias}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Informe Diario de Ventas</a>
+                        <a class="dropdown-item"  th:href="@{/informeProductos}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Informe mMnsual de Productos</a>
+
                     </div>
+
                 </li>
                 <li class="nav-item dropdown animated--grow-in">
                     <a class="nav-link dropdown-toggle text-light" href="#" id="facturasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

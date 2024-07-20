@@ -98,7 +98,7 @@ public class InformesController {
         return "informeVentas";
     }
     
-        @GetMapping("/informeProductosMasVendidos")
+    @GetMapping("/informeProductosMasVendidos")
     public String informeProductosMasVendidos(@RequestParam(value = "mes", required = false) Integer mes, Model model, HttpSession sesion) {
         Long usuarioId = (Long) sesion.getAttribute("idUsuario");
 
@@ -120,5 +120,46 @@ public class InformesController {
 
         return "informeProductos";
     }
+    
+    
+    @GetMapping("/ventasDiarias")
+    public String ventasDiarias(){
+        return "ventasDiarias";
+    }
+    
+     @GetMapping("/informeDiarioVentas")
+    public String informeVentasDiarias(HttpSession sesion,
+                                        @RequestParam(value = "dia", defaultValue = "-1") int dia,
+                                        @RequestParam(value = "mes", defaultValue = "-1") int mes,
+                                        @RequestParam(value = "anio", defaultValue = "-1") int anio,
+                                        Model model) 
+    {
+        
+        model.addAttribute("mesSeleccionado", mes);
+        model.addAttribute("diaSeleccionado", dia);
+        model.addAttribute("anioSeleccionado", anio);
+        
+        // Validaciones
+        if (dia < 1 || dia > 31) {
+            model.addAttribute("error", "El día debe estar entre 1 y 31.");
+            return "ventasDiarias";
+        }
+        if (mes < 1 || mes > 12) {
+            model.addAttribute("error", "El mes debe estar entre 1 y 12.");
+            return "ventasDiarias";
+        }
+        if (anio < 1900 || anio > 2100) {
+            model.addAttribute("error", "El año debe estar entre 1900 y 2100.");
+            return "ventasDiarias";
+        }
 
+        List<Venta> ventas = ventaService.filterVentasByFecha(
+            (Long) sesion.getAttribute("idUsuario"),
+            dia,
+            mes,
+            anio
+        );
+        model.addAttribute("ventas", ventas);
+        return "ventasDiarias";
+    } 
 }
