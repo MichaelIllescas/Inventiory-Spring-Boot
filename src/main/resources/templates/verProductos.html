@@ -1,72 +1,79 @@
 <!DOCTYPE html>
 <html lang ="es" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="componentes/head:: head"></head>
-<body class="bg-login-image" id="page-top">
+    <head th:insert="componentes/head:: head"></head>
+    <body class="bg-login-image" id="page-top">
 
-   <nav th:insert="componentes/nav :: nav"></<nav></nav>
-    
-    <!-- DataTables Example -->
-<section class="pt-5 m-auto col-lg-10">
+        <nav th:insert="componentes/nav :: nav"></<nav></nav>
+
+            <section class="pt-5 m-auto col-lg-10">
     <div class="row m-auto w-100">
         <div class="col-12 m-auto">
             <div class="card shadow mb-4">
-                <div class="card-header py-3">
-                    <h6 class="m-0 font-weight-bold text-primary">Listado de Productos:</h6>
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive table-hover">
-                        <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Cód.</th>
-                                    <th>Nombre</th>
-                                    <th>Marca</th>
-                                    <th>Descripción</th>
-                                    <th>Precio</th>
-                                    <th>Stock</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Iterar sobre la lista de productos -->
-                                <tr  th:each="producto : ${listadoProductos}" th:class="${producto.stock < 5} ? (producto.stock == 0 ? 'bg-danger text-white' : 'bg-warning') : ''">
-                                    <td class="w-auto " th:text="${producto.id}"></td>
-                                    <td class="w-auto" th:text="${producto.nombre}"></td>
-                                    <td class="w-auto" th:text="${producto.marca}"></td>
-                                    <td class="w-auto" th:text="${producto.descripcion}"></td>
-                                    <td class="w-auto" th:text="${producto.precio}"></td>
-                                    <td class="w-auto" th:text="${producto.stock}"></td>
-                                    <td  class="text-center w-auto">
-                                        <form th:action="@{/actualizarProductos}" method="post" class="w-auto">
-                                            <input type="hidden" name="id" th:value="${producto.id}">
-                                            <input type="hidden" name="idProducto" th:value="${producto.id}">
-                                            <button type="submit" class="btn btn-primary btn-sm">
-                                                <i class="fas fa-pencil-alt"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                            <div class="card-header bg-gradient-light py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">Listado de Productos:</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive table-hover text-dark ">
+                                    <table class="table table-bordered table-sm text-black-50" id="dataTable" width="100%" cellspacing="0">
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th>Cód.</th>
+                                                <th>Nombre</th>
+                                                <th>Marca</th>
+                                                <th>Descripción</th>
+                                                <th>Precio</th>
+                                                <th>Stock</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Iterar sobre la lista de productos -->
+                                            <tr  th:each="producto : ${listadoProductos}" th:class="${producto.stock < 5} ? (producto.stock == 0 ? 'bg-danger text-white' : 'bg-warning') : ''">
+                                                <td class="w-auto " th:text="${producto.id}"></td>
+                                                <td class="w-auto" th:text="${producto.nombre}"></td>
+                                                <td class="w-auto" th:text="${producto.marca}"></td>
+                                                <td class="w-auto" th:text="${producto.descripcion}"></td>
+                                                <td class="w-auto" th:text="${producto.precio}"></td>
+                                                <td class="w-auto" th:text="${producto.stock}"></td>
+                                                <td  class="text-center w-auto ">
+                                                    <form th:action="@{/actualizarProductos}" method="post" class="w-auto">
+                                                        <input type="hidden" name="id" th:value="${producto.id}">
+                                                        <input type="hidden" name="idProducto" th:value="${producto.id}">
+                                                        <button type="submit" class="btn btn-primary btn-sm rounded-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar Producto">
+                                                            <i class="fas fa-pencil-alt"></i>
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    
-</section>
 
-    
-    
-          <div th:insert="componentes/footer::footer"></div>
-   
- <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
+            </section>
 
-   <div th:insert="componentes/modalCerrarSesion :: modalCerrarSesion"></div>
 
-  <div th:insert="componentes/scriptsBTyJS:: scriptsBTyJS"></div>
-</body>
+
+            <div th:insert="componentes/footer::footer"></div>
+
+            <!-- Scroll to Top Button-->
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fas fa-angle-up"></i>
+            </a>
+
+            <div th:insert="componentes/modalCerrarSesion :: modalCerrarSesion"></div>
+
+            <div th:insert="componentes/scriptsBTyJS:: scriptsBTyJS"></div>
+            <script>
+                // Inicializa los tooltips
+                document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (tooltipElement) {
+                    new bootstrap.Tooltip(tooltipElement);
+                });
+            </script>
+    </body>
+
+
 </html>

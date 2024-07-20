@@ -163,18 +163,15 @@ public class VentaController {
             sesion.setAttribute("errorCli", "No se ha seleccionado un cliente para la venta.");
             return "redirect:/registrarVenta"; // Redirige al formulario de registro de venta
         }
-        if (usuario == null) {
-            sesion.setAttribute("error", "No se ha iniciado sesión correctamente.");
-            return "redirect:/login"; // Redirige al formulario de inicio de sesión
-        }
+       
 
         // Obtener la lista de productos seleccionados de la sesión
         List<ItemVenta> productosSeleccionados = listado.getProductosSeleccionados();
 
         // Validar si se seleccionaron productos para la venta
         if (productosSeleccionados == null || productosSeleccionados.isEmpty()) {
-            model.addAttribute("errorProd", "No se han seleccionado productos para la venta.");
-            return "registrarVenta"; // Redirige al formulario de registro de venta
+            sesion.setAttribute("errorProd", "No se han seleccionado productos para la venta.");
+            return "redirect:/registrarVenta"; // Redirige al formulario de registro de venta
         }
         
         

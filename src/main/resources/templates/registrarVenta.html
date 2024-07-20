@@ -1,171 +1,154 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-    <head th:insert="componentes/head::head"></head>
+<head th:insert="componentes/head::head"></head>
+<body class="bg-login-image" id="page-top">
 
-    <body class="bg-login-image" id="page-top">
+    <nav th:insert="componentes/nav::nav"></nav>
 
-        <nav th:insert="componentes/nav::nav"></nav>
+    <div class="container mt-3 pb-5">
+        <h1 class="text-center text-white mb-4">Panel de Venta</h1>
 
-        <div class="container mt-5 pb-5">
-            <h1 class="text-center text-white mb-4">Panel de Venta</h1>
-
-            <div class="row">
-                <div class="col-lg-6">
-                    <!-- Formulario para seleccionar cliente -->
-                    <form th:action="@{/seleccionarCliente}" method="get">
-                        <div class="form-group">
-                            <label for="inputCliente" class="text-white">Selecciona un Cliente:</label>
-                            <select id="inputCliente" name="dniCliente" class="form-control form-control-lg">
-                                <option></option> <!-- Opción vacía inicial -->
-                                <!-- Iteración sobre los clientes desde el controlador -->
-                                <th:block th:each="cliente : ${clientes}">
-                                    <option th:value="${cliente.dni}" th:text="${cliente.nombre + ' ' + cliente.apellido + ' - ' + cliente.dni}"></option>
-                                </th:block>
-                            </select>
-
-                            <div th:if="${session.errorCli}" class="alert alert-danger text-center mt-3 py-1 pt-3">
-                                <p th:text="${session.errorCli}"></p>
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Seleccionar</button>
-                    </form>
-
-                    <!-- Datos del Cliente seleccionado -->
-                    <div class="mt-4 bg-gradient-light rounded p-4 shadow-sm">
-                        <h2 class="text-dark text-center mb-4">Datos del Cliente:</h2>
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <strong class="text-muted">Nombre:</strong>
-                                <p class="h4 mb-0" th:text="${session.cliente != null} ? ${session.cliente.nombre} : ''"></p>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <strong class="text-muted">Apellido:</strong>
-                                <p class="h4 mb-0" th:text="${session.cliente != null} ? ${session.cliente.apellido} : ''"></p>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <strong class="text-muted">DNI:</strong>
-                                <p class="h4 mb-0" th:text="${session.cliente != null} ? ${session.cliente.dni} : ''"></p>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <strong class="text-muted">Dirección:</strong>
-                                <p class="h4 mb-0" th:text="${session.cliente != null} ? ${session.cliente.direccion} : ''"></p>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <strong class="text-muted">Teléfono:</strong>
-                                <p class="h4 mb-0" th:text="${session.cliente != null} ? ${session.cliente.telefono} : ''"></p>
-                            </div>
+        <div class="row">
+            <div class="col-lg-6 text-dark">
+                <!-- Formulario para seleccionar cliente -->
+                <form th:action="@{/seleccionarCliente}" method="get" class="bg-light rounded p-4 shadow-sm">
+                    <div class="form-group">
+                        <label for="inputCliente" class="form-label">Selecciona un Cliente:</label>
+                        <select id="inputCliente" name="dniCliente" class="form-control form-control-lg">
+                            <option></option> <!-- Opción vacía inicial -->
+                            <!-- Iteración sobre los clientes desde el controlador -->
+                            <th:block th:each="cliente : ${clientes}">
+                                <option th:value="${cliente.dni}" th:text="${cliente.nombre + ' ' + cliente.apellido + ' - ' + cliente.dni}"></option>
+                            </th:block>
+                        </select>
+                        <div th:if="${session.errorCli}" class="alert alert-danger mt-3">
+                            <p th:text="${session.errorCli}"></p>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-success btn-lg">Seleccionar</button>
+                </form>
 
-                </div>
-
-                <div class="col-lg-6">
-                    <!-- Formulario para buscar y agregar productos -->
-                    <form th:action="@{/agregarProducto}" method="post" class="mb-4">
-                        <div class="form-group">
-                            <label for="inputProducto" class="text-white">Selecciona un Producto:</label>
-                            <select id="inputProducto" name="idProducto" class="form-control form-control-lg">
-                                <option></option> <!-- Opción vacía inicial -->
-                                <!-- Iteración sobre los productos desde el controlador -->
-                                <th:block th:each="producto : ${productos}">
-                                    <option th:value="${producto.id}" th:text="${producto.nombre + ' - ' + producto.marca + ' - ' + producto.descripcion + ' - ' + producto.precio}"></option>
-                                </th:block>
-                            </select>
+                <!-- Datos del Cliente seleccionado -->
+                <div class="mt-4 bg-light rounded p-4 shadow-sm">
+                    <h2 class="text-dark text-center mb-4">Datos del Cliente:</h2>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <strong class="text-muted">Nombre:</strong>
+                            <p class="h5 mb-0" th:text="${session.cliente != null} ? ${session.cliente.nombre} : ''"></p>
                         </div>
-                        <div th:if="${session.errorProd}" class="alert alert-danger text-center mt-3 py-1 pt-3">
-                            <p th:text="${session.errorProd}"></p>
-
+                        <div class="col-md-6 mb-3">
+                            <strong class="text-muted">Apellido:</strong>
+                            <p class="h5 mb-0" th:text="${session.cliente != null} ? ${session.cliente.apellido} : ''"></p>
                         </div>
-                        <div class="form-group w-25">
-                            <label for="cant" class="text-white">Cantidad:</label>
-                            <input type="number" class="form-control form-control-sm w-50" id="cant" name="cant" value="1" min="1" step="1">
+                        <div class="col-md-6 mb-3">
+                            <strong class="text-muted">DNI:</strong>
+                            <p class="h5 mb-0" th:text="${session.cliente != null} ? ${session.cliente.dni} : ''"></p>
                         </div>
-
-
-                        <button type="submit" class="btn btn-success">Agregar</button>
-                    </form>
-
-                    <!-- Tabla para mostrar productos seleccionados -->
-                    <div class="table-responsive">
-                        <table class="table table-bordered bg-gradient-light">
-                            <thead>
-                                <tr>
-                                    <th>Producto</th>
-                                    <th>Precio</th>
-                                    <th>Cant.</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Ejemplo de producto agregado dinámicamente -->
-                                <tr th:each="prod : ${session.productosSeleccionados}">
-                                    <td th:text="${prod.producto.nombre}">milanesa</td>
-                                    <td th:text="${prod.producto.precio}">$10.00</td>
-                                    <td th:text="${prod.cantidad}">$10.00</td>
-                                    <td class="w-25">
-                                        <form th:action="@{/eliminarProducto}" method="post">
-                                            <input type="hidden" th:value="${prod.producto.id}" name="idProd">
-                                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <!-- Fila para mostrar el total de los precios -->
-                                <tr>
-                                    <td colspan="2" class="text-right"><strong>Total:</strong></td>
-                                    <td><strong th:text="${session.total}">$10.00</strong></td>
-                                </tr>
-                            </tfoot>
-                        </table>
+                        <div class="col-md-6 mb-3">
+                            <strong class="text-muted">Dirección:</strong>
+                            <p class="h5 mb-0" th:text="${session.cliente != null} ? ${session.cliente.direccion} : ''"></p>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <strong class="text-muted">Teléfono:</strong>
+                            <p class="h5 mb-0" th:text="${session.cliente != null} ? ${session.cliente.telefono} : ''"></p>
+                        </div>
                     </div>
-
-                    <!-- Formulario para confirmar la venta con campo de observaciones -->
-                    <form class="p-1" th:action="@{/confirmarVenta}" method="post">
-                        <div class="form-group">
-                            <label for="observaciones" class="text-white">Observaciones:</label>
-                            <textarea id="observaciones" name="observaciones" class="form-control" rows="3" maxlength="255" placeholder="Ingrese observaciones adicionales aquí..."></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-success">Confirmar Venta</button>
-
-                        <p th:if="${confirmacion}" class="mt-3 alert alert-success  text-gray " th:text="${confirmacion}"></p>
-
-                    </form>
-
                 </div>
             </div>
 
-            <div th:insert="componentes/footer::footer"></div>
+            <div class="col-lg-6 text-dark">
+                <!-- Formulario para buscar y agregar productos -->
+                <form th:action="@{/agregarProducto}" method="post" class="bg-light rounded p-4 shadow-sm mb-4">
+                    <div class="form-group mb-3">
+                        <label for="inputProducto" class="form-label">Selecciona un Producto:</label>
+                        <select id="inputProducto" name="idProducto" class="form-control form-control-lg">
+                            <option></option> <!-- Opción vacía inicial -->
+                            <!-- Iteración sobre los productos desde el controlador -->
+                            <th:block th:each="producto : ${productos}">
+                                <option th:value="${producto.id}" th:text="${producto.nombre + ' - ' + producto.marca + ' - ' + producto.descripcion + ' - ' + producto.precio}"></option>
+                            </th:block>
+                        </select>
+                    </div>
+                    <div th:if="${session.errorProd}" class="alert alert-danger mt-3">
+                        <p th:text="${session.errorProd}"></p>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="cant" class="form-label">Cantidad:</label>
+                        <input type="number" class="form-control form-control-sm" id="cant" name="cant" value="1" min="1" step="1">
+                    </div>
+                    <button type="submit" class="btn btn-success btn-lg">Agregar</button>
+                </form>
 
-            <!-- Scroll to Top Button -->
-            <a class="scroll-to-top rounded" href="#page-top">
-                <i class="fas fa-angle-up"></i>
-            </a>
+                <!-- Tabla para mostrar productos seleccionados -->
+                <div class="table-responsive text-dark">
+                    <table class="table table-bordered table-striped bg-light">
+                        <thead class="thead-dark">
+                            <tr class="text-dark">
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cant.</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-dark">
+                            <!-- Ejemplo de producto agregado dinámicamente -->
+                            <tr th:each="prod : ${session.productosSeleccionados}">
+                                <td th:text="${prod.producto.nombre}">Producto</td>
+                                <td th:text="${prod.producto.precio}">$10.00</td>
+                                <td th:text="${prod.cantidad}">1</td>
+                                <td class="w-25">
+                                    <form th:action="@{/eliminarProducto}" method="post">
+                                        <input type="hidden" th:value="${prod.producto.id}" name="idProd">
+                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2" class="text-right text-dark"><strong>Total:</strong></td>
+                                <td><strong class="text-dark" th:text="${session.total}">$10.00</strong></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
 
-            <div th:insert="componentes/modalCerrarSesion::modalCerrarSesion"></div>
+                <!-- Formulario para confirmar la venta con campo de observaciones -->
+                <form class="bg-light rounded p-4 shadow-sm" th:action="@{/confirmarVenta}" method="post">
+                    <div class="form-group mb-3">
+                        <label for="observaciones" class="form-label">Observaciones:</label>
+                        <textarea id="observaciones" name="observaciones" class="form-control" rows="3" maxlength="255" placeholder="Ingrese observaciones adicionales aquí..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-lg">Confirmar Venta</button>
+                    <p th:if="${confirmacion}" class="mt-3 alert alert-success" th:text="${confirmacion}"></p>
+                </form>
+            </div>
+        </div>
+    </div>
 
-            <div th:insert="componentes/scriptsBTyJS::scriptsBTyJS"></div>
-            <!-- CDN de Select2 CSS y JS -->
+        <div th:insert="componentes/footer::footer"></div>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
+        <!-- Scroll to Top Button -->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-            <script>
-                $(document).ready(function () {
-                    $('#inputProducto').select2({
-                        placeholder: 'Buscar producto...',
-                        allowClear: true,
-                        // Permite borrar la selección
-                        // Puedes añadir más opciones de configuración según necesites
-                    });
+        <div th:insert="componentes/modalCerrarSesion::modalCerrarSesion"></div>
+
+        <div th:insert="componentes/scriptsBTyJS::scriptsBTyJS"></div>
+        <!-- CDN de Select2 CSS y JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#inputProducto').select2({
+                    placeholder: 'Buscar producto...',
+                    allowClear: true
                 });
-                $(document).ready(function () {
-                    $('#inputCliente').select2({
-                        placeholder: 'Buscar cliente...',
-                        allowClear: true,
-                        // Permite borrar la selección
-                        // Puedes añadir más opciones de configuración según necesites
-                    });
+                $('#inputCliente').select2({
+                    placeholder: 'Buscar cliente...',
+                    allowClear: true
                 });
-            </script>
+            });
+        </script>
     </body>
 </html>

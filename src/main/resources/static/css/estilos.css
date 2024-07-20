@@ -1,0 +1,17 @@
+
+
+ .inset-shadow-gray {
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.6);
+            border-radius: 8px;
+            padding: 20px;
+ }
+ 
+ .btn-underline {
+    background-color: transparent; /* Fondo transparente para que no se vea el subrayado bajo el fondo del botón */
+    border: none; /* Sin borde */
+    text-decoration: underline; /* Subrayado */
+    cursor: pointer; /* Cambiar cursor a pointer */
+    color: blue; /* Color de texto heredado */
+    padding: 0; /* Ajustar el padding según sea necesario */
+    font-size: inherit; /* Tamaño de fuente heredado */
+}

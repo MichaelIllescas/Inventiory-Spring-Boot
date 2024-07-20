@@ -5,13 +5,14 @@
 
 <nav th:insert="componentes/nav :: nav"></nav>
 
-<div class="container m-auto mt-4 pt-4">
-    <h1 class="text-white">Informe de los 10 Productos más vendidos:</h1>
-    <div class="row m-auto">
-        <div class="col-md-8 m-auto mt-4">
+<div class="container text-dark text-center mt-2 pt-2">
+
+    <div class="row justify-content-center mt-2">
+        <div class="col-md-8 bg-light p-4 rounded shadow inset-shadow-gray">
+            <h1 class="text-dark mb-4">Informe de los 10 productos más vendidos</h1>
             <form th:action="@{/informeProductosMasVendidos}" method="get">
                 <div class="input-group mb-3">
-                    <label class="text-white mr-3 pt-3 h3" for="mes">Seleccione el mes:</label>
+                    <label class="text-dark mr-3 pt-1 h5" for="mes">Seleccione el mes:</label>
                     <select class="form-select rounded" id="mes" name="mes">
                         <option value="1" th:text="'Enero'" th:selected="${mesSeleccionado == 1}">Enero</option>
                         <option value="2" th:text="'Febrero'" th:selected="${mesSeleccionado == 2}">Febrero</option>
@@ -26,32 +27,31 @@
                         <option value="11" th:text="'Noviembre'" th:selected="${mesSeleccionado == 11}">Noviembre</option>
                         <option value="12" th:text="'Diciembre'" th:selected="${mesSeleccionado == 12}">Diciembre</option>
                     </select>
-                    <button class="btn btn-primary" type="submit">Seleccionar</button>
+                    <button class="btn btn-success ms-2" type="submit">Seleccionar</button>
                 </div>
             </form>
         </div>
     </div>
 
-    <div class="row mt-4">
-        <div class="col-md-10 offset-md-1">
-            <div class="table-responsive table-bordered table-light">
-                <table class="table table-bordered  table-striped table-hover">
-                    <thead class="table-dark">
+    <div class="row justify-content-center mt-4 pb-5">
+            <div class="col-sm-10 col-lg-8 bg-light p-4 rounded shadow">
+             <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <thead class="table-dark">
                         <tr>
                             <th scope="col">Producto</th>
                             <th scope="col">Descripción</th>
-                            <th style="width: 70px"  scope="col">Cantidad Vendida</th>
+                            <th scope="col">Cantidad Vendida</th>
                         </tr>
                     </thead>
                     <tbody>
                         <!-- Mostrar productos más vendidos -->
-                        <tr  th:each="producto : ${productos}">
+                        <tr th:each="producto : ${productos}">
                             <td th:text="${producto[0]}"></td>
                             <td th:text="${producto[1]}"></td>
                             <td class="text-center" th:text="${producto[2]}"></td>
                         </tr>
                     </tbody>
-                    
                 </table>
                 
                 <!-- Mostrar mensaje si no hay productos vendidos -->
@@ -61,11 +61,13 @@
             </div>
         </div>
     </div>
-
-
 </div>
 
-<div th:insert="componentes/footer::footer"></div>
+
+
+
+
+<div th:insert="componentes/footer :: footer"></div>
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">

@@ -5,22 +5,22 @@
 
    <nav th:insert="componentes/nav::nav"></nav>
 <!-- Formulario clientes -->
-<div class="d-flex align-items-center justify-content-center mt-5 mb-5 pb-5">
-    <div class="container mb-3" style="max-width: 800px;"> <!-- Aumenté el max-width para mejor distribución -->
-        <h1 class="my-4 text-center text-white">Actualizar Cliente</h1>
+ <div class="d-flex align-items-center justify-content-center mb-5 pb-5 ">
+            <div class="container mb-4 mt-2 inset-shadow-gray bg-light" style="max-width: 800px;">
+                <h1 class="my-4 text-center text-dark">Actualizar Cliente:</h1>
         <form class="mb-5" th:action="@{/actualizarCliente}" method="post" th:object="${cliente}">
             <input type="hidden" class="form-control form-control-lg" id="id" name="id" th:field="*{id}">
 
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="nombre" class="text-white">Nombre del Cliente:</label>
+                    <div class="form-group text-dark">
+                        <label for="nombre" >Nombre del Cliente:</label>
                         <input type="text" class="form-control form-control-lg" id="nombre" name="nombre" th:field="*{nombre}" required>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="apellido" class="text-white">Apellido:</label>
+                        <label for="apellido" >Apellido:</label>
                         <input type="text" class="form-control form-control-lg" id="apellido" name="apellido" th:field="*{apellido}" required>
                     </div>
                 </div>
@@ -29,13 +29,13 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="direccion" class="text-white">Dirección:</label>
+                        <label for="direccion" >Dirección:</label>
                         <input class="form-control form-control-lg" id="direccion" name="direccion" th:field="*{direccion}" required>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="telefono" class="text-white">Teléfono:</label>
+                        <label for="telefono">Teléfono:</label>
                         <input type="text" class="form-control form-control-lg" id="telefono" name="telefono" th:field="*{telefono}" required>
                     </div>
                 </div>
@@ -44,13 +44,13 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="dni" class="text-white">DNI:</label>
+                        <label for="dni">DNI:</label>
                         <input type="text" class="form-control form-control-lg" id="dni" name="dni" th:field="*{dni}" required>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="cuil" class="text-white">CUIL/CUIT:</label>
+                        <label for="cuil" >CUIL/CUIT:</label>
                         <input type="text" class="form-control form-control-lg" id="cuil" name="cuil_cuit" th:field="*{cuil_cuit}">
                     </div>
                 </div>

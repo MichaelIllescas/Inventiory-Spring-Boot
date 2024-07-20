@@ -6,22 +6,22 @@
   <div th:insert="componentes/nav :: nav"></div>
 
    <!--Formulario productos-->
-<div class="d-flex align-items-center justify-content-center mb-5 pb-5">
-    <div class="container mb-4 mt-2" style="max-width: 800px;">
-        <h1 class="my-4 mt-5 text-center text-white">Actualizar Productos</h1>
-        <form class="mb-5" th:action="@{/actualizar}" method="post" th:object="${producto}">
+<div class="d-flex align-items-center justify-content-center mb-5 pb-5 ">
+    <div class="container mb-4 mt-2 inset-shadow-gray bg-light" style="max-width: 800px;">
+        <h1 class="my-4 mt-5 text-center text-dark">Actualizar Producto:</h1>
+        <form class="mb-5 text-dark" th:action="@{/actualizar}" method="post" th:object="${producto}">
 
             <input type='hidden' th:value='${producto.id}' name='id'> 
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="nombre" class="text-white">Nombre del Producto:</label>
+                        <label for="nombre" >Nombre del Producto:</label>
                         <input type="text" class="form-control form-control-lg" id="nombre" name="nombre" th:field="*{nombre}" required>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="marca" class="text-white">Marca:</label>
+                        <label for="marca">Marca:</label>
                         <input type="text" class="form-control form-control-lg" id="marca" name="marca" th:field="*{marca}" required>
                     </div>
                 </div>
@@ -30,13 +30,13 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="descripcion" class="text-white">Descripción:</label>
+                        <label for="descripcion" >Descripción:</label>
                         <input class="form-control form-control-lg" id="descripcion" name="descripcion" th:field="*{descripcion}" required>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="categoria" class="text-white">Categoría:</label>
+                        <label for="categoria" >Categoría:</label>
                         <input class="form-control form-control-lg" id="categoria" name="categoria" th:field="*{categoria}" required>
                     </div>
                 </div>
@@ -45,13 +45,13 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="precio" class="text-white">Precio:</label>
+                        <label for="precio" >Precio:</label>
                         <input type="number" class="form-control form-control-lg" id="precio" name="precio" step="0.01" th:field="*{precio}" required>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="stock" class="text-white">Stock:</label>
+                        <label for="stock" >Stock:</label>
                         <input type="number" class="form-control form-control-lg" id="stock" name="stock" th:field="*{stock}" required>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
 
             <div class="row">
                 <div class="col-lg-12 text-center mt-3">
-                    <button type="submit" class="btn btn-primary btn-block blue w-25 m-auto rounded">Actualizar</button>
+                    <button type="submit" class="btn btn-success btn-block blue w-25 m-auto rounded">Actualizar</button>
                 </div>
             </div>
         </form>
