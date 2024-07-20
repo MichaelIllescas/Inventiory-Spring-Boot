@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-md-6 offset-md-3">
                     <div class="card">
-                        <h5 class="card-header">Aumentar Precios de los Productos:</h5>
+                        <h5 class="card-header">Disminuir Precios de los Productos:</h5>
                         <div class="card-body">
                             <!-- Mensaje de error -->
                             <div th:if="${session.errorProd}" class="alert alert-danger" role="alert">
@@ -17,14 +17,14 @@
                             </div>
 
                             <!-- Mensaje de confirmación -->
-                            <div th:if="${confirmationMessage}" class="alert alert-success" role="alert">
-                                <span th:text="${confirmationMessage}"></span>
+                            <div th:if="${session.confirmationMessage}" class="alert alert-success" role="alert">
+                                <span th:text="${session.confirmationMessage}"></span>
                             </div>
 
                             <!-- Formulario para seleccionar un producto -->
                             <div class="col-lg-12">
                                 <!-- Formulario para buscar y agregar productos -->
-                                <form th:action="@{/agregarProductoPrecio}" method="post" class="mb-4">
+                                <form th:action="@{/agregarProductoDescuento}" method="post" class="mb-4">
                                     <div class="form-group">
                                         <label for="inputProducto" class="text-white">Selecciona un Producto:</label>
                                         <select id="inputProducto" name="idProducto" class="form-control form-control-lg">
@@ -42,7 +42,7 @@
                                 <!-- Tabla para mostrar productos seleccionados -->
                                 <div class="table-responsive">
                                     <table class="table table-bordered bg-gradient-light">
-                                        <h4 class="h5" >Listado de productos a aplicar aumento: </h4>
+                                        <h4 class="h5" >Listado de productos a aplicar descuento: </h4>
                                         <thead>
                                             <tr>
                                                 <th>Producto</th>
@@ -57,7 +57,7 @@
                                                 <td th:text="${prod.precio}">$10.00</td>
                                                 
                                                 <td class="w-25">
-                                                    <form th:action="@{/eliminarProductoAumentos}" method="post">
+                                                    <form th:action="@{/eliminarProductoDescuentos}" method="post">
                                                         <input type="hidden" th:value="${prod.id}" name="idProd">
                                                         <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                                                     </form>
@@ -71,15 +71,15 @@
                                 </div>
 
                                 <!-- Formulario para confirmar la venta con campo de observaciones -->
-                                <form class="p-1" th:action="@{/confirmarAumento}" method="post">
+                                <form class="p-1" th:action="@{/confirmarDescuento}" method="post">
                                  
 
                                     <div class="form-group d-flex ">
-                                        <label for="cant" class="text-gray w-100">Porcentaje de Aumento:</label>
+                                        <label for="cant" class="text-gray w-100">Porcentaje de Descuento:</label>
                                         <input type="number" class="form-control form-control-sm w-50" id="cant" name="cant" value="1" min="1" step="1">
                                     </div>
 
-                                    <button type="submit" class="btn btn-success">Aplicar Aumento</button>
+                                    <button type="submit" class="btn btn-success">Aplicar Descuento</button>
 
                                     <p th:if="${session.confirmacion}" class="mt-3 alert alert-success  text-gray " th:text="${session.confirmacion}"></p>
                                     

@@ -39,12 +39,12 @@
                                                 <div class="d-flex">
                                                     <!-- Botón de eliminación -->
                                                     <div>
-                                                        <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" th:attr="data-target='#confirmDeleteModal' + ${venta.id}">
+                                                        <button type="button" class="btn btn-danger rounded-circle btn-sm m-1" data-toggle="modal" th:attr="data-target='#confirmDeleteModal' + ${venta.id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar la Venta.">
                                                             <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </div>
                                                     <div>
-                                                        <button type="button" class="btn btn-primary btn-sm m-1" data-toggle="modal" th:attr="data-target='#ventaModal' + ${venta.id}">
+                                                        <button type="button" class="btn btn-primary btn-sm m-1 rounded-circle" data-toggle="modal" th:attr="data-target='#ventaModal' + ${venta.id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver Detalles de la Venta.">
                                                             <i class="fas fa-solid fa-eye"></i>
                                                         </button>
                                                     </div>
@@ -171,6 +171,11 @@
         <div th:insert="componentes/modalCerrarSesion :: modalCerrarSesion"></div>
 
         <div th:insert="componentes/scriptsBTyJS :: scriptsBTyJS"></div>
-
+  <script>
+                // Inicializa los tooltips
+                document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (tooltipElement) {
+                    new bootstrap.Tooltip(tooltipElement);
+                });
+            </script>
     </body>
 </html>

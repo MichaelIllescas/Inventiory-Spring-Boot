@@ -21,6 +21,7 @@
                                             <th>Orden</th>
                                             <th>Fecha</th>
                                             <th>Monto</th>
+                                            <th>Observaciones</th>
                                             <th style="width:75px;">Detalle:</th>
                                         </tr>
                                     </thead>
@@ -29,14 +30,11 @@
                                             <td th:text="${venta.id}"></td>
                                             <td th:text="${venta.fechaVenta}"></td>
                                             <td th:text="${venta.total}"></td>
+                                            <td th:text="${venta.observaciones}"></td>
                                             <td class="text-center">
-                                                <div class="d-flex justify-content-center">
-                                                    <button type="button" class="btn btn-primary btn-sm m-1 rounded-circle" 
-                                                            data-bs-toggle="tooltip" 
-                                                            data-bs-placement="top" 
-                                                            title="Ver detalle de la compra" 
-                                                            data-bs-target="#ventaModal">
-                                                        <i class="fas fa-eye"></i>
+                                                <div>
+                                                    <button type="button" class="btn rounded-circle btn-primary btn-sm m-1" data-toggle="modal" th:attr="data-target='#ventaModal' + ${venta.id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver Detalles de la Venta.">
+                                                        <i class="fas fa-solid fa-eye"></i>
                                                     </button>
                                                 </div>
 
@@ -55,9 +53,23 @@
                                                                     <div class="col-sm-6">
                                                                         <p><strong>Orden:</strong> <span class="text-primary" th:text="${venta.id}"></span></p>
                                                                     </div>
-
+                                                                    <div class="col-sm-6">
+                                                                        <p><strong>Cliente:</strong> <span class="text-primary" th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido}"></span></p>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <p><strong>DNI:</strong> <span class="text-primary" th:text="${venta.cliente.dni}"></span></p>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <p><strong>Dirección:</strong> <span class="text-primary" th:text="${venta.cliente.direccion}"></span></p>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <p><strong>Teléfono:</strong> <span class="text-primary" th:text="${venta.cliente.telefono}"></span></p>
+                                                                    </div>
                                                                     <div class="col-sm-6">
                                                                         <p><strong>Fecha de Venta:</strong> <span class="text-primary" th:text="${venta.fechaVenta}"></span></p>
+                                                                    </div>
+                                                                    <div class="col-sm-6">
+                                                                        <p><strong>Observaciones</strong> <span class="text-primary" th:text="${venta.observaciones}"></span></p>
                                                                     </div>
                                                                 </div>
 
@@ -76,7 +88,7 @@
                                                                         <tr class="text-primary" th:each="item : ${venta.itemsVenta}">
                                                                             <td th:text="${item.producto.nombre + ' ' + item.producto.descripcion}"></td>
                                                                             <td th:text="${item.cantidad}"></td>
-                                                                            <td th:text="${item.producto.precio}"></td>
+                                                                            <td th:text="${item.precioUnitario}"></td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
@@ -89,14 +101,13 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>  
-
-
                                             </td>
+
                                         </tr>
                                     </tbody>
 
@@ -104,15 +115,11 @@
 
                             </div>
 
-
-
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-
-
 
         <div th:insert="componentes/footer::footer"></div>
 
@@ -124,11 +131,11 @@
         <div th:insert="componentes/modalCerrarSesion :: modalCerrarSesion"></div>
 
         <div th:insert="componentes/scriptsBTyJS :: scriptsBTyJS"></div>
-<script>
-        // Inicializa los tooltips
-        document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (tooltipElement) {
-            new bootstrap.Tooltip(tooltipElement);
-        });
-    </script>
+        <script>
+            // Inicializa los tooltips
+            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (tooltipElement) {
+                new bootstrap.Tooltip(tooltipElement);
+            });
+        </script>
     </body>
 </html>
