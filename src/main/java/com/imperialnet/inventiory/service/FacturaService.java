@@ -1,4 +1,3 @@
-
 package com.imperialnet.inventiory.service;
 
 import com.imperialnet.inventiory.entities.Factura;
@@ -7,10 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author jonii
- */
 @Service
 public class FacturaService implements IFacturaService{
 
@@ -18,22 +13,27 @@ public class FacturaService implements IFacturaService{
     FacturaRepository factuRepo;
     
     @Override
-    public void crearFactura(Factura facura) {
+    public void crearFactura(Factura facura) 
+    {
         factuRepo.save(facura);
     }
 
     @Override
-    public List<Factura> getFacturaa() {
+    public List<Factura> getFacturaa() 
+    {
         return factuRepo.findAll();
     }
 
     @Override
-    public Factura obtenerFacturaPorId(Long id) {
+    public Factura obtenerFacturaPorId(Long id)
+    {
         return factuRepo.findById(id).orElse(null);
     }
 
     @Override
-    public Factura editarFatura(Long id, Factura factura) {
+    public Factura editarFatura(Long id, 
+                                Factura factura)
+    {
         Factura facturaEditar= this.obtenerFacturaPorId(id);
         if(facturaEditar!=null){
             facturaEditar.setFecha_emision(factura.getFecha_emision());
@@ -45,7 +45,8 @@ public class FacturaService implements IFacturaService{
     }
 
     @Override
-    public void eliminarFactura(Long id) {
+    public void eliminarFactura(Long id)
+    {
         factuRepo.deleteById(id);
     }
     

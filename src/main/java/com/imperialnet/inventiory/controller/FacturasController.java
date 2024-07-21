@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class FacturasController {
     
     @GetMapping("/menuFacturas")
-    public String menuFacturas(){
+    public String menuFacturas()
+    {
         return "menuFacturas";
     }
 }

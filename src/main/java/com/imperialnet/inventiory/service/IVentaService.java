@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.imperialnet.inventiory.service;
 
 import com.imperialnet.inventiory.entities.Cliente;
@@ -14,10 +10,6 @@ import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.List;
 
-/**
- *
- * @author jonii
- */
 public interface IVentaService {
 
     @Transactional
@@ -33,7 +25,6 @@ public interface IVentaService {
 
     public List<Venta> findByUsuarioId(Long usuarioId);
 
-    // Método para calcular el total de la venta
     public float calcularTotalVenta(List<ItemVenta> productosSeleccionados);
 
     public List<Venta> obtenerVentasPorMes(List<Venta> ventas, int mes);

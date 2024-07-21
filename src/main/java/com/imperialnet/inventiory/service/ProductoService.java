@@ -18,26 +18,30 @@ public class ProductoService implements IProductoService {
     @Autowired
     private IUsuarioService usuServ;
 
-    
     @Override
-    public void crearProducto(Producto producto,HttpSession sesion) {
+    public void crearProducto(Producto producto, HttpSession sesion) 
+    {
         producto.setUsuario(usuServ.obtenerUsuarioPorId((Long) sesion.getAttribute("idUsuario")));
         prodRepo.save(producto);
     }
 
     @Override
-    public List<Producto> getProductos() {
+    public List<Producto> getProductos() 
+    {
         return prodRepo.findAll();
     }
 
     @Override
-    public Producto obtenerProductoPorId(Long id) {
+    public Producto obtenerProductoPorId(Long id) 
+    {
         Optional<Producto> optionalProducto = prodRepo.findById(id);
         return optionalProducto.orElse(null);
     }
 
     @Override
-    public Producto editarProducto(Long id, Producto producto) {
+    public Producto editarProducto(Long id, 
+                                   Producto producto) 
+    {
         Optional<Producto> optionalProducto = prodRepo.findById(id);
         if (optionalProducto.isPresent()) {
             Producto existingProducto = optionalProducto.get();
@@ -53,16 +57,18 @@ public class ProductoService implements IProductoService {
     }
 
     @Override
-    public void eliminarProducto(Long id) {
+    public void eliminarProducto(Long id) 
+    {
         prodRepo.deleteById(id);
     }
-    
-    
-    public List<Producto> obtenerProductosPorUsuario(Long usuarioId) {
+
+    public List<Producto> obtenerProductosPorUsuario(Long usuarioId)
+    {
         return prodRepo.findByUsuarioId(usuarioId);
     }
-    
-       public void actualizarStock(Long id, int cantidad) {
+
+    public void actualizarStock(Long id, int cantidad) 
+    {
         Producto producto = obtenerProductoPorId(id);
         if (producto != null) {
             producto.setStock(cantidad);

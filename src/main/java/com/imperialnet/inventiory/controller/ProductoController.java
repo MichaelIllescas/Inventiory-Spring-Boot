@@ -24,7 +24,7 @@ public class ProductoController {
     // Método para crear un producto
     @PostMapping("/producto/crear")
     public String crearProducto(Producto producto,
-            HttpSession session) 
+                                HttpSession session)
     {
         prodServ.crearProducto(producto, session);
         return "redirect:/verProductos"; // Redirige a la página de listado de productos después de la creación
@@ -33,7 +33,7 @@ public class ProductoController {
     // Método para listar los productos del usuario
     @GetMapping("/verProductos")
     public String listarProductos(Model model,
-                                  HttpSession session)
+                                  HttpSession session) 
     {
         Long idUsuario = (Long) session.getAttribute("idUsuario");
         List<Producto> listaProductos = prodServ.obtenerProductosPorUsuario(idUsuario);
@@ -75,8 +75,8 @@ public class ProductoController {
     // Método para mostrar el formulario de actualización de stock
     @GetMapping("/actualizarStock")
     public String mostrarFormularioActualizarStock(Model model,
-                                                    @RequestParam(value = "idProducto", required = false) Long idProducto,
-                                                    HttpSession session) 
+                                                   @RequestParam(value = "idProducto", required = false) Long idProducto,
+                                                   HttpSession session)
     {
         List<Producto> productos = prodServ.obtenerProductosPorUsuario((Long) session.getAttribute("idUsuario"));
         Producto selectedProduct = null;
@@ -129,7 +129,7 @@ public class ProductoController {
 
     @GetMapping("/aplicarAumentos")
     public String aplicarAumentos(HttpSession sesion,
-                                  Model model)
+                                 Model model) 
     {
         // Obtener y añadir la lista de productos y clientes al modelo
         List<Producto> productos = prodServ.obtenerProductosPorUsuario((Long) sesion.getAttribute("idUsuario"));
@@ -138,12 +138,10 @@ public class ProductoController {
         return "aplicarAumentos";  // Esto debe coincidir con el nombre del archivo HTML en el directorio de plantillas
     }
 
- 
-
     @PostMapping("/agregarProductoPrecio")
     public String agregarProducto(@RequestParam(value = "idProducto", required = false) Long idProducto,
                                   Model model,
-                                  HttpSession sesion) 
+                                  HttpSession sesion)
     {
         // Validar si se seleccionó un producto válido
         if (idProducto == null) {
@@ -187,8 +185,8 @@ public class ProductoController {
     @PostMapping("/confirmarAumento")
     @Transactional
     public String aplicarPorcentajeAumento(HttpSession sesion,
-                                           @RequestParam(value = "cant") int porcentaje,
-                                           Model model)
+                                          @RequestParam(value = "cant") int porcentaje,
+                                          Model model)
     {
 
         List<Producto> productosAumento = listado.getListadoAumento();
@@ -215,10 +213,9 @@ public class ProductoController {
 
     }
 
-
     @GetMapping("/aplicarDescuento")
-    public String aplicarDescuentos(HttpSession sesion, 
-                                    Model model) 
+    public String aplicarDescuentos(HttpSession sesion,
+                                    Model model)
     {
         // Obtener y añadir la lista de productos y clientes al modelo
         Long idUsuario = (Long) sesion.getAttribute("idUsuario");
@@ -234,8 +231,8 @@ public class ProductoController {
     }
 
     @PostMapping("/eliminarProductoDescuentos")
-    public String eliminarProductoDesc(@RequestParam("idProd") Long idProd, 
-                                       HttpSession sesion) 
+    public String eliminarProductoDesc(@RequestParam("idProd") Long idProd,
+            HttpSession sesion) 
     {
         // Eliminar el producto seleccionado de la lista en la sesión
         listado.getListadoAumento().removeIf(producto -> producto.getId().equals(idProd));
@@ -247,7 +244,7 @@ public class ProductoController {
 
     @PostMapping("/agregarProductoDescuento")
     public String agregarProductoDesc(@RequestParam(value = "idProducto", required = false) Long idProducto,
-                                      Model model, 
+                                      Model model,
                                       HttpSession sesion)
     {
         // Validar si se seleccionó un producto válido
@@ -280,8 +277,8 @@ public class ProductoController {
     @PostMapping("/confirmarDescuento")
     @Transactional
     public String aplicarPorcentajeDescuento(HttpSession sesion,
-                                             @RequestParam(value = "cant") int porcentaje,
-                                             Model model) 
+            @RequestParam(value = "cant") int porcentaje,
+            Model model) 
     {
 
         List<Producto> productosAumento = listado.getListadoAumento();
@@ -289,7 +286,7 @@ public class ProductoController {
         if (productosAumento == null || productosAumento.isEmpty()) {
             sesion.setAttribute("errorProd", "No se han seleccionado productos para aplicar el descuento.");
             sesion.removeAttribute("confirmacion");
-            
+
             return "redirect:/aplicarDescuento"; // Redirige al formulario de registro de venta
         }
 
@@ -298,7 +295,6 @@ public class ProductoController {
             prodServ.crearProducto(prod, sesion);
         }
 
-       
         sesion.removeAttribute("productosSeleccionados");
         sesion.removeAttribute("errorProd");
         listado.vaciar();

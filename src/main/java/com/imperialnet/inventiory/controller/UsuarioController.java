@@ -29,7 +29,8 @@ public class UsuarioController {
 
     // Muestra la lista de usuarios
     @GetMapping("/verUsuarios")
-    public String verUsuarios(Model model) {
+    public String verUsuarios(Model model)
+    {
         List<Usuario> usuarios = userServ.getUsuarios();
         model.addAttribute("listadoUsuarios", usuarios);
         return "verUsuarios"; // Retorna la vista verUsuarios
@@ -37,7 +38,8 @@ public class UsuarioController {
 
     // Muestra el formulario para registrar un nuevo usuario
     @GetMapping("/registrarUsuario")
-    public String registrarUsuario() {
+    public String registrarUsuario() 
+    {
         return "registrarUsuario"; // Retorna la vista registrarUsuario
     }
 
@@ -45,7 +47,8 @@ public class UsuarioController {
     @PostMapping("/registrarUsuario")
     public String crearUsuario(@ModelAttribute("usuario") Usuario usuario,
                                @RequestParam("rolId") Long rolId,
-                               Model model) {
+                               Model model) 
+    {
         // Obtener el rol desde el servicio de roles
         Rol rol = rolServ.obtenerRolPorId(rolId);
         // Asignar el rol al usuario
@@ -71,7 +74,8 @@ public class UsuarioController {
 
     // Muestra el menú de usuarios, verifica el rol del usuario desde la sesión
     @GetMapping("/menuUsuarios")
-    public String menuUsuarios(HttpSession sesion) {
+    public String menuUsuarios(HttpSession sesion)
+    {
         Integer rol = (Integer) sesion.getAttribute("rol");
 
         // Verificar si el rol es 1 (administrador)
@@ -86,7 +90,8 @@ public class UsuarioController {
     @PostMapping("/acceder")
     public String acceder(Usuario usuario,
                           HttpSession sesion,
-                          Model model) throws NoSuchAlgorithmException {
+                          Model model) throws NoSuchAlgorithmException 
+    {
         // Buscar el usuario por nombre de usuario
         Optional<Usuario> user = userServ.buscarUsuarioPorUserName(usuario.getNombreUsuario());
 
@@ -114,7 +119,8 @@ public class UsuarioController {
 
     // Cierra la sesión del usuario
     @GetMapping("/cerrar")
-    public String cerrarSesion(HttpSession sesion) {
+    public String cerrarSesion(HttpSession sesion)
+    {
         sesion.invalidate(); // Invalida la sesión eliminando todos los atributos
         return "redirect:/?mensaje=Ha+finalizado+Correctamente"; // Redirige con el mensaje de éxito en la URL
     }
@@ -122,7 +128,8 @@ public class UsuarioController {
     // Muestra el formulario para actualizar un usuario específico
     @GetMapping("/actualizarUsuario")
     public String actualizarUsuario(@RequestParam(name = "id", required = false) Long id,
-                                    Model model) {
+                                    Model model)
+    {
         // Obtener el usuario por su ID
         Usuario usu = userServ.obtenerUsuarioPorId(id);
 
@@ -140,7 +147,8 @@ public class UsuarioController {
                                     BindingResult result,
                                     Model model,
                                     @RequestParam("rolId") long id,
-                                    @RequestParam("clave_repeat") String claveRepeat) {
+                                    @RequestParam("clave_repeat") String claveRepeat)
+    {
         // Validar que las contraseñas coincidan
         if (!usuario.getClave().equals(claveRepeat)) {
             model.addAttribute("errorClave", "Las contraseñas no coinciden");
@@ -164,7 +172,8 @@ public class UsuarioController {
         return "redirect:/verUsuarios"; // Redirige a la lista de usuarios después de actualizar
     }
     @PostMapping("/anularUsuario")
-    public String anularUsuario(@RequestParam ("id")Long id){
+    public String anularUsuario(@RequestParam ("id")Long id)
+    {
       Usuario usu= userServ.obtenerUsuarioPorId(id);
       userServ.anularUsuario(usu);
     return "redirect:/verUsuarios";

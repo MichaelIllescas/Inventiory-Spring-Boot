@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.imperialnet.inventiory.service;
 
 import com.imperialnet.inventiory.entities.Cliente;
@@ -12,10 +9,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- *
- * @author jonii
- */
 @Service
 public class ClienteService implements IClienteService{
 
@@ -23,29 +16,31 @@ public class ClienteService implements IClienteService{
     ClienteRepository cliRepo;
     @Autowired
     IUsuarioService userService;
-    
-    
-    
-    
+
     @Override
-    public void crearCliente(Cliente cliente, HttpSession sesion) {
+    public void crearCliente(Cliente cliente,
+                             HttpSession sesion) 
+    {
         cliente.setUsuario(userService.obtenerUsuarioPorId((Long)sesion.getAttribute("idUsuario")));
         cliRepo.save(cliente);
     }
 
     @Override
-    public List<Cliente> getClientes() {
+    public List<Cliente> getClientes() 
+    {
         return cliRepo.findAll();
     }
 
     @Override
-    public Cliente obtenerClientePorId(Long id) {
+    public Cliente obtenerClientePorId(Long id) 
+    {
         
         return cliRepo.findById(id).orElse(null);
      }
 
     @Override
-    public Cliente editarCliente(Long id, Cliente cliente) {
+    public Cliente editarCliente(Long id, Cliente cliente) 
+    {
         Cliente clienteOriginal= this.obtenerClientePorId(id);
         if(clienteOriginal!= null){
             clienteOriginal.setNombre(cliente.getNombre());
@@ -63,12 +58,14 @@ public class ClienteService implements IClienteService{
     }
 
     @Override
-    public void eliminarCliente(Long id) {
+    public void eliminarCliente(Long id) 
+    {
         cliRepo.deleteById(id);
     }
     
     @Override
-    public void editarCliente(Cliente cliente) {
+    public void editarCliente(Cliente cliente) 
+    {
     Cliente clienteExistente = this.obtenerClientePorId(cliente.getId());
     if (clienteExistente != null) {
         clienteExistente.setNombre(cliente.getNombre());
@@ -86,7 +83,8 @@ public class ClienteService implements IClienteService{
 
 
     @Override
-    public Cliente findByNombre(String nombre, Long usuarioId) {
+    public Cliente findByNombre(String nombre, Long usuarioId) 
+    {
         // Encuentra todos los clientes del usuario y luego busca por nombre
         List<Cliente> clientes = cliRepo.findByUsuarioId(usuarioId);
         return clientes.stream()
@@ -96,7 +94,9 @@ public class ClienteService implements IClienteService{
     }
 
     @Override
-    public Cliente findByDni(String dni, Long usuarioId) {
+    public Cliente findByDni(String dni,    
+                             Long usuarioId)
+    {
         // Encuentra todos los clientes del usuario y luego busca por DNI
         List<Cliente> clientes = cliRepo.findByUsuarioId(usuarioId);
         return clientes.stream()
@@ -106,7 +106,8 @@ public class ClienteService implements IClienteService{
     }
 
     @Override
-    public List<Cliente> obtenerClientesPorUsuario(Long usuarioId) {
+    public List<Cliente> obtenerClientesPorUsuario(Long usuarioId)
+    {
         return cliRepo.findByUsuarioId(usuarioId);
     }
 }

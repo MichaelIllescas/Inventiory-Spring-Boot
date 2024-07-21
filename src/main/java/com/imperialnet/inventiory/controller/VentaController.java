@@ -54,11 +54,9 @@ public class VentaController {
                              HttpSession sesion)
     {
         // Obtener y añadir la lista de productos y clientes al modelo
-        List<Producto> productos = prodServ.obtenerProductosPorUsuario((Long)sesion.getAttribute("idUsuario"));
-        List<Cliente> clientes = cliServ.obtenerClientesPorUsuario((Long)sesion.getAttribute("idUsuario"));
-        
-      
-        
+        List<Producto> productos = prodServ.obtenerProductosPorUsuario((Long) sesion.getAttribute("idUsuario"));
+        List<Cliente> clientes = cliServ.obtenerClientesPorUsuario((Long) sesion.getAttribute("idUsuario"));
+
         model.addAttribute("productos", productos);
         model.addAttribute("clientes", clientes);
         return "registrarVenta"; // Retorna la vista de registro de venta
@@ -67,7 +65,7 @@ public class VentaController {
     @GetMapping("/seleccionarCliente")
     public String seleccionarCliente(Model model,
                                      @RequestParam(value = "dniCliente", required = false) String dni,
-                                     HttpSession sesion)
+                                     HttpSession sesion) 
     {
         // Validar si se proporcionó un DNI válido
         if (dni == null || dni.isEmpty()) {
@@ -76,7 +74,7 @@ public class VentaController {
         }
 
         // Buscar el cliente por su DNI en la base de datos
-        Cliente clienteSeleccionado = cliServ.findByDni(dni, (Long)sesion.getAttribute("idUsuario"));
+        Cliente clienteSeleccionado = cliServ.findByDni(dni, (Long) sesion.getAttribute("idUsuario"));
 
         // Validar si se encontró un cliente válido
         if (clienteSeleccionado == null) {
@@ -93,8 +91,8 @@ public class VentaController {
     @PostMapping("/agregarProducto")
     public String agregarProducto(@RequestParam(value = "idProducto", required = false) Long idProducto,
                                   Model model,
-                                  @RequestParam(value="cant") int cant,
-                                  HttpSession sesion)
+                                  @RequestParam(value = "cant") int cant,
+                                  HttpSession sesion) 
     {
         // Validar si se seleccionó un producto válido
         if (idProducto == null) {
@@ -110,7 +108,7 @@ public class VentaController {
             sesion.setAttribute("errorProd", "El producto seleccionado no existe.");
             return "redirect:/registrarVenta"; // Redirige al formulario de registro de venta
         }
-         // Validar si el producto seleccionado existe
+        // Validar si el producto seleccionado existe
         if (productoSeleccionado.getStock() == 0) {
             sesion.setAttribute("errorProd", "No posee Stock disponible de " + productoSeleccionado.getNombre());
             return "redirect:/registrarVenta"; // Redirige al formulario de registro de venta
@@ -146,9 +144,9 @@ public class VentaController {
 
     @PostMapping("/confirmarVenta")
     @Transactional
-    public String confirmarVenta(HttpSession sesion, 
-                                Model model,
-                                @RequestParam (value="observaciones") String obs)
+    public String confirmarVenta(HttpSession sesion,
+                                 Model model,
+                                 @RequestParam(value = "observaciones") String obs)
     {
         // Obtener la fecha actual
         LocalDate fechaDeHoyLocalDate = LocalDate.now();
@@ -163,7 +161,6 @@ public class VentaController {
             sesion.setAttribute("errorCli", "No se ha seleccionado un cliente para la venta.");
             return "redirect:/registrarVenta"; // Redirige al formulario de registro de venta
         }
-       
 
         // Obtener la lista de productos seleccionados de la sesión
         List<ItemVenta> productosSeleccionados = listado.getProductosSeleccionados();
@@ -173,21 +170,20 @@ public class VentaController {
             sesion.setAttribute("errorProd", "No se han seleccionado productos para la venta.");
             return "redirect:/registrarVenta"; // Redirige al formulario de registro de venta
         }
-        
-        // Validar stock de los productos seleccionados
-    for (ItemVenta item : productosSeleccionados) {
-        Producto producto = item.getProducto();
-        int cantidadSeleccionada = item.getCantidad();
-        int stockDisponible = producto.getStock(); // Asume que tienes un método getStock() en Producto
 
-        if (cantidadSeleccionada > stockDisponible) {
-            // Si el stock no es suficiente, agregar un mensaje de error
-            sesion.setAttribute("errorProd", "No hay suficiente stock para el producto: " + producto.getNombre());
-            sesion.removeAttribute("confirmacion");
-            return "redirect:/registrarVenta"; // Redirige al formulario de registro de venta
+        // Validar stock de los productos seleccionados
+        for (ItemVenta item : productosSeleccionados) {
+            Producto producto = item.getProducto();
+            int cantidadSeleccionada = item.getCantidad();
+            int stockDisponible = producto.getStock(); // Asume que tienes un método getStock() en Producto
+
+            if (cantidadSeleccionada > stockDisponible) {
+                // Si el stock no es suficiente, agregar un mensaje de error
+                sesion.setAttribute("errorProd", "No hay suficiente stock para el producto: " + producto.getNombre());
+                sesion.removeAttribute("confirmacion");
+                return "redirect:/registrarVenta"; // Redirige al formulario de registro de venta
+            }
         }
-    }
-        
 
         // Crear una nueva venta y registrarla
         Venta venta = new Venta();
@@ -195,7 +191,7 @@ public class VentaController {
         venta.setUsuario(usuario);
         venta.setObservaciones(obs);
         venta.setFechaVenta(fechaDeHoyLocalDate);
-        
+
         ventaServ.registrarVenta(venta, productosSeleccionados, sesion);
 
         // Limpiar atributos de sesión después de registrar la venta
@@ -211,7 +207,8 @@ public class VentaController {
     }
 
     @GetMapping("/verVentas")
-    public String verVentas(HttpSession sesion, Model model) 
+    public String verVentas(HttpSession sesion, 
+                            Model model) 
     {
         // Obtener y añadir las ventas del usuario al modelo
         model.addAttribute("ventas", ventaServ.findByUsuarioId((Long) sesion.getAttribute("idUsuario")));
@@ -232,8 +229,8 @@ public class VentaController {
 
     @PostMapping("/ventasCliente")
     public String cargarComprasCliente(@RequestParam("idCli") Long idCli,
-                                       HttpSession sesion,
-                                       Model model)
+                                        HttpSession sesion,
+                                        Model model)
     {
         // Obtener y añadir las ventas del cliente al modelo
         Cliente cliente = cliServ.obtenerClientePorId(idCli);

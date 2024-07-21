@@ -1,6 +1,3 @@
-/*
- * Controlador para manejar las operaciones relacionadas con clientes.
- */
 package com.imperialnet.inventiory.controller;
 
 import com.imperialnet.inventiory.entities.Cliente;
@@ -19,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ClienteController {
 
     @Autowired
-    private IClienteService cliServ; // Servicio para manejar operaciones de clientes
+    private IClienteService cliServ; 
 
     /*
      * Método para mostrar la página de registro de clientes.
      */
     @GetMapping("/registrarCliente")
-    public String mostrarFormularioRegistroCliente() {
+    public String mostrarFormularioRegistroCliente() 
+    {
         return "registrarCliente"; // Devuelve la vista de registro de clientes
     }
 
@@ -34,8 +32,9 @@ public class ClienteController {
      */
     @PostMapping("/registrarCliente")
     public String registrarCliente(@ModelAttribute Cliente cliente,
-            HttpSession sesion,
-            Model model) {
+                                    HttpSession sesion,
+                                    Model model)
+    {
         // Verificar si el cliente ya está registrado por su DNI
         Cliente clienteExistente = cliServ.findByDni(cliente.getDni(), (Long)sesion.getAttribute("idUsuario"));
 
@@ -56,7 +55,8 @@ public class ClienteController {
      */
     @GetMapping("/verClientes")
     public String verClientes(Model model,
-            HttpSession sesion) {
+                              HttpSession sesion) 
+    {
         Long idUsuario = (Long) sesion.getAttribute("idUsuario"); // Obtiene el ID del usuario de la sesión
         List<Cliente> listaClientes = cliServ.obtenerClientesPorUsuario(idUsuario); // Obtiene la lista de clientes del servicio
         model.addAttribute("listadoClientes", listaClientes); // Agrega la lista de clientes al modelo
@@ -68,7 +68,8 @@ public class ClienteController {
      */
     @GetMapping("/actualizarCliente")
     public String mostrarFormularioActualizarCliente(Model model,
-            @RequestParam("id") Long id) {
+                                                     @RequestParam("id") Long id) 
+    {
         Cliente cliente = cliServ.obtenerClientePorId(id); // Obtiene el cliente por su ID
         model.addAttribute("cliente", cliente); // Agrega el cliente al modelo
         return "actualizarCliente"; // Devuelve la vista de actualización de cliente
@@ -78,7 +79,8 @@ public class ClienteController {
      * Método para procesar el formulario de actualización de cliente.
      */
     @PostMapping("/actualizarCliente")
-    public String actualizarCliente(@ModelAttribute Cliente cliente) {
+    public String actualizarCliente(@ModelAttribute Cliente cliente)
+    {
         cliServ.editarCliente(cliente); // Llama al servicio para editar el cliente
         return "redirect:/verClientes"; // Redirige al listado de clientes después de actualizar
     }
@@ -87,7 +89,8 @@ public class ClienteController {
      * Método para mostrar el menú de clientes.
      */
     @GetMapping("/menuClientes")
-    public String mostrarMenuClientes() {
+    public String mostrarMenuClientes()
+    {
         return "menuClientes"; // Devuelve la vista del menú de clientes
     }
 }

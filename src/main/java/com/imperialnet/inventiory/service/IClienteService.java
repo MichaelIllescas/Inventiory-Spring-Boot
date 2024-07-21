@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.imperialnet.inventiory.service;
 
 import com.imperialnet.inventiory.entities.Cliente;
@@ -9,10 +5,6 @@ import com.imperialnet.inventiory.entities.Producto;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
-/**
- *
- * @author jonii
- */
 public interface IClienteService {
 
     public void crearCliente(Cliente cliente, HttpSession sesion);
