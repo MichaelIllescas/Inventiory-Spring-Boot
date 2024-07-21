@@ -20,7 +20,8 @@ public class WebConfig implements WebMvcConfigurer{
     SessionInterceptor sessionInterceptor;
     
   @Override
-    public void addInterceptors(InterceptorRegistry registry) {
+    public void addInterceptors(InterceptorRegistry registry)
+    {
         registry.addInterceptor(sessionInterceptor)
                 .excludePathPatterns("/","/acceder", "/cerrar", "/css/**", "/js/**", "/img/**")
                 .addPathPatterns("/**");

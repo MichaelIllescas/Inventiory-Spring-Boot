@@ -51,7 +51,7 @@ public class VentaController {
 
     @GetMapping("/registrarVenta")
     public String panelVenta(Model model,
-                             HttpSession sesion   )
+                             HttpSession sesion)
     {
         // Obtener y añadir la lista de productos y clientes al modelo
         List<Producto> productos = prodServ.obtenerProductosPorUsuario((Long)sesion.getAttribute("idUsuario"));
@@ -147,7 +147,7 @@ public class VentaController {
     @PostMapping("/confirmarVenta")
     @Transactional
     public String confirmarVenta(HttpSession sesion, 
-            Model model,
+                                Model model,
                                 @RequestParam (value="observaciones") String obs)
     {
         // Obtener la fecha actual
@@ -174,6 +174,19 @@ public class VentaController {
             return "redirect:/registrarVenta"; // Redirige al formulario de registro de venta
         }
         
+        // Validar stock de los productos seleccionados
+    for (ItemVenta item : productosSeleccionados) {
+        Producto producto = item.getProducto();
+        int cantidadSeleccionada = item.getCantidad();
+        int stockDisponible = producto.getStock(); // Asume que tienes un método getStock() en Producto
+
+        if (cantidadSeleccionada > stockDisponible) {
+            // Si el stock no es suficiente, agregar un mensaje de error
+            sesion.setAttribute("errorProd", "No hay suficiente stock para el producto: " + producto.getNombre());
+            sesion.removeAttribute("confirmacion");
+            return "redirect:/registrarVenta"; // Redirige al formulario de registro de venta
+        }
+    }
         
 
         // Crear una nueva venta y registrarla
@@ -193,8 +206,8 @@ public class VentaController {
         listado.vaciar(); // Vaciar la lista de productos seleccionados en la sesión
 
         // Establecer confirmación de venta exitosa en la sesión
-        model.addAttribute("confirmacion", "Se ha registrado la venta correctamente.");
-        return "registrarVenta"; // Redirige al formulario de registro de venta
+        sesion.setAttribute("confirmacion", "Se ha registrado la venta correctamente.");
+        return "redirect:/registrarVenta"; // Redirige al formulario de registro de venta
     }
 
     @GetMapping("/verVentas")

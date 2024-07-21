@@ -120,7 +120,7 @@
                         <textarea id="observaciones" name="observaciones" class="form-control" rows="3" maxlength="255" placeholder="Ingrese observaciones adicionales aquí..."></textarea>
                     </div>
                     <button type="submit" class="btn btn-success btn-lg">Confirmar Venta</button>
-                    <p th:if="${confirmacion}" class="mt-3 alert alert-success" th:text="${confirmacion}"></p>
+                    <p th:if="${session.confirmacion}" class="mt-3 alert alert-success" th:text="${session.confirmacion}"></p>
                 </form>
             </div>
         </div>

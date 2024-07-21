@@ -1,82 +1,82 @@
 <!DOCTYPE html>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
-<head th:insert="componentes/head :: head"></head>
-<body class="bg-login-image" id="page-top">
+    <head th:insert="componentes/head :: head"></head>
+    <body class="bg-login-image" id="page-top">
 
-<nav th:insert="componentes/nav :: nav"></nav>
+        <nav th:insert="componentes/nav :: nav"></nav>
 
-<div class="container text-dark text-center mt-2 pt-2">
+        <div class="container text-dark text-center mt-2 pt-2">
 
-    <div class="row justify-content-center mt-2">
-        <div class="col-md-10 bg-light p-4 rounded shadow inset-shadow-gray">
-            <h1 class="text-dark mb-4">Informe de los 10 productos más vendidos</h1>
-            <form th:action="@{/informeProductosMasVendidos}" method="get">
-                <div class="input-group mb-3">
-                    <label class="text-dark mr-3 pt-1 h5" for="mes">Seleccione el mes:</label>
-                    <select class="form-select rounded" id="mes" name="mes">
-                        <option value="1" th:text="'Enero'" th:selected="${mesSeleccionado == 1}">Enero</option>
-                        <option value="2" th:text="'Febrero'" th:selected="${mesSeleccionado == 2}">Febrero</option>
-                        <option value="3" th:text="'Marzo'" th:selected="${mesSeleccionado == 3}">Marzo</option>
-                        <option value="4" th:text="'Abril'" th:selected="${mesSeleccionado == 4}">Abril</option>
-                        <option value="5" th:text="'Mayo'" th:selected="${mesSeleccionado == 5}">Mayo</option>
-                        <option value="6" th:text="'Junio'" th:selected="${mesSeleccionado == 6}">Junio</option>
-                        <option value="7" th:text="'Julio'" th:selected="${mesSeleccionado == 7}">Julio</option>
-                        <option value="8" th:text="'Agosto'" th:selected="${mesSeleccionado == 8}">Agosto</option>
-                        <option value="9" th:text="'Septiembre'" th:selected="${mesSeleccionado == 9}">Septiembre</option>
-                        <option value="10" th:text="'Octubre'" th:selected="${mesSeleccionado == 10}">Octubre</option>
-                        <option value="11" th:text="'Noviembre'" th:selected="${mesSeleccionado == 11}">Noviembre</option>
-                        <option value="12" th:text="'Diciembre'" th:selected="${mesSeleccionado == 12}">Diciembre</option>
-                    </select>
-                    <button class="btn btn-success ms-2" type="submit">Seleccionar</button>
+            <div class="row justify-content-center mt-2">
+                <div class="col-md-10 bg-light p-4 rounded shadow inset-shadow-gray">
+                    <h1 class="text-dark mb-4">Informe de los 10 productos más vendidos</h1>
+                    <form th:action="@{/informeProductosMasVendidos}" method="get">
+                        <div class="input-group mb-3">
+                            <label class="text-dark mr-3 pt-1 h5" for="mes">Seleccione el mes:</label>
+                            <select class="form-select rounded" id="mes" name="mes">
+                                <option value="1" th:text="'Enero'" th:selected="${mesSeleccionado == 1}">Enero</option>
+                                <option value="2" th:text="'Febrero'" th:selected="${mesSeleccionado == 2}">Febrero</option>
+                                <option value="3" th:text="'Marzo'" th:selected="${mesSeleccionado == 3}">Marzo</option>
+                                <option value="4" th:text="'Abril'" th:selected="${mesSeleccionado == 4}">Abril</option>
+                                <option value="5" th:text="'Mayo'" th:selected="${mesSeleccionado == 5}">Mayo</option>
+                                <option value="6" th:text="'Junio'" th:selected="${mesSeleccionado == 6}">Junio</option>
+                                <option value="7" th:text="'Julio'" th:selected="${mesSeleccionado == 7}">Julio</option>
+                                <option value="8" th:text="'Agosto'" th:selected="${mesSeleccionado == 8}">Agosto</option>
+                                <option value="9" th:text="'Septiembre'" th:selected="${mesSeleccionado == 9}">Septiembre</option>
+                                <option value="10" th:text="'Octubre'" th:selected="${mesSeleccionado == 10}">Octubre</option>
+                                <option value="11" th:text="'Noviembre'" th:selected="${mesSeleccionado == 11}">Noviembre</option>
+                                <option value="12" th:text="'Diciembre'" th:selected="${mesSeleccionado == 12}">Diciembre</option>
+                            </select>
+                            <button class="btn btn-success ms-2" type="submit">Seleccionar</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-    </div>
+            </div>
 
-    <div class="row justify-content-center mt-4 pb-5">
-            <div class="col-sm-10 col-lg-10 bg-light p-4 rounded shadow">
-             <div class="table-responsive">
-                    <table class="table table-bordered table-sm table-hover">
-                        <thead class="table-dark">
-                        <tr>
-                            <th scope="col">Producto</th>
-                            <th scope="col">Descripción</th>
-                            <th scope="col">Cantidad Vendida</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Mostrar productos más vendidos -->
-                        <tr th:each="producto : ${productos}">
-                            <td th:text="${producto[0]}"></td>
-                            <td th:text="${producto[1]}"></td>
-                            <td class="text-center" th:text="${producto[2]}"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                
-                <!-- Mostrar mensaje si no hay productos vendidos -->
-                <div th:if="${mensaje}" class="alert alert-warning mt-3">
-                    <p th:text="${mensaje}"></p>
+            <div class="row justify-content-center mt-4 pb-5">
+                <div class="col-sm-10 col-lg-10 bg-light p-4 rounded shadow">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-sm table-hover">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col">Producto</th>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col">Cantidad Vendida</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Mostrar productos más vendidos -->
+                                <tr th:each="producto : ${productos}">
+                                    <td th:text="${producto[0]}"></td>
+                                    <td th:text="${producto[1]}"></td>
+                                    <td class="text-center" th:text="${producto[2]}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- Mostrar mensaje si no hay productos vendidos -->
+                        <div th:if="${mensaje}" class="alert alert-warning mt-3">
+                            <p th:text="${mensaje}"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
 
 
 
 
 
-<div th:insert="componentes/footer :: footer"></div>
+        <div th:insert="componentes/footer :: footer"></div>
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
-    <i class="fas fa-angle-up"></i>
-</a>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
 
-<div th:insert="componentes/modalCerrarSesion :: modalCerrarSesion"></div>
+        <div th:insert="componentes/modalCerrarSesion :: modalCerrarSesion"></div>
 
-<div th:insert="componentes/scriptsBTyJS :: scriptsBTyJS"></div>
+        <div th:insert="componentes/scriptsBTyJS :: scriptsBTyJS"></div>
 
-</body>
+    </body>
 </html>
