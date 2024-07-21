@@ -60,13 +60,13 @@
                     </div>
 
                 </li>
-                <li class="nav-item dropdown animated--grow-in">
+                <li class="nav-item dropdown animated--grow-in" th:if="${session.rol == 1}">
                     <a class="nav-link dropdown-toggle text-light" href="#" id="facturasDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Facturas
+                        Usuarios
                     </a>
                     <div class="dropdown-menu custom-dropdown animated--grow-in" aria-labelledby="facturasDropdown">
-                        <a class="dropdown-item" th:href="@{/menuFacturas}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ver Facturas</a>
-                        <a class="dropdown-item"  th:href="@{/menuFacturas}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Generar Factura</a>
+                        <a class="dropdown-item" th:href="@{/registrarUsuario}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Registrar Usuarios</a>
+                        <a class="dropdown-item"  th:href="@{/verUsuarios}"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ver Usuarios</a>
                     </div>
                 </li>
             </ul>
