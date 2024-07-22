@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0.33
+    container_name: mysql-container
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: mydatabase
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin-container
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: 1234
+    depends_on:
+      - mysql
+
+  inventiory:
+    build:
+      context: ./inventiory  # Asegúrate de que el contexto sea el directorio donde está tu Dockerfile
+      dockerfile: Dockerfile
+    container_name: inventiory-container
+    ports:
+      - "8081:8080"
+    depends_on:
+      - mysql
+    environment:
+      DB_URL: jdbc:mysql://mysql:3306/mydatabase
+      DB_USER_NAME: root
+      DB_PASSWORD: 1234
+
+volumes:
+  mysql-data:
