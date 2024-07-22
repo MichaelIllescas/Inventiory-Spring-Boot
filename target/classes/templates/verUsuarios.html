@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html  lang ="es" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="componentes/head :: head"></head>
+<body class="bg-login-image" id="page-top">
+
+ <nav th:insert="componentes/nav :: nav"></<nav></nav>
+
+
+
+    <!-- DataTables Example -->
+<section th:if="${session.rol != 2}" class="pt-5 m-auto col-lg-10">
+    <div class="row m-auto w-100 pb-5">
+        <div class="col-12 m-auto">
+            <div class="card shadow mb-4">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Listado de Usuarios:</h6>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive table-hover">
+                        <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th>Usuario</th>
+                                    <th>Rol</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="usuario : ${listadoUsuarios}">
+                                    <td th:text="${usuario.nombreUsuario}"></td>
+                                    <td th:text="${usuario.rol.descripicion}"></td> <!-- Usando el operador de navegación segura -->
+                                    <td th:text="${usuario.activo == 1 ? 'Activo' : 'Inactivo'}"></td>
+                                    <td class="text-center w-auto d-flex justify-content-center">
+                                        <form name="editar" th:action="@{/actualizarUsuario}" th:method="get" class="w-auto">
+                                            <input type="hidden" name="id" th:value="${usuario.id}">
+                                            <button type="submit" class="btn btn-primary btn-sm">
+                                                <i class="fas fa-pencil-alt"></i>
+                                            </button>
+                                        </form>
+                                         <form name="editar" th:action="@{/anularUsuario}" th:method="post" class="w-auto">
+                                            <input type="hidden" name="id" th:value="${usuario.id}">
+                                            <button th:if="${usuario.activo == 1 }" type="submit" class="btn btn-danger btn-sm">
+                                                <i class="fas fa-solid fa-ban"></i>
+                                               
+                                            </button>
+                                            <button th:if="${usuario.activo == 0 }" type="submit" class="btn btn-info btn-sm">
+                                              
+                                               <i class="fas fa-solid fa-check"></i>
+                                            </button>
+                                            
+                                        </form>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+        
+ <div th:insert="componentes/footer::footer"></div>
+   
+ <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fas fa-angle-up"></i>
+    </a>
+
+   <div th:insert="componentes/modalCerrarSesion :: modalCerrarSesion"></div>
+ 
+   <div th:insert="componentes/scriptsBTyJS :: scriptsBTyJS"></div>
+
+</body>
+</html>

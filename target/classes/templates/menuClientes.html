@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="componentes/head::head"></head>
+<body class="bg-login-image" id="page-top">
+
+   <nav th:insert="componentes/nav::nav"></nav>
+    
+    <section class="content-section p-5 d-flex" id="portfolio">
+        <div class="container m-auto">
+            <div class="row gx-1 gy-1 m-auto mb-5">
+                <div class="col-lg-4 col-md-10 col-sm-10 m-auto">
+                    <a class="portfolio-item d-block text-center" th:href="@{/verClientes}">
+                        <div class="caption">
+                            <div class="caption-content m-auto">
+                                <div class="h3 text-shadow m-auto">Ver Clientes</div>
+                                <p class="mb-0"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ingresar!</p>
+                            </div>
+                        </div>
+                        <img class="img-fluid" src="img/portfolio-2.jpg" alt="..." />
+                    </a>
+                </div>
+                <div class="col-lg-4 col-md-10 col-sm-10 m-auto mt-4">
+                    <a class="portfolio-item text-center" th:href="@{/registrarCliente}">
+                        <div class="caption">
+                            <div class="caption-content m-auto">
+                                <div class="h3 text-shadow m-auto">
+                                   <div class="h3 text-shadow m-auto">Registrar Clientes</div>
+                                    <p class="mb-0"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ingresar!</p>
+                                </div>
+                            </div>
+                        </div>
+                        <img class="img-fluid" src="img/portfolio-2.jpg" alt="..." />
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div th:insert="componentes/footer::footer"></div>
+   
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <div th:insert="componentes/modalCerrarSesion::modalCerrarSesion"></div>
+ 
+    <div th:insert="componentes/scriptsBTyJS::scriptsBTyJS"></div>
+       
+</body>
+</html>

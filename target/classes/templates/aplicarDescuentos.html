@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head th:insert="componentes/head :: head"></head>
+    <body class="bg-login-image" id="page-top">
+
+        <nav th:insert="componentes/nav :: nav"></nav>
+
+        <div class="container mt-4">
+            <div class="row">
+                <div class="col-md-6 offset-md-3">
+                    <div class="card">
+                        <h5 class="card-header">Disminuir Precios de los Productos:</h5>
+                        <div class="card-body">
+                            <!-- Mensaje de error -->
+                            <div th:if="${session.errorProd}" class="alert alert-danger" role="alert">
+                                <span th:text="${session.errorProd}"></span>
+                            </div>
+
+                            <!-- Mensaje de confirmación -->
+                            <div th:if="${session.confirmationMessage}" class="alert alert-success" role="alert">
+                                <span th:text="${session.confirmationMessage}"></span>
+                            </div>
+
+                            <!-- Formulario para seleccionar un producto -->
+                            <div class="col-lg-12">
+                                <!-- Formulario para buscar y agregar productos -->
+                                <form th:action="@{/agregarProductoDescuento}" method="post" class="mb-4">
+                                    <div class="form-group">
+                                        <label for="inputProducto" class="text-white">Selecciona un Producto:</label>
+                                        <select id="inputProducto" name="idProducto" class="form-control form-control-lg">
+                                            <option></option> <!-- Opción vacía inicial -->
+                                            <!-- Iteración sobre los productos desde el controlador -->
+                                            <th:block th:each="producto : ${productos}">
+                                                <option th:value="${producto.id}" th:text="${producto.nombre + ' - ' + producto.marca + ' - ' + producto.descripcion + ' - ' + producto.precio}"></option>
+                                            </th:block>
+                                        </select>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success">Agregar</button>
+                                </form>
+
+                                <!-- Tabla para mostrar productos seleccionados -->
+                                <div class="table-responsive">
+                                    <table class="table table-bordered bg-gradient-light">
+                                        <h4 class="h5" >Listado de productos a aplicar descuento: </h4>
+                                        <thead>
+                                            <tr>
+                                                <th>Producto</th>
+                                                <th>Precio Actual</th>
+                                                <th>Acciones</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Ejemplo de producto agregado dinámicamente -->
+                                            <tr th:each="prod : ${session.productosSeleccionados}">
+                                                <td th:text="${prod.nombre}">milanesa</td>
+                                                <td th:text="${prod.precio}">$10.00</td>
+                                                
+                                                <td class="w-25">
+                                                    <form th:action="@{/eliminarProductoDescuentos}" method="post">
+                                                        <input type="hidden" th:value="${prod.id}" name="idProd">
+                                                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                           
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+                                <!-- Formulario para confirmar la venta con campo de observaciones -->
+                                <form class="p-1" th:action="@{/confirmarDescuento}" method="post">
+                                 
+
+                                    <div class="form-group d-flex ">
+                                        <label for="cant" class="text-gray w-100">Porcentaje de Descuento:</label>
+                                        <input type="number" class="form-control form-control-sm w-50" id="cant" name="cant" value="1" min="1" step="1">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-success">Aplicar Descuento</button>
+
+                                    <p th:if="${session.confirmacion}" class="mt-3 alert alert-success  text-gray " th:text="${session.confirmacion}"></p>
+                                    
+
+
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <!-- Área para mostrar información del producto seleccionado -->
+                        <div th:if="${selectedProduct}">
+                            <h6>Información del Producto:</h6>
+                            <p><strong>Nombre:</strong> <span th:text="${selectedProduct.nombre}">N/A</span></p>
+                            <p><strong>Descripción:</strong> <span th:text="${selectedProduct.descripcion}">N/A</span></p>
+
+                            <!-- Formulario para actualizar el stock -->
+                            <form th:action="@{/actualizarStock}" method="post">
+                                <input type="hidden" name="productoId" th:value="${selectedProduct.id}" />
+                                <div class="form-group">
+                                    <label for="cantidad">Cantidad en Stock:</label>
+                                    <input type="number" class="form-control" id="cantidad" name="cantidad" th:value="${stockActual}" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Actualizar Stock</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div th:insert="componentes/footer::footer"></div>
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <div th:insert="componentes/modalCerrarSesion :: modalCerrarSesion"></div>
+
+    <div th:insert="componentes/scriptsBTyJS :: scriptsBTyJS"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.1.0/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#inputProducto').select2({
+                placeholder: 'Buscar producto...',
+                allowClear: true
+            });
+        });
+    </script>
+
+</body>
+</html>

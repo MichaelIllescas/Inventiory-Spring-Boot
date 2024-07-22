@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio de Sesión</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/sb-admin-2.css" rel="stylesheet"> <!-- Asegúrate de tener tu propio CSS personalizado -->
+    <style>
+        .bg-login-image {
+            /* Agrega tu estilo personalizado para la imagen de fondo si es necesario */
+        }
+    </style>
+</head>
+<body class="bg-login-image">
+
+<div class="container-fluid d-flex align-items-center justify-content-center mt-5">
+    <div class="card shadow p-4" style="max-width: 300px; width: 100%;">
+        <h2 class="card-title text-center">Inicio de Sesión</h2>
+        <form th:action="@{/acceder}" method="post" class="needs-validation">
+            <div class="form-group">
+                <label for="nombreUsuario">Usuario</label>
+                <input type="text" class="form-control form-control-lg" id="nombreUsuario" name="nombreUsuario" required>
+            </div>
+            <div class="form-group">
+                <label for="clave">Contraseña</label>
+                <input type="password" class="form-control form-control-lg" id="clave" name="clave" required>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
+            
+            <div th:if="${param.error}" class="alert alert-danger text-center mt-3 py-1">
+                <p th:text="${param.error}"></p>
+            </div>
+            <div th:if="${param.mensaje}" class="alert alert-success text-center mt-3 py-1">
+                <p th:text="${param.mensaje}"></p>
+            </div>
+            <div th:if="${sessionExpired}" class="alert alert-warning" role="alert">
+        <span th:text="${sessionExpired}"></span>
+    </div>
+            
+            <div class="text-center mt-3">
+                <a href="#">¿Olvidaste tu contraseña?</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="js/sb-admin-2.js"></script> <!-- Asegúrate de tener tu propio JS personalizado -->
+</body>
+</html>

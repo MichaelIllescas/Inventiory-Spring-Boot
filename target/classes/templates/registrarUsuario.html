@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html  lang="es" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="componentes/head::head"></head>
+<body class="bg-login-image" id="page-top">
+
+   <nav th:insert="componentes/nav::nav"></nav>
+   
+   <!-- Formulario de registro de usuario -->
+   <div  th:if="${session.rol != 2}"class="d-flex align-items-center justify-content-center mb-5 pb-5">
+       <div class="container mb-4 mt-5" style="max-width: 800px;">
+           <h1 class="my-4 mt-3 text-center text-white">Registrar Usuario</h1>
+           <form class="mb-5" th:action="@{/registrarUsuario}" method="post">
+
+               <div class="row">
+                   <div class="col-lg-6">
+                       <div class="form-group">
+                           <label for="nombreUsuario" class="text-white">Nombre de Usuario:</label>
+                           <input type="text" class="form-control form-control-lg" id="nombreUsuario" th:text="${user}" name="nombreUsuario" required>
+                            <small th:if="${errorUser}" class="form-text text-white" th:text="${errorUser}"></small>
+                       </div>
+                   </div>
+                   <div class="col-lg-6">
+                       <div class="form-group">
+                           <label for="clave" class="text-white">Contraseña:</label>
+                           <input type="password" class="form-control form-control-lg" id="clave" name="clave" required>
+                       </div>
+                   </div>
+               </div>
+
+               <div class="row">
+                   <div class="col-lg-6">
+                       <div class="form-group">
+                           <label for="claveRepeat" class="text-white">Repetir Contraseña:</label>
+                           <input type="password" class="form-control form-control-lg" id="claveRepeat" name="clave_repeat" required>
+                           <small th:if="${errorClave}" class="form-text text-white" th:text="${errorClave}"></small>
+                       </div>
+                   </div>
+                   <div class="col-lg-6">
+                       <div class="form-group">
+                           <label for="rol" class="text-white">Rol:</label>
+                           <select class="form-control form-control-lg" id="rol" name="rolId" required>
+                               <option value="1">ADMINISTRADOR</option>
+                               <option value="2">USUARIO</option>
+                           </select>
+                       </div>
+                   </div>
+               </div>
+
+               <div class="row">
+                   <div class="col-lg-12 text-center mt-3">
+                       <button type="submit" class="btn btn-primary btn-block blue w-25 m-auto rounded">Guardar</button>
+                   </div>
+               </div>
+           </form>
+       </div>
+   </div>
+
+   <div th:insert="componentes/footer::footer"></div>
+
+   <!-- Scroll to Top Button -->
+   <a class="scroll-to-top rounded" href="#page-top">
+       <i class="fas fa-angle-up"></i>
+   </a>
+
+   <div th:insert="componentes/modalCerrarSesion::modalCerrarSesion"></div>
+
+   <div th:insert="componentes/scriptsBTyJS::scriptsBTyJS"></div>
+
+</body>
+</html>

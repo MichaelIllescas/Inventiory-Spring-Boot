@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+    <head th:insert="componentes/head::head"></head>
+    <body class="bg-login-image" id="page-top">
+
+        <nav th:insert="componentes/nav::nav"></nav>
+        <!-- Formulario clientes -->
+        <div class="d-flex align-items-center justify-content-center mb-5 pb-5 ">
+            <div class="container mb-4 mt-2 inset-shadow-gray bg-light" style="max-width: 800px;">
+                <h1 class="my-4 text-center text-dark">Registrar Cliente:</h1>
+                <form class="mb-5" th:action="@{/registrarCliente}" method="post">
+                    <div th:if="${session.errorReg}" class="alert alert-danger text-center mt-3 py-1 pt-3">
+                        <p  th:text="${session.errorReg}"></p>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-lg-6">
+                            <div class="form-group text-darck">
+                                <label for="nombre">Nombre del Cliente:</label>
+                                <input type="text" class="form-control form-control-lg" id="nombre" name="nombre" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="apellido">Apellido:</label>
+                                <input type="text" class="form-control form-control-lg" id="apellido" name="apellido" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="direccion" >Dirección:</label>
+                                <input class="form-control form-control-lg" id="direccion" name="direccion" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="telefono" >Teléfono:</label>
+                                <input type="text" class="form-control form-control-lg" id="telefono" name="telefono" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="dni" >DNI:</label>
+                                <input type="text" class="form-control form-control-lg" id="dni" name="dni" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="cuil" >CUIL/CUIT:</label>
+                                <input type="text" class="form-control form-control-lg" id="cuil" name="cuil_cuit">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-12 text-center mt-3">
+                            <button type="submit" class="btn btn-success btn-block blue w-25 m-auto rounded">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div th:insert="componentes/footer::footer"></div>
+
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <div th:insert="componentes/modalCerrarSesion::modalCerrarSesion"></div>
+
+        <div th:insert="componentes/scriptsBTyJS::scriptsBTyJS"></div>
+
+    </body>
+</html>
+
+
+
+
+
+

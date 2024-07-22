@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.imperialnet</groupId>
 	<artifactId>inventiory</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>inventiory</name>
 	<description>Proyect App Web java whit Spring boot</description>
 	<url/>

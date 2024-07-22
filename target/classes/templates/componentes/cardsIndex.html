@@ -1,0 +1,82 @@
+<!-- cards index-->
+<section th:fragment="cardsIndex" class="content-section p-3 m-auto" id="portfolio">
+    <div class="container m-auto">
+
+        <div  class="row gx-1 gy-1 m-auto mb-5 ">
+           
+
+            <div class="col-lg-4 col-md-10 col-sm-10 m-auto mb-3">
+                <a class="portfolio-item d-block text-center position-relative" th:href="@{/menuProductos}">
+                    <div class="caption d-flex justify-content-center align-items-center h-100 w-100">
+                        <div class="caption-content m-auto">
+                            <div class="h1 text-shadow m-auto">Productos</div>
+                            <p class="mb-0"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ingresar!</p>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="img/portfolio-2.jpg" alt="..." />
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-10 col-sm-10 m-auto mb-3">
+                <a class="portfolio-item d-block text-center position-relative" th:href="@{/menuClientes}">
+                    <div class="caption d-flex justify-content-center align-items-center h-100 w-100">
+                        <div class="caption-content m-auto">
+                            <div class="h1 text-shadow m-auto">Clientes</div>
+                            <p class="mb-0"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ingresar!</p>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="img/portfolio-2.jpg" alt="..." />
+                </a>
+            </div>
+            <div class="col-lg-4 col-md-10 col-sm-10 m-auto mb-3">
+                <a class="portfolio-item d-block text-center position-relative" th:href="@{/menuVentas}">
+                    <div class="caption d-flex justify-content-center align-items-center h-100 w-100">
+                        <div class="caption-content m-auto">
+                            <div class="h1 text-shadow m-auto">Ventas</div>
+                            <p class="mb-0"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ingresar!</p>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="img/portfolio-2.jpg" alt="..." />
+                </a>
+            </div>
+        </div>
+          <div  class="row gx-1 gy-1 m-auto mb-5 mt-3 pt-3 ">
+           
+             <div class="m-auto col-lg-4 col-md-10 col-sm-10 mb-3">
+                <a class="portfolio-item d-block text-center position-relative" th:href="@{/menuInformes}">
+                    <div class="caption d-flex justify-content-center align-items-center h-100 w-100">
+                        <div class="caption-content m-auto">
+                            <div class="h1 text-shadow m-auto">Informes</div>
+                            <p class="mb-0"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ingresar!</p>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="img/portfolio-2.jpg" alt="..." />
+                </a>
+            </div>
+              
+              <div class=" portfolio-item d-block col-lg-4 col-md-10 col-sm-10 m-auto mb-3  text-center">
+                
+                <img th:src="@{/img/logoInventiory-removebg-preview.png}" class="  rounded-pill m-auto shadow img-fluid" style="width: 200px" alt="Logo">
+                
+
+            </div>
+            <div th:if="${session.rol == 1}" class="m-auto col-lg-4 col-md-10 col-sm-10 mb-3">
+                <a class="portfolio-item d-block text-center position-relative" th:href="@{/menuUsuarios}">
+                    <div class="caption d-flex justify-content-center align-items-center h-100 w-100">
+                        <div class="caption-content m-auto">
+                            <div class="h1 text-shadow m-auto">Usuarios</div>
+                            <p class="mb-0"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>Ingresar!</p>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="img/portfolio-2.jpg" alt="..." />
+                </a>
+            </div>
+               <div class="col-lg-4 col-md-10 col-sm-10 m-auto mb-3">
+                    
+            </div>
+            
+
+        </div>
+
+    </div>
+</section>
+<!-- Footer -->
