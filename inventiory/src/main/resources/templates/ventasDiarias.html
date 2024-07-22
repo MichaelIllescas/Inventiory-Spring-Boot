@@ -4,7 +4,7 @@
     <body class="bg-login-image" id="page-top">
         <nav th:insert="componentes/nav :: nav"></nav>
 
-        <div class="container text-dark text-center mt-2 pt-2">
+        <div class="container text-dark text-center mt-2 pt-2 pb-4">
 
 
             <div class="row justify-content-center mt-2">
@@ -58,7 +58,7 @@
                         Importe Total de compras del cliente: $<span th:text="${montoTotal}"></span>
                     </h4>
 
-                    <div class="table-responsive">
+                    <div class="table-responsive table-striped">
                         <div th:if="${error}" class="alert alert-warning" role="alert">
                             <p th:text="${error}"></p>
                         </div>
@@ -68,20 +68,22 @@
                             <thead class="table-dark">
 
                                 <tr>
+                                    <th scope="col">N°</th>
                                     <th scope="col">Cliente</th>
-                                    <th scope="col">Fecha</th>
-                                    <th scope="col">Observaciones</th>
                                     <th scope="col">Total</th>
+                                    <th scope="col">Observaciones</th>
+                                    <th scope="col">Fecha</th>
                                     <th scope="col">Detalles</th>
 
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="venta : ${ventas}">
+                                <tr th:each="venta,iterStat  : ${ventas}">
+                                    <td th:text="${iterStat .index +1 }"></td>
                                     <td th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido}"></td>
-                                    <td th:text="${venta.fechaVenta}"></td>
-                                    <td th:text="${venta.observaciones}"></td>
                                     <td th:text="${venta.total}"></td>
+                                    <td th:text="${venta.observaciones}"></td>
+                                    <td th:text="${venta.fechaVenta}"></td>
                                     <td class="text-center">
                                         <button type="button" class="btn btn-primary btn-sm rounded-circle" data-toggle="modal" th:attr="data-target='#ventaModal' + ${venta.id}" data-bs-toggle="tooltip" title="Ver detalles de la venta">
                                             <i class="fas fa-eye"></i>

@@ -202,7 +202,7 @@ public class VentaController {
         listado.vaciar(); // Vaciar la lista de productos seleccionados en la sesión
 
         // Establecer confirmación de venta exitosa en la sesión
-        sesion.setAttribute("confirmacion", "Se ha registrado la venta correctamente.");
+        sesion.setAttribute("confirmacionVenta", "Se ha registrado la venta correctamente.");
         return "redirect:/registrarVenta"; // Redirige al formulario de registro de venta
     }
 

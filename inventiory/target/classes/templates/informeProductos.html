@@ -5,7 +5,7 @@
 
         <nav th:insert="componentes/nav :: nav"></nav>
 
-        <div class="container text-dark text-center mt-2 pt-2">
+        <div class="container text-dark text-center mt-2 pt-2 pb-4">
 
             <div class="row justify-content-center mt-2">
                 <div class="col-md-10 bg-light p-4 rounded shadow inset-shadow-gray">
@@ -35,10 +35,11 @@
 
             <div class="row justify-content-center mt-4 pb-5">
                 <div class="col-sm-10 col-lg-10 bg-light p-4 rounded shadow">
-                    <div class="table-responsive">
+                    <div class="table-responsive table-striped">
                         <table class="table table-bordered table-sm table-hover">
                             <thead class="table-dark">
                                 <tr>
+                                    <th scope="col">N°</th>
                                     <th scope="col">Producto</th>
                                     <th scope="col">Descripción</th>
                                     <th scope="col">Cantidad Vendida</th>
@@ -46,7 +47,8 @@
                             </thead>
                             <tbody>
                                 <!-- Mostrar productos más vendidos -->
-                                <tr th:each="producto : ${productos}">
+                                <tr th:each="producto,indice : ${productos}">
+                                    <td th:text="${indice.index +1}"></td>
                                     <td th:text="${producto[0]}"></td>
                                     <td th:text="${producto[1]}"></td>
                                     <td class="text-center" th:text="${producto[2]}"></td>

@@ -4,10 +4,10 @@
     <body class="bg-login-image" id="page-top">
         <nav th:insert="componentes/nav :: nav"></nav>
 
-        <div class="container text-dark text-center mt-2 pt-2">
+        <div class="container text-dark text-center mt-2 pt-2 pb-2">
 
 
-            <div class="row justify-content-center mt-2">
+            <div class="row justify-content-center  mt-2">
 
                 <div class="col-md-10 bg-light p-4 rounded shadow inset-shadow-gray ">
                     <h1 class="text-dark mb-4">Informe de Ventas Mensuales</h1>
@@ -34,7 +34,7 @@
                 </div>
             </div>
 
-            <div class="row justify-content-center mt-4 pb-5">
+            <div class="row justify-content-center mt-4 pb-5 mb-5">
                 <div class="col-sm-10 col-lg-10 bg-light p-4 rounded shadow">
                     <h4 class="mb-4 text-dark" th:if="${montoTotal != null}">
                         Importe Mensual de Ventas Registradas: $<span th:text="${totalVentasMes}"></span>
@@ -46,10 +46,11 @@
                         Importe Total de compras del cliente: $<span th:text="${montoTotal}"></span>
                     </h4>
 
-                    <div class="table-responsive">
+                    <div class="table-responsive table-striped">
                         <table class="table table-bordered table-sm table-hover">
                             <thead class="table-dark">
                                 <tr>
+                                    <th scope="col">N°</th>
                                     <th scope="col">Cliente</th>
                                     <th scope="col">Fecha</th>
                                     <th scope="col">Observaciones</th>
@@ -61,7 +62,8 @@
                                 <tr th:if="${error}">
                                     <td colspan="5" class="text-center text-danger">No hay ventas para el mes seleccionado.</td>
                                 </tr>
-                                <tr th:each="venta : ${ventas}">
+                                <tr th:each="venta, indice : ${ventas}">
+                                    <td th:text="${indice.index +1}"></td>
                                     <td th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido}"></td>
                                     <td th:text="${venta.fechaVenta}"></td>
                                     <td th:text="${venta.observaciones}"></td>

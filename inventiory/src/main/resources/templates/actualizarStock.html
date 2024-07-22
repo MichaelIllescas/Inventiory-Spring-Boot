@@ -5,7 +5,7 @@
 
 <nav th:insert="componentes/nav :: nav"></nav>
 
-<div class="container mt-4">
+<div class="container mt-4 pb-5">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="card">
@@ -53,7 +53,7 @@
                                 <label for="cantidad">Cantidad en Stock:</label>
                                 <input type="number" class="form-control" id="cantidad" name="cantidad" th:value="${stockActual}" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Actualizar Stock</button>
+                            <button type="submit" class="btn btn-success">Actualizar Stock</button>
                         </form>
                     </div>
                 </div>

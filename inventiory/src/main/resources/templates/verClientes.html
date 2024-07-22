@@ -14,14 +14,15 @@
                     <div class="col-12 m-auto">
                         <div class="card shadow mb-4">
                             <div class="card-header bg-gradient-light py-3">
-                                <h6 class="m-0 font-weight-bold text-primary">Listado de Clientes:</h6>
+                                <h6 class="m-0 font-weight-bold text-primary">Listado de Clientes Registrados:</h6>
                             </div>
                             <div class="card-body">
-                                <div class="table-responsive table-hover">
+                                <div class="table-responsive table-hover table-striped">
                                     <table class="table table-bordered table-sm" id="dataTable" width="100%" cellspacing="0">
                                         <thead class="thead-light">
                                             <tr>
 
+                                                <th>N°</th>
                                                 <th>Nombre</th>
                                                 <th>Dirección</th>
                                                 <th>Teléfono</th>
@@ -31,7 +32,8 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr th:each="cliente : ${listadoClientes}">
+                                            <tr th:each="cliente, indice : ${listadoClientes}">
+                                                <td th:text="${indice.index +1}"></td>
                                                 <td th:text="${cliente.nombre + ' ' +cliente.apellido}"></td>
                                                 <td th:text="${cliente.direccion}"></td>
                                                 <td th:text="${cliente.telefono}"></td>
