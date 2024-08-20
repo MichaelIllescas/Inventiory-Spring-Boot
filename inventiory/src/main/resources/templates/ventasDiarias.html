@@ -12,10 +12,14 @@
                 <div class="col-md-10 bg-light p-4 rounded shadow inset-shadow-gray">
                     <h1 class="text-dark mb-4">Informe Diario de Ventas: </h1>
                     <form class="w-75 m-auto" th:action="@{/informeDiarioVentas}" method="get">
-                        <div class="row mb-3 align-items-center">
+                        <div class="row mb-3 align-items-center"> 
                             <div class="col-md-4">
-                                <label class=" text-gray h6 mb-3" for="mes">Seleccione el mes:</label>
-                                <select class=" text-gray h5 form-select form-select-sm border-info rounded text-center" id="mes" name="mes">
+                                <label class="text-dark h6" for="dia">Seleccione el día:</label>
+                                <input type="number" th:value="${diaSeleccionado}" class="form-control form-control-sm border-info text-center rounded" id="dia" name="dia" min="1" max="31" />
+                            </div>
+                            <div class="col-md-4">
+                                <label class=" text-gray h6 mb-2 mt-3" for="mes">Seleccione el mes:</label>
+                                <select class=" text-gray h5 p-0 w-100 form-select form-select-sm border-info rounded text-center" id="mes" name="mes">
                                     <option  value="1" th:text="'Enero'" th:selected="${mesSeleccionado == 1}">Enero</option>
                                     <option value="2" th:text="'Febrero'" th:selected="${mesSeleccionado == 2}">Febrero</option>
                                     <option value="3" th:text="'Marzo'" th:selected="${mesSeleccionado == 3}">Marzo</option>
@@ -30,10 +34,7 @@
                                     <option value="12" th:text="'Diciembre'" th:selected="${mesSeleccionado == 12}">Diciembre</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
-                                <label class="text-dark h6" for="dia">Seleccione el día:</label>
-                                <input type="number" th:value="${diaSeleccionado}" class="form-control form-control-sm border-info text-center rounded" id="dia" name="dia" min="1" max="31" />
-                            </div>
+                           
                             <div class="col-md-4">
                                 <label class="text-dark h6" for="anio">Seleccione el año:</label>
                                 <input type="number" th:value="${anioSeleccionado}" class="form-control form-control-sm border-info text-center rounded " id="anio" name="anio" min="1900" max="2100" />

@@ -18,5 +18,7 @@ public interface IProductoService {
 
     public List<Producto> obtenerProductosPorUsuario(Long usuarioId);
 
-    public void actualizarStock(Long id, int cantidad);
+    public void actualizarStock(Long id, float cantidad);
+
+    public Float obtenerCapital(Long idUsuario);
 }

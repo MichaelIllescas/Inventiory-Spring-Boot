@@ -51,7 +51,7 @@
                             <input type="hidden" name="productoId" th:value="${selectedProduct.id}" />
                             <div class="form-group">
                                 <label for="cantidad">Cantidad en Stock:</label>
-                                <input type="number" class="form-control" id="cantidad" name="cantidad" th:value="${stockActual}" required>
+                                <input type="number" class="form-control" id="cantidad" name="cantidad" th:value="${stockActual}" step="0.01" required>
                             </div>
                             <button type="submit" class="btn btn-success">Actualizar Stock</button>
                         </form>

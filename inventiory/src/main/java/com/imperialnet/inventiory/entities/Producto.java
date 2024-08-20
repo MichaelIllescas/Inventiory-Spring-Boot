@@ -7,11 +7,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
 
 @Entity
 public class Producto {
@@ -23,29 +27,16 @@ public class Producto {
     private String marca;
     private String descripcion;
     private float precio;
-    private int stock;
+    private float stock;
     private String categoria;
     private int estado;
     
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = true)
-
     private Usuario usuario;
     
 
-    public Producto() {
-    }
 
-    public Producto(Long id, String nombre,String marca, String descripcion, float precio, int stock, String categoria, int estado) {
-        this.id = id;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.precio = precio;
-        this.stock = stock;
-        this.categoria = categoria;
-        this.estado = estado;
-        this.marca = marca;
-    }
 
     
 }

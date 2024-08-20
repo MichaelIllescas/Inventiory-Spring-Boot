@@ -38,6 +38,8 @@ public class ProductoController {
         Long idUsuario = (Long) session.getAttribute("idUsuario");
         List<Producto> listaProductos = prodServ.obtenerProductosPorUsuario(idUsuario);
         model.addAttribute("listadoProductos", listaProductos);
+        Float capital=prodServ.obtenerCapital(idUsuario);
+        model.addAttribute("capital", capital);
         return "verProductos"; // Nombre de la vista Thymeleaf
     }
 
@@ -80,7 +82,7 @@ public class ProductoController {
     {
         List<Producto> productos = prodServ.obtenerProductosPorUsuario((Long) session.getAttribute("idUsuario"));
         Producto selectedProduct = null;
-        Integer stockActual = null;
+        Float stockActual = null;
 
         if (idProducto != null) {
             selectedProduct = prodServ.obtenerProductoPorId(idProducto);
@@ -112,7 +114,7 @@ public class ProductoController {
     // Método para actualizar el stock del producto
     @PostMapping("/actualizarStock")
     public String actualizarStock(@RequestParam("productoId") Long productoId,
-                                  @RequestParam("cantidad") int cantidad,
+                                  @RequestParam("cantidad") float cantidad,
                                   HttpSession session) 
     {
         if (productoId == null) {

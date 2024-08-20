@@ -28,8 +28,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="venta : ${ventas}">
-                                            <td th:text="${venta.id}"></td>
+                                        <tr th:each="venta, ind: ${ventas}">
+                                            <td th:text="${ind.index+1}"></td>
                                             <td th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido}"></td>
                                             <td th:text="${venta.cliente.dni}"></td>
                                             <td th:text="${venta.fechaVenta}"></td>

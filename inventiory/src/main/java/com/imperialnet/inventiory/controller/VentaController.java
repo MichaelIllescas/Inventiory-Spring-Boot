@@ -91,7 +91,7 @@ public class VentaController {
     @PostMapping("/agregarProducto")
     public String agregarProducto(@RequestParam(value = "idProducto", required = false) Long idProducto,
                                   Model model,
-                                  @RequestParam(value = "cant") int cant,
+                                  @RequestParam(value = "cant") float cant,
                                   HttpSession sesion) 
     {
         // Validar si se seleccionó un producto válido
@@ -120,7 +120,7 @@ public class VentaController {
         item.setProducto(productoSeleccionado);
 
         // Agregar el producto a la lista de productos seleccionados en la sesión
-        listado.agregarProducto(item);
+        listado.agregarProducto(item, cant);
         sesion.setAttribute("productosSeleccionados", listado.getProductosSeleccionados());
 
         // Calcular y guardar el total de la venta en la sesión
@@ -174,8 +174,8 @@ public class VentaController {
         // Validar stock de los productos seleccionados
         for (ItemVenta item : productosSeleccionados) {
             Producto producto = item.getProducto();
-            int cantidadSeleccionada = item.getCantidad();
-            int stockDisponible = producto.getStock(); // Asume que tienes un método getStock() en Producto
+            float cantidadSeleccionada = item.getCantidad();
+            float stockDisponible = producto.getStock(); // Asume que tienes un método getStock() en Producto
 
             if (cantidadSeleccionada > stockDisponible) {
                 // Si el stock no es suficiente, agregar un mensaje de error

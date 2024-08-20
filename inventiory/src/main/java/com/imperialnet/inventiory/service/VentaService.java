@@ -71,6 +71,7 @@ public void registrarVenta(Venta venta, List<ItemVenta> itemsVenta, HttpSession 
 
     // Calcular el total de la venta si es necesario
     float total = calcularTotalVenta(itemsVenta);
+    Math.round(total);
     venta.setTotal(total);
 
     // Guardar la venta en la base de datos usando merge() si es necesario
@@ -120,12 +121,12 @@ public void registrarVenta(Venta venta, List<ItemVenta> itemsVenta, HttpSession 
         return ventaRepo.findByUsuarioId(usuarioId);
     }
 
-    @Override // Método para obtener las ventas filtradas por mes
-    public List<Venta> obtenerVentasPorMes(List<Venta> ventas, int mes) {
-        return ventas.stream()
-                .filter(venta -> venta.getFechaVenta().getMonthValue() == mes)
-                .collect(Collectors.toList());
-    }
+    @Override // Método para obtener las ventas filtradas por mes y anio
+    public List<Venta> obtenerVentasPorMesYAño(List<Venta> ventas, int mes, int anio) {
+    return ventas.stream()
+            .filter(venta -> venta.getFechaVenta().getMonthValue() == mes && venta.getFechaVenta().getYear() == anio)
+            .collect(Collectors.toList());
+}
 
     @Override
     public Cliente obtenerClienteQueMasComproEnMes(int mes, long idUser) {
@@ -226,4 +227,9 @@ public void registrarVenta(Venta venta, List<ItemVenta> itemsVenta, HttpSession 
         LocalDate fecha = LocalDate.of(ano, mes, dia);
         return ventaRepo.findVentasByUsuarioAndFecha(idUsuario, fecha);
     }
+     public List<Venta> findVentasByUsuarioAndFecha(Long idUsuario, int mesSeleccionado, int yearSeleccionado) {
+        // Llamar al método del repositorio con el año y el mes proporcionados
+        return ventaRepo.findVentasByUsuarioAndFecha(idUsuario, yearSeleccionado, mesSeleccionado);
+    }
+    
 }

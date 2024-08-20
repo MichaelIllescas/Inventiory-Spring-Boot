@@ -26,6 +26,9 @@ public interface VentaRepository extends JpaRepository<Venta, Long>{
      @Query("SELECT v FROM Venta v WHERE v.usuario.id = :idUsuario AND FUNCTION('DATE', v.fechaVenta) = :fecha")
     List<Venta> findVentasByUsuarioAndFecha(@Param("idUsuario") Long idUsuario, @Param("fecha") LocalDate fecha);
 
+    @Query("SELECT v FROM Venta v WHERE v.usuario.id = :idUsuario AND FUNCTION('YEAR', v.fechaVenta) = :year AND FUNCTION('MONTH', v.fechaVenta) = :month")
+List<Venta> findVentasByUsuarioAndFecha(@Param("idUsuario") Long idUsuario, @Param("year") int year, @Param("month") int month);
+
    
     
 }

@@ -26,8 +26,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="venta : ${ventas}">
-                                            <td th:text="${venta.id}"></td>
+                                        <tr th:each="venta,ind : ${ventas}">
+                                            <td th:text="${ind.index +1}"></td>
                                             <td th:text="${venta.fechaVenta}"></td>
                                             <td th:text="${venta.total}"></td>
                                             <td th:text="${venta.observaciones}"></td>

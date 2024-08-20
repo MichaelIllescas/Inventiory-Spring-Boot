@@ -12,7 +12,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 
@@ -24,6 +26,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 public class ItemVenta {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -32,21 +36,11 @@ public class ItemVenta {
     @OneToOne
     private Producto producto;
     
-    private int cantidad;
+    private float cantidad;
     @ManyToOne
     @JoinColumn(name = "venta_id")
     private Venta venta;
     
     private float precioUnitario;
-
-    public ItemVenta() {
-    }
-
-    public ItemVenta(Long id, Producto producto, int cantidad) {
-        this.id = id;
-        this.producto = producto;
-        this.cantidad = cantidad;
-    }
-    
-    
+  
 }

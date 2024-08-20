@@ -27,7 +27,7 @@ public interface IVentaService {
 
     public float calcularTotalVenta(List<ItemVenta> productosSeleccionados);
 
-    public List<Venta> obtenerVentasPorMes(List<Venta> ventas, int mes);
+    public List<Venta> obtenerVentasPorMesYAño(List<Venta> ventas, int mes, int anio);
 
     public Cliente obtenerClienteQueMasComproEnMes(int mes, long id);
 
@@ -42,4 +42,6 @@ public interface IVentaService {
     public List<Venta> obtenerVentasPorClienteYUsuario(Long clienteId, Long usuarioId);
 
     public List<Venta> filterVentasByFecha(Long idUsuario, int dia, int mes, int ano);
+  
+    public List<Venta> findVentasByUsuarioAndFecha(Long idUsuario, int mes, int ano);
 }

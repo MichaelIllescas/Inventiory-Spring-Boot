@@ -20,13 +20,13 @@ public class ProcutosSesionData implements Serializable {
         return productosSeleccionados;
     }
 
-    public void agregarProducto(ItemVenta nuevoProducto)
+    public void agregarProducto(ItemVenta nuevoProducto, float cantidad)
     {
         // Verificar si el producto ya está en la lista
         for (ItemVenta item : productosSeleccionados) {
             if (item.getProducto().getId() == nuevoProducto.getProducto().getId()) {
                 // El producto ya existe, aumentar la cantidad
-                item.setCantidad(item.getCantidad() + 1);
+                item.setCantidad(item.getCantidad() + cantidad);
                 return; // Salir del método
             }
         }

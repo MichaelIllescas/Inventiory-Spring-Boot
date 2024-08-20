@@ -67,12 +67,34 @@ public class ProductoService implements IProductoService {
         return prodRepo.findByUsuarioId(usuarioId);
     }
 
-    public void actualizarStock(Long id, int cantidad) 
+    public void actualizarStock(Long id, float cantidad) 
     {
         Producto producto = obtenerProductoPorId(id);
         if (producto != null) {
             producto.setStock(cantidad);
             prodRepo.save(producto);
         }
+    }
+
+    @Override
+    public Float obtenerCapital(Long idUsuario) {
+            List<Producto> productos = this.obtenerProductosPorUsuario(idUsuario);
+
+            Float capital=0F;
+          // Verificar si la lista de productos no es null
+    // Verificar si la lista de productos no es null
+    
+        for (Producto producto : productos) {
+            // Manejar el caso de valores nulos para precio y stock
+            Float precio = producto.getPrecio();
+            Float stock = producto.getStock();
+
+            // Asegurarse de que precio y stock no sean null
+            
+               capital += (precio * stock);
+          
+    }
+    
+        return capital;
     }
 }

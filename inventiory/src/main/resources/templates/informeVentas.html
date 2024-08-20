@@ -9,29 +9,56 @@
 
             <div class="row justify-content-center  mt-2">
 
-                <div class="col-md-10 bg-light p-4 rounded shadow inset-shadow-gray ">
-                    <h1 class="text-dark mb-4">Informe de Ventas Mensuales</h1>
-                    <form th:action="@{/informeVentas}" method="get">
-                        <div class="input-group mb-3">
-                            <label class="text-dark mr-3 pt-1 h5" for="mes">Seleccione el mes:</label>
-                            <select class="form-select rounded" id="mes" name="mes">
-                                <option value="1" th:text="'Enero'" th:selected="${mesSeleccionado == 1}">Enero</option>
-                                <option value="2" th:text="'Febrero'" th:selected="${mesSeleccionado == 2}">Febrero</option>
-                                <option value="3" th:text="'Marzo'" th:selected="${mesSeleccionado == 3}">Marzo</option>
-                                <option value="4" th:text="'Abril'" th:selected="${mesSeleccionado == 4}">Abril</option>
-                                <option value="5" th:text="'Mayo'" th:selected="${mesSeleccionado == 5}">Mayo</option>
-                                <option value="6" th:text="'Junio'" th:selected="${mesSeleccionado == 6}">Junio</option>
-                                <option value="7" th:text="'Julio'" th:selected="${mesSeleccionado == 7}">Julio</option>
-                                <option value="8" th:text="'Agosto'" th:selected="${mesSeleccionado == 8}">Agosto</option>
-                                <option value="9" th:text="'Septiembre'" th:selected="${mesSeleccionado == 9}">Septiembre</option>
-                                <option value="10" th:text="'Octubre'" th:selected="${mesSeleccionado == 10}">Octubre</option>
-                                <option value="11" th:text="'Noviembre'" th:selected="${mesSeleccionado == 11}">Noviembre</option>
-                                <option value="12" th:text="'Diciembre'" th:selected="${mesSeleccionado == 12}">Diciembre</option>
-                            </select>
-                            <button class="btn btn-success ml-2" type="submit">Seleccionar</button>
+                <div class="container text-dark text-center mt-2 pt-2 pb-2">
+
+
+            <div class="row justify-content-center  mt-2">
+
+             <div class="col-md-10 bg-light p-4 rounded shadow inset-shadow-gray">
+                    <h1 class="text-dark mb-4">Informe Mensual de Ventas: </h1>
+                    <form class="w-75 m-auto" th:action="@{/informeVentas}" method="get">
+                        <div class="row mb-3 align-items-center m-auto"> 
+                           
+                            <div class="col-md-4 m-auto">
+                                <label class=" text-gray h6 mb-2 mt-3" for="mes">Seleccione el mes:</label>
+                                <select class=" text-gray h5 p-0 w-100 form-select form-select-sm border-info rounded text-center" id="mes" name="mes">
+                                    <option  value="1" th:text="'Enero'" th:selected="${mesSeleccionado == 1}">Enero</option>
+                                    <option value="2" th:text="'Febrero'" th:selected="${mesSeleccionado == 2}">Febrero</option>
+                                    <option value="3" th:text="'Marzo'" th:selected="${mesSeleccionado == 3}">Marzo</option>
+                                    <option value="4" th:text="'Abril'" th:selected="${mesSeleccionado == 4}">Abril</option>
+                                    <option value="5" th:text="'Mayo'" th:selected="${mesSeleccionado == 5}">Mayo</option>
+                                    <option value="6" th:text="'Junio'" th:selected="${mesSeleccionado == 6}">Junio</option>
+                                    <option value="7" th:text="'Julio'" th:selected="${mesSeleccionado == 7}">Julio</option>
+                                    <option value="8" th:text="'Agosto'" th:selected="${mesSeleccionado == 8}">Agosto</option>
+                                    <option value="9" th:text="'Septiembre'" th:selected="${mesSeleccionado == 9}">Septiembre</option>
+                                    <option value="10" th:text="'Octubre'" th:selected="${mesSeleccionado == 10}">Octubre</option>
+                                    <option value="11" th:text="'Noviembre'" th:selected="${mesSeleccionado == 11}">Noviembre</option>
+                                    <option value="12" th:text="'Diciembre'" th:selected="${mesSeleccionado == 12}">Diciembre</option>
+                                </select>
+                            </div>
+                           
+                            <div class="col-md-4">
+                                <label class="text-dark h6" for="anio">Seleccione el año:</label>
+                                <input type="number" th:value="${anio}" class="form-control form-control-sm border-info text-center rounded " id="anio" name="anio" min="1900" max="2100" required/>
+                            </div>
+                            
+                            <div class="col-md-4 pt-4 m-auto">
+                        <button class="btn btn-success " type="submit">Seleccionar</button>
                         </div>
+                        </div>
+                        
                     </form>
+
+
                 </div>
+
+                
+                
+            </div>
+
+          
+        </div>
+            </div>
             </div>
 
             <div class="row justify-content-center mt-4 pb-5 mb-5">

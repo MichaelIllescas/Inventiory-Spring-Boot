@@ -8,8 +8,8 @@ import com.imperialnet.inventiory.entities.Cliente;
 import com.imperialnet.inventiory.entities.Venta;
 import com.imperialnet.inventiory.service.IVentaService;
 import jakarta.servlet.http.HttpSession;
-import java.math.BigDecimal;
-import java.util.Calendar;
+import java.time.LocalDate;
+
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,13 +43,20 @@ public class InformesController {
 
     @GetMapping("/informeVentas")
     public String mostrarInformeVentas(@RequestParam("mes") int mesSeleccionado,
+                                        @RequestParam("anio") int anio,
                                         Model model, 
                                         HttpSession sesion)
     {
 
         model.addAttribute("mesSeleccionado", mesSeleccionado);
-// Obtener las ventas para el mes seleccionado
-        List<Venta> ventas = ventaService.obtenerVentasPorMes(ventaService.findByUsuarioId((Long) sesion.getAttribute("idUsuario")), mesSeleccionado);
+        model.addAttribute("anio", anio);
+
+       
+    
+        // Obtener las ventas para el mes seleccionado
+      
+        
+        List<Venta> ventas = ventaService.findVentasByUsuarioAndFecha((Long) sesion.getAttribute("idUsuario"),mesSeleccionado,anio);
 
         // Validar si hay ventas para el mes seleccionado
         if (ventas.isEmpty()) {
