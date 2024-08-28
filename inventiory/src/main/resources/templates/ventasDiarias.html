@@ -81,7 +81,7 @@
                             <tbody>
                                 <tr th:each="venta,iterStat  : ${ventas}">
                                     <td th:text="${iterStat .index +1 }"></td>
-                                    <td th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido}"></td>
+                                    <td th:text="${(venta.cliente != null)? venta.cliente.nombre + ' ' + venta.cliente.apellido: 'No asignado'}"></td>
                                     <td th:text="${venta.total}"></td>
                                     <td th:text="${venta.observaciones}"></td>
                                     <td th:text="${venta.fechaVenta}"></td>
@@ -129,16 +129,16 @@
                                     <p><strong>Orden:</strong> <span class="text-primary" th:text="${venta.id}"></span></p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p><strong>Cliente:</strong> <span class="text-primary" th:text="${venta.cliente.nombre + ' ' + venta.cliente.apellido}"></span></p>
+                                    <p><strong>Cliente:</strong> <span class="text-primary" th:text="${(venta.cliente != null)? venta.cliente.nombre + ' ' + venta.cliente.apellido: 'No asignado'}"></span></p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p><strong>DNI:</strong> <span class="text-primary" th:text="${venta.cliente.dni}"></span></p>
+                                    <p><strong>DNI:</strong> <span class="text-primary" th:text="${(venta.cliente != null)?  venta.cliente.dni: 'No asignado'}"></span></p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p><strong>Dirección:</strong> <span class="text-primary" th:text="${venta.cliente.direccion}"></span></p>
+                                    <p><strong>Dirección:</strong> <span class="text-primary" th:text="${(venta.cliente != null)?  venta.cliente.dni: 'No asignado'}"></span></p>
                                 </div>
                                 <div class="col-sm-6">
-                                    <p><strong>Teléfono:</strong> <span class="text-primary" th:text="${venta.cliente.telefono}"></span></p>
+                                    <p><strong>Teléfono:</strong> <span class="text-primary" th:text="${(venta.cliente != null)?  venta.cliente.telefono: 'No asignado'}" ></span></p>
                                 </div>
                                 <div class="col-sm-6">
                                     <p><strong>Fecha de Venta:</strong> <span class="text-primary" th:text="${venta.fechaVenta}"></span></p>

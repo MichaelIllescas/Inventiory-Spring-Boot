@@ -37,8 +37,9 @@ public class Venta {
     @Column(name = "observaciones")
     private String observaciones;
     
+    
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    @JoinColumn(nullable=true, name = "cliente_id", referencedColumnName = "id")
     private Cliente cliente;
 
     @Column(name = "fecha_venta")

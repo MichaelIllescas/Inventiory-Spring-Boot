@@ -28,7 +28,7 @@
                                         </thead>
                                         <tbody>
                                             <!-- Iterar sobre la lista de productos -->
-                                            <tr  th:each="producto, ind : ${listadoProductos}" th:class="${producto.stock < 5} ? (producto.stock == 0 ? 'bg-danger text-white' : 'bg-warning') : ''">
+                                            <tr  th:each="producto, ind : ${listadoProductos}" th:class="${(producto.stock == 0)?   'bg-danger' : ''}">
                                                 <td class="w-auto " th:text="${ind.index+1}"></td>
                                                 <td class="w-auto" th:text="${producto.nombre}"></td>
                                                 <td class="w-auto" th:text="${producto.marca}"></td>

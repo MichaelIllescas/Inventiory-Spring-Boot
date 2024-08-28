@@ -156,12 +156,7 @@ public class VentaController {
         Long idUsuario = (Long) sesion.getAttribute("idUsuario");
         Usuario usuario = usuServ.obtenerUsuarioPorId(idUsuario);
 
-        // Validar la presencia de cliente y usuario en la sesión
-        if (cliente == null) {
-            sesion.setAttribute("errorCli", "No se ha seleccionado un cliente para la venta.");
-            return "redirect:/registrarVenta"; // Redirige al formulario de registro de venta
-        }
-
+      
         // Obtener la lista de productos seleccionados de la sesión
         List<ItemVenta> productosSeleccionados = listado.getProductosSeleccionados();
 
@@ -187,7 +182,10 @@ public class VentaController {
 
         // Crear una nueva venta y registrarla
         Venta venta = new Venta();
+        if (cliente!=null){
         venta.setCliente(cliente);
+        };
+
         venta.setUsuario(usuario);
         venta.setObservaciones(obs);
         venta.setFechaVenta(fechaDeHoyLocalDate);

@@ -41,8 +41,9 @@ public class InformesController {
         return "informeVentas";
     }
 
+  
     @GetMapping("/informeVentas")
-    public String mostrarInformeVentas(@RequestParam("mes") int mesSeleccionado,
+    public String mostrarInformeVentas(@RequestParam("mes") Integer mesSeleccionado,
                                         @RequestParam("anio") int anio,
                                         Model model, 
                                         HttpSession sesion)
@@ -65,17 +66,7 @@ public class InformesController {
             return "informeVentas";
         }
 
-        // Obtener el cliente que más compró en el mes y el monto total de sus compras
-        Cliente clienteTop = ventaService.obtenerClienteQueMasComproEnMes(mesSeleccionado, (Long) sesion.getAttribute("idUsuario"));
-
-        // Validar si se encontró un cliente que más compró en el mes
-        if (clienteTop == null) {
-            // Agregar un mensaje de error al modelo y retornar a la vista
-            model.addAttribute("error", "No se encontró cliente que más compró en el mes seleccionado.");
-            return "informeVentas";
-        }
-
-        float montoTotal = ventaService.obtenerMontoTotalComprasClienteEnMes(clienteTop.getId(), mesSeleccionado, (Long) sesion.getAttribute("idUsuario"));
+  
 
         //obtener el monto total de ventas en el mes
         float totalVentasMes = ventaService.obtenerMontoTotalComprasEnMes(ventas);
@@ -83,8 +74,8 @@ public class InformesController {
         // Agregar las ventas, el cliente top y el monto total al modelo para la vista
         model.addAttribute("mesSeleccionado", mesSeleccionado);
         model.addAttribute("ventas", ventas);
-        model.addAttribute("clienteTop", clienteTop);
-        model.addAttribute("montoTotal", montoTotal);
+       
+       
         model.addAttribute("totalVentasMes", totalVentasMes);
 
         // Retornar el nombre de la vista Thymeleaf que mostrará los resultados
