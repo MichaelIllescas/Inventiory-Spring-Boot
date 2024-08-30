@@ -11,6 +11,7 @@ import com.imperialnet.inventiory.service.IProductoService;
 import com.imperialnet.inventiory.service.IUsuarioService;
 import com.imperialnet.inventiory.service.IVentaService;
 import com.imperialnet.inventiory.service.ProcutosSesionData;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.transaction.Transactional;
 import java.time.LocalDate;
@@ -230,6 +231,8 @@ public class VentaController {
                                         HttpSession sesion,
                                         Model model)
     {
+        
+        
         // Obtener y añadir las ventas del cliente al modelo
         Cliente cliente = cliServ.obtenerClientePorId(idCli);
         String nomApe = cliente.getNombre() + " " + cliente.getApellido();
@@ -238,4 +241,22 @@ public class VentaController {
         model.addAttribute("cli", nomApe);
         return "verComprasCliente"; // Retorna la vista de visualización de compras del cliente
     }
+    
+    @PostMapping("/editarObservaciones")
+    public String editarObservaciones(@RequestParam ("idVenta") long idVenta,
+                                        @RequestParam ("observacionesNuevas") String observacionesNuevas,
+                                     HttpServletRequest request)
+    {
+        Venta ventaEditar= ventaServ.obtenerVentaPorId(idVenta);
+        ventaEditar.setObservaciones(observacionesNuevas);
+        ventaServ.editarVenta(idVenta, ventaEditar);
+    
+            // Obtener la URL de la página desde la que se hizo la solicitud
+    String referer = request.getHeader("Referer");
+    
+    // Redirigir a la misma página
+    return "redirect:" + referer;
+    }
+    
+    
 }

@@ -164,6 +164,12 @@ public class InformesController {
                 anio
         );
         model.addAttribute("ventas", ventas);
+       
+        if(!ventas.isEmpty()){
+        Float montoTotalVentadiaria= ventaService.calcularTotalVentasDiarias(ventas);
+         model.addAttribute("totalVentasDiarias", montoTotalVentadiaria);
+        }
+        
         return "ventasDiarias";
     }
 }

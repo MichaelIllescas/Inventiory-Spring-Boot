@@ -44,4 +44,6 @@ public interface IVentaService {
     public List<Venta> filterVentasByFecha(Long idUsuario, int dia, int mes, int ano);
   
     public List<Venta> findVentasByUsuarioAndFecha(Long idUsuario, int mes, int ano);
+
+    public float calcularTotalVentasDiarias(List<Venta> ventas);
 }

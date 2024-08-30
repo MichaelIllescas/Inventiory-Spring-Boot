@@ -1,14 +1,12 @@
 com\imperialnet\inventiory\entities\Cliente.class
 com\imperialnet\inventiory\config\SessionInterceptor.class
 com\imperialnet\inventiory\service\IVentaService.class
-com\imperialnet\inventiory\service\FacturaService.class
 com\imperialnet\inventiory\service\IRolService.class
 com\imperialnet\inventiory\repository\ClienteRepository.class
 com\imperialnet\inventiory\service\IClienteService.class
 com\imperialnet\inventiory\service\UsuarioService.class
 com\imperialnet\inventiory\repository\FacturaRepository.class
 com\imperialnet\inventiory\service\IUsuarioService.class
-com\imperialnet\inventiory\service\IFacturaService.class
 com\imperialnet\inventiory\service\ProcutosSesionData.class
 com\imperialnet\inventiory\controller\VentaController.class
 com\imperialnet\inventiory\entities\Producto.class

@@ -31,21 +31,34 @@
                                         <tr th:each="venta, ind: ${ventas}">
                                             <td th:text="${ind.index+1}"></td>
                                             <td th:text="${(venta.cliente != null) ? (venta.cliente.nombre + ' ' + venta.cliente.apellido) : 'No Asignado'}"></td>
-                                            <td th:text="${(venta.cliente != null) ? (venta.cliente.dni) : 'No Asignado'}"></td>
-                                            <td th:text="${venta.fechaVenta}"></td>
+                                            <td th:text="${(venta.cliente != null) ? (venta.cliente.dni) : '---'}"></td>
+                                            <td th:text="${venta.fechaVenta}">
+
+                                            </td>
                                             <td th:text="${venta.total}"></td>
-                                            <td th:text="${venta.observaciones}"></td>
+                                            <td class="d-flex">
+                                                <div>
+                                                    <span th:text="${venta.observaciones}"></span>
+                                                </div>   
+                                                <div class="justify-content-end w-100 text-right">
+                                                    <button type="button" class="btn btn-info rounded-circle btn-sm" data-toggle="modal" th:attr="data-target='#modalEdit' + ${venta.id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Editar las observaciones.">
+                                                        <i class="fas fa-solid fa-pen"></i>                                              
+                                                    </button>
+                                                </div>
+                                            </td>
                                             <td class="text-center">
                                                 <div class="d-flex">
                                                     <!-- Botón de eliminación -->
-                                                    <div>
-                                                        <button type="button" class="btn btn-danger rounded-circle btn-sm m-1" data-toggle="modal" th:attr="data-target='#confirmDeleteModal' + ${venta.id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar la Venta.">
-                                                            <i class="fas fa-trash-alt"></i>
-                                                        </button>
-                                                    </div>
+
                                                     <div>
                                                         <button type="button" class="btn btn-primary btn-sm m-1 rounded-circle" data-toggle="modal" th:attr="data-target='#ventaModal' + ${venta.id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Ver Detalles de la Venta.">
                                                             <i class="fas fa-solid fa-eye"></i>
+                                                        </button>
+                                                    </div>
+
+                                                    <div>
+                                                        <button type="button" class="btn btn-danger rounded-circle btn-sm m-1" data-toggle="modal" th:attr="data-target='#confirmDeleteModal' + ${venta.id}" data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar la Venta.">
+                                                            <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </div>
                                                 </div>
@@ -69,13 +82,13 @@
                                                                         <p><strong>Cliente:</strong> <span class="text-primary" th:text="${(venta.cliente != null)? venta.cliente.nombre + ' ' + venta.cliente.apellido: 'No asignado'}"></span></p>
                                                                     </div>
                                                                     <div class="col-sm-6">
-                                                                        <p><strong>DNI:</strong> <span class="text-primary" th:text="${(venta.cliente != null)? venta.cliente.dni: 'No asignado'}"></span></p>
+                                                                        <p><strong>DNI:</strong> <span class="text-primary" th:text="${(venta.cliente != null)? venta.cliente.dni: '---'}"></span></p>
                                                                     </div>
                                                                     <div class="col-sm-6">
-                                                                        <p><strong>Dirección:</strong> <span class="text-primary" th:text="${(venta.cliente != null)? venta.cliente.direccion : 'No asignado'}"></span></p>
+                                                                        <p><strong>Dirección:</strong> <span class="text-primary" th:text="${(venta.cliente != null)? venta.cliente.direccion : '---'}"></span></p>
                                                                     </div>
                                                                     <div class="col-sm-6">
-                                                                        <p><strong>Teléfono:</strong> <span class="text-primary" th:text="${(venta.cliente != null)? venta.cliente.telefono: 'No asignado'}"></span></p>
+                                                                        <p><strong>Teléfono:</strong> <span class="text-primary" th:text="${(venta.cliente != null)? venta.cliente.telefono: '---'}"></span></p>
                                                                     </div>
                                                                     <div class="col-sm-6">
                                                                         <p><strong>Fecha de Venta:</strong> <span class="text-primary" th:text="${venta.fechaVenta}"></span></p>
@@ -113,13 +126,95 @@
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
-                                                                <button type="button" class="btn btn-primary" data-dismiss="modal">Cerrar</button>
+                                                                <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>  
+                                                <!-- Modal edicion de venta -->
 
-                                                <!-- Modal de Confirmación -->
+
+                                                <div class="modal fade" th:id="'modalEdit' + ${venta.id}" tabindex="-1" role="dialog" aria-labelledby="'ventaModalLabel' + ${venta.id}" aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <form th:action="@{/editarObservaciones}" th:method="post" class="h-25">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title text-dark" th:id="'ventaModalLabel' + ${venta.id}">Edición de la Venta</h5>
+
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                       <div class="row">
+                                                                        <!-- Campo oculto para enviar idVenta -->
+                                                                        <input type="hidden" name="idVenta" th:value="${venta.id}"/>
+
+                                                                        <div class="col-sm-6">
+                                                                            <p><strong>Orden:</strong> <span class="text-primary" th:text="${venta.id}"></span></p>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <p><strong>Cliente:</strong> <span class="text-primary" th:text="${(venta.cliente != null) ? venta.cliente.nombre + ' ' + venta.cliente.apellido : 'No asignado'}"></span></p>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <p><strong>DNI:</strong> <span class="text-primary" th:text="${(venta.cliente != null) ? venta.cliente.dni : 'No asignado'}"></span></p>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <p><strong>Dirección:</strong> <span class="text-primary" th:text="${(venta.cliente != null) ? venta.cliente.direccion : 'No asignado'}"></span></p>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <p><strong>Teléfono:</strong> <span class="text-primary" th:text="${(venta.cliente != null) ? venta.cliente.telefono : 'No asignado'}"></span></p>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <p><strong>Fecha de Venta:</strong> <span class="text-primary" th:text="${venta.fechaVenta}"></span></p>
+                                                                        </div>
+                                                                        <div class="col-sm-6">
+                                                                            <p><strong>Observaciones:</strong> <span class="text-primary" th:text="${venta.observaciones}"></span></p>
+                                                                        </div>
+                                                                        <div class="col-sm-12 text-left">
+                                                                            <p class="text-center"><strong>Nueva Observación:</strong></p>
+                                                                            <textarea id="observaciones" name="observacionesNuevas" class="form-control" rows="3" maxlength="255" placeholder="Ingrese las nuevas observaciones aquí..."></textarea>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <hr class="hr text-primary">
+                                                                    <!-- Tabla de Productos -->
+                                                                    <h5 class="text-dark text-left">Productos comprados:</h5>
+                                                                    <table class="table table-bordered thead-light">
+                                                                        <thead>
+                                                                            <tr>
+                                                                                <th>Producto</th>
+                                                                                <th style="width: 70px">Cantidad</th>
+                                                                                <th style="width: 70px">Precio</th>
+                                                                            </tr>
+                                                                        </thead>
+                                                                        <tbody>
+                                                                            <tr class="text-primary" th:each="item : ${venta.itemsVenta}">
+                                                                                <td th:text="${item.producto.nombre + ' ' + item.producto.descripcion}"></td>
+                                                                                <td th:text="${item.cantidad}"></td>
+                                                                                <td th:text="${item.precioUnitario}"></td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+
+                                                                    <!-- Monto -->
+                                                                    <div class="row d-flex">
+                                                                        <div class="col-sm-12 pr-3 text-right justify-content-center">
+                                                                            <p><strong>Total:</strong> <span class="text-primary font-weight-bold" th:text="'$' + ' ' + ${venta.total}"></span></p>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-success">Guardar</button>
+                                                                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                                                                </div>
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+                                                </div>  
+
+                                                <!-- Modal de Confirmación eliminación-->
                                                 <div class="modal fade" th:id="'confirmDeleteModal' + ${venta.id}" tabindex="-1" role="dialog" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog" role="document">
                                                         <div class="modal-content">
@@ -145,20 +240,20 @@
                                             </td>
                                         </tr>
                                     </tbody>
-                                
+
                                 </table>
-                                
+
                             </div>
-                          
-                                <small th:if="${session.mensajeConfirm}" class="form-text text-success" th:text="${session.mensajeConfirm}"></small>
-                           
-                            
+
+                            <small th:if="${session.mensajeConfirm}" class="form-text text-success" th:text="${session.mensajeConfirm}"></small>
+
+
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        
+
 
 
         <div th:insert="componentes/footer::footer"></div>
@@ -171,11 +266,11 @@
         <div th:insert="componentes/modalCerrarSesion :: modalCerrarSesion"></div>
 
         <div th:insert="componentes/scriptsBTyJS :: scriptsBTyJS"></div>
-  <script>
-                // Inicializa los tooltips
-                document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (tooltipElement) {
-                    new bootstrap.Tooltip(tooltipElement);
-                });
-            </script>
+        <script>
+            // Inicializa los tooltips
+            document.querySelectorAll('[data-bs-toggle="tooltip"]').forEach(function (tooltipElement) {
+                new bootstrap.Tooltip(tooltipElement);
+            });
+        </script>
     </body>
 </html>

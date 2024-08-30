@@ -231,5 +231,17 @@ public void registrarVenta(Venta venta, List<ItemVenta> itemsVenta, HttpSession 
         // Llamar al método del repositorio con el año y el mes proporcionados
         return ventaRepo.findVentasByUsuarioAndFecha(idUsuario, yearSeleccionado, mesSeleccionado);
     }
+
+    @Override
+    public float calcularTotalVentasDiarias(List<Venta> ventas) {
+
+       Float totalVentasDiarias =0F;
+       
+       for(Venta venta:ventas){
+       
+       totalVentasDiarias+=venta.getTotal();
+       }
+       return totalVentasDiarias;
+    }
     
 }
